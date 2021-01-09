@@ -18,6 +18,11 @@
             <artifactId>gdx</artifactId>
             <version>1.9.13</version>
         </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
     </dependencies>
 
 </project>
