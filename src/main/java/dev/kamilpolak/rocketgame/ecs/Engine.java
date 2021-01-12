@@ -5,6 +5,7 @@ import java.util.*;
 public class Engine {
     private final Set<Entity> entities = new HashSet<>();
     private final Map<Class<? extends Component>, Set<Entity>> componentEntityMap = new HashMap<>();
+    private final Set<EntitySystem> systems = new TreeSet<>();
 
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -18,5 +19,13 @@ public class Engine {
         for(Component component: entity.getComponents()) {
             componentEntityMap.get(component.getClass()).remove(entity);
         }
+    }
+
+    public void addSystem(EntitySystem system) {
+        systems.add(system);
+    }
+
+    public void removeSystem(EntitySystem system) {
+        systems.remove(system);
     }
 }
