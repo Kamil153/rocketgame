@@ -32,4 +32,18 @@ public class Engine {
     public void update(float deltaTime) {
         systems.forEach(system -> system.runUpdate(deltaTime));
     }
+
+    public Set<Entity> getEntities() {
+        return new HashSet<>(entities);
+    }
+
+    public Set<Entity> getEntities(EntityConstraint constraint) {
+        Set<Entity> result = new HashSet<>();
+        for(Entity entity: entities) {
+            if(constraint.check(entity)) {
+                result.add(entity);
+            }
+        }
+        return result;
+    }
 }
