@@ -1,4 +1,5 @@
 package dev.kamilpolak.rocketgame.ecs;
 
-public class EntitySystem {
+public abstract class EntitySystem {
+    abstract void update(float deltaTime);
 }
