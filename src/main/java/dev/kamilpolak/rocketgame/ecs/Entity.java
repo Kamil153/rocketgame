@@ -1,5 +1,6 @@
 package dev.kamilpolak.rocketgame.ecs;
 
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Entity {
@@ -21,5 +22,9 @@ public class Entity {
 
     public void removeComponent(Component component) {
         removeComponent(component.getClass());
+    }
+
+    public Collection<Component> getComponents() {
+        return components.values();
     }
 }
