@@ -28,4 +28,8 @@ public class Engine {
     public void removeSystem(EntitySystem system) {
         systems.remove(system);
     }
+
+    public void update(float deltaTime) {
+        systems.forEach(system -> system.update(deltaTime));
+    }
 }
