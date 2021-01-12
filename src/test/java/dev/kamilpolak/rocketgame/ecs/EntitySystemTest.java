@@ -5,11 +5,17 @@ import org.junit.Test;
 
 public class EntitySystemTest {
 
+    static class TestException extends RuntimeException {
+        private final float deltaTime;
+        public TestException(float deltaTime) { this.deltaTime = deltaTime; }
+        public float getDeltaTime() { return deltaTime; }
+    }
+
     static class TestSystem extends EntitySystem {
         public TestSystem(int priority) { super(priority); }
 
         @Override
-        void update(float deltaTime) { throw new RuntimeException(); }
+        void update(float deltaTime) { throw new TestException(deltaTime); }
     }
 
     @Test
@@ -20,5 +26,13 @@ public class EntitySystemTest {
         Assert.assertEquals(1, system1.compareTo(system2));
         Assert.assertEquals(0, system2.compareTo(system3));
         Assert.assertEquals(-1, system2.compareTo(system1));
+    }
+
+    @Test
+    public void updateTest() {
+        EntitySystem system = new TestSystem(10);
+        int deltaTime = 10;
+        TestException ex = Assert.assertThrows(TestException.class, () -> system.update(deltaTime));
+        Assert.assertEquals(deltaTime, ex.getDeltaTime(), 1);
     }
 }
