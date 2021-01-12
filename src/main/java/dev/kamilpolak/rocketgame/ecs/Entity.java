@@ -24,6 +24,10 @@ public class Entity {
         removeComponent(component.getClass());
     }
 
+    public boolean hasComponent(Class<? extends Component> componentClass) {
+        return components.containsKey(componentClass);
+    }
+
     public Collection<Component> getComponents() {
         return components.values();
     }
