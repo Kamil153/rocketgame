@@ -14,7 +14,7 @@ public class EntitySystemTest {
         public TestSystem(int priority) { super(priority); }
 
         @Override
-        void runUpdate(float deltaTime) { throw new TestException(deltaTime); }
+        void update(float deltaTime) { throw new TestException(deltaTime); }
     }
 
     @Test

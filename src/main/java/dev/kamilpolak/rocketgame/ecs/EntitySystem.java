@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 public abstract class EntitySystem implements Comparable<EntitySystem> {
     private final int priority;
+    private boolean enabled = true;
 
     public static final Comparator<EntitySystem> PRIORITY_COMPARATOR = Comparator
             .comparing(EntitySystem::getPriority)
@@ -21,7 +22,21 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         return priority;
     }
 
-    abstract void runUpdate(float deltaTime);
+    public void enable() {
+        enabled = true;
+    }
+
+    public void disable() {
+        enabled = false;
+    }
+
+    abstract void update(float deltaTime);
+
+    public void runUpdate(float deltaTime) {
+        if(enabled) {
+            update(deltaTime);
+        }
+    }
 
     @Override
     public int compareTo(EntitySystem entitySystem) {
