@@ -4,7 +4,6 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class EntitySystemTest {
-
     static class TestException extends RuntimeException {
         private final float deltaTime;
         public TestException(float deltaTime) { this.deltaTime = deltaTime; }
