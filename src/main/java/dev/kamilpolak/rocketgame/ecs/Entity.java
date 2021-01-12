@@ -7,7 +7,7 @@ public class Entity {
 
     public Entity() { }
 
-    public <T> T getComponent(Class<T> componentClass) {
+    public <T extends Component> T getComponent(Class<T> componentClass) {
         return componentClass.cast(components.get(componentClass));
     }
 
