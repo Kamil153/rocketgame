@@ -30,6 +30,6 @@ public class Engine {
     }
 
     public void update(float deltaTime) {
-        systems.forEach(system -> system.update(deltaTime));
+        systems.forEach(system -> system.runUpdate(deltaTime));
     }
 }

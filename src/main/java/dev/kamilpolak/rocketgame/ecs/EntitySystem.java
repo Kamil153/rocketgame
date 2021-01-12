@@ -21,7 +21,7 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         return priority;
     }
 
-    abstract void update(float deltaTime);
+    abstract void runUpdate(float deltaTime);
 
     @Override
     public int compareTo(EntitySystem entitySystem) {
