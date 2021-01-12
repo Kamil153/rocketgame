@@ -13,6 +13,10 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         this.priority = priority;
     }
 
+    public EntitySystem() {
+        this(0);
+    }
+
     public int getPriority() {
         return priority;
     }
