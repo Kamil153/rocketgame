@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Entity {
-    private final HashMap<Class<?>, Component> components = new HashMap<>();
+    private final HashMap<Class<? extends Component>, Component> components = new HashMap<>();
 
     public Entity() { }
 
@@ -16,7 +16,7 @@ public class Entity {
         components.put(component.getClass(), component);
     }
 
-    public void removeComponent(Class<?> componentClass) {
+    public void removeComponent(Class<? extends Component> componentClass) {
         components.remove(componentClass);
     }
 
