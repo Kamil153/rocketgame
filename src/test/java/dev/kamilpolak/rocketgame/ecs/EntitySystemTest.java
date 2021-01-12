@@ -35,4 +35,11 @@ public class EntitySystemTest {
         TestException ex = Assert.assertThrows(TestException.class, () -> system.update(deltaTime));
         Assert.assertEquals(deltaTime, ex.getDeltaTime(), 1);
     }
+
+    @Test
+    public void getPriorityTest() {
+        int priority = 10;
+        EntitySystem system = new TestSystem(priority);
+        Assert.assertEquals(priority, system.getPriority());
+    }
 }
