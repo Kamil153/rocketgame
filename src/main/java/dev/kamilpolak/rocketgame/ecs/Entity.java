@@ -7,6 +7,10 @@ public class Entity {
 
     public Entity() { }
 
+    public <T> T getComponent(Class<T> componentClass) {
+        return componentClass.cast(components.get(componentClass));
+    }
+
     public void addComponent(Component component) {
         components.put(component.getClass(), component);
     }
