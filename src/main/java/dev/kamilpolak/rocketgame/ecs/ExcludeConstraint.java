@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ExcludeConstraint {
+public class ExcludeConstraint implements IEntityConstraint {
     Set<Class<? extends Component>> exclude;
 
     public ExcludeConstraint(Collection<Class<? extends Component>> exclude) {
