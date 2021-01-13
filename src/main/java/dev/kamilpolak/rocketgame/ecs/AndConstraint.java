@@ -2,10 +2,10 @@ package dev.kamilpolak.rocketgame.ecs;
 
 import java.util.*;
 
-public class IncludeConstraint implements IEntityConstraint {
+public class AndConstraint implements IEntityConstraint {
     Set<Class<? extends Component>> include;
 
-    public IncludeConstraint(Collection<Class<? extends Component>> include) {
+    public AndConstraint(Collection<Class<? extends Component>> include) {
         this.include = new HashSet<>(include);
     }
 
