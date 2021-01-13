@@ -5,7 +5,7 @@ import java.util.*;
 public class IncludeConstraint implements IEntityConstraint {
     Set<Class<? extends Component>> include;
 
-    private IncludeConstraint(Collection<Class<? extends Component>> include) {
+    public IncludeConstraint(Collection<Class<? extends Component>> include) {
         this.include = new HashSet<>(include);
     }
 

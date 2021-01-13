@@ -7,7 +7,7 @@ import java.util.Set;
 public class ExcludeConstraint {
     Set<Class<? extends Component>> exclude;
 
-    private ExcludeConstraint(Collection<Class<? extends Component>> exclude) {
+    public ExcludeConstraint(Collection<Class<? extends Component>> exclude) {
         this.exclude = new HashSet<>(exclude);
     }
 
