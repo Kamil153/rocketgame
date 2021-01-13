@@ -38,6 +38,10 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         }
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
+
     @Override
     public int compareTo(EntitySystem entitySystem) {
         return PRIORITY_COMPARATOR.compare(this, entitySystem);
