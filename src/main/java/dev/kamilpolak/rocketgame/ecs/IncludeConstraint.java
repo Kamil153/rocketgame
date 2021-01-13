@@ -2,7 +2,7 @@ package dev.kamilpolak.rocketgame.ecs;
 
 import java.util.*;
 
-public abstract class IncludeConstraint implements IEntityConstraint {
+public class IncludeConstraint implements IEntityConstraint {
     Set<Class<? extends Component>> include;
 
     private IncludeConstraint(Collection<Class<? extends Component>> include) {
