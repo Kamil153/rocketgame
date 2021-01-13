@@ -18,7 +18,7 @@ public class EntityConstraintTest {
         Entity entity2 = new Entity();
         entity2.addComponent(new TestComponent1());
         IEntityConstraint constraint1 = new AndConstraint(Arrays.asList(TestComponent1.class, TestComponent2.class));
-        IEntityConstraint constraint2 = new ExcludeConstraint(Collections.singletonList(TestComponent2.class));
+        IEntityConstraint constraint2 = new NotConstraint(Collections.singletonList(TestComponent2.class));
         IEntityConstraint constraint3 = new AndConstraint(Collections.emptyList());
         Assert.assertTrue(constraint1.check(entity1));
         Assert.assertFalse(constraint2.check(entity1));
