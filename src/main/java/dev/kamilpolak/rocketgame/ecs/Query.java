@@ -24,6 +24,11 @@ public class Query {
         return this;
     }
 
+    public Query exclude(Class<? extends Component> componentClass) {
+        excluded.add(componentClass);
+        return this;
+    }
+
     public Iterator<Class<? extends Component>> getIncludedComponents() {
         return Collections.unmodifiableSet(included).iterator();
     }
