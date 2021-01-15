@@ -36,4 +36,10 @@ public class Engine {
     public Iterator<Entity> getEntities() {
         return entities.iterator();
     }
+
+    public Iterator<Entity> getEntitiesWith(Class<? extends Component> componentClass) {
+        return Collections.unmodifiableSet(
+                componentEntityMap.getOrDefault(componentClass, Collections.emptySet())
+        ).iterator();
+    }
 }
