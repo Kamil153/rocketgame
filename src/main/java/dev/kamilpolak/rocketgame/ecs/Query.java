@@ -3,32 +3,32 @@ package dev.kamilpolak.rocketgame.ecs;
 import java.util.*;
 
 public class Query {
-    private final Set<Class<? extends Component>> include;
-    private final Set<Class<? extends Component>> exclude;
+    private final Set<Class<? extends Component>> included;
+    private final Set<Class<? extends Component>> excluded;
 
     Query() {
         this(Collections.emptyList(), Collections.emptyList());
     }
 
-    Query(Collection<Class<? extends Component>> include) {
-        this(include, Collections.emptyList());
+    Query(Collection<Class<? extends Component>> included) {
+        this(included, Collections.emptyList());
     }
 
-    Query(Collection<Class<? extends Component>> include, Collection<Class<? extends Component>> exclude) {
-        this.include = new HashSet<>(include);
-        this.exclude = new HashSet<>(include);
+    Query(Collection<Class<? extends Component>> included, Collection<Class<? extends Component>> excluded) {
+        this.included = new HashSet<>(included);
+        this.excluded = new HashSet<>(included);
     }
 
     public Query include(Class<? extends Component> componentClass) {
-        include.add(componentClass);
+        included.add(componentClass);
         return this;
     }
 
     public Iterator<Class<? extends Component>> getIncludedComponents() {
-        return Collections.unmodifiableSet(include).iterator();
+        return Collections.unmodifiableSet(included).iterator();
     }
 
     public Iterator<Class<? extends Component>> getExcludedComponents() {
-        return Collections.unmodifiableSet(exclude).iterator();
+        return Collections.unmodifiableSet(excluded).iterator();
     }
 }
