@@ -19,6 +19,11 @@ public class Query {
         this.exclude = new HashSet<>(include);
     }
 
+    public Query include(Class<? extends Component> componentClass) {
+        include.add(componentClass);
+        return this;
+    }
+
     public Iterator<Class<? extends Component>> getIncludedComponents() {
         return Collections.unmodifiableSet(include).iterator();
     }
