@@ -33,7 +33,7 @@ public class Engine {
         systems.forEach(system -> system.runUpdate(deltaTime));
     }
 
-    public Set<Entity> getEntities() {
-        return new HashSet<>(entities);
+    public Iterator<Entity> getEntities() {
+        return entities.iterator();
     }
 }
