@@ -36,14 +36,4 @@ public class Engine {
     public Set<Entity> getEntities() {
         return new HashSet<>(entities);
     }
-
-    public Set<Entity> getEntities(AndConstraint constraint) {
-        Set<Entity> result = new HashSet<>();
-        for(Entity entity: entities) {
-            if(constraint.check(entity)) {
-                result.add(entity);
-            }
-        }
-        return result;
-    }
 }
