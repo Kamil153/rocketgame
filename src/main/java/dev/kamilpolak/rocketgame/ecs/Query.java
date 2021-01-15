@@ -3,8 +3,8 @@ package dev.kamilpolak.rocketgame.ecs;
 import java.util.*;
 
 public class Query {
-    private Set<Class<? extends Component>> include;
-    private Set<Class<? extends Component>> exclude;
+    private final Set<Class<? extends Component>> include;
+    private final Set<Class<? extends Component>> exclude;
 
     Query() {
         this(Collections.emptyList(), Collections.emptyList());
