@@ -7,6 +7,7 @@ public class Engine {
     private final Map<Class<? extends Component>, Set<Entity>> componentEntityMap = new HashMap<>();
     private final Set<EntitySystem> systems = new TreeSet<>();
     private final Map<Query, Set<Entity>> queriedEntities = new HashMap<>();
+    private final Map<Class<? extends Component>, Set<Query>> queryByComponent = new HashMap<>();
 
     public void addEntity(Entity entity) {
         entities.add(entity);
@@ -36,5 +37,23 @@ public class Engine {
 
     public Set<Entity> getEntities() {
         return Collections.unmodifiableSet(entities);
+    }
+
+    public Set<Entity> activateQuery(Query query) {
+        if(!queriedEntities.containsKey(query)) {
+            for(var component: query.getRelevantComponents()) {
+                queryByComponent.putIfAbsent(component, new HashSet<>());
+                queryByComponent.get(component).add(query);
+            }
+            Set<Entity> initialEntities = new HashSet<>();
+            for(Entity entity: entities) {
+                if(query.check(entity)) {
+                    initialEntities.add(entity);
+                }
+            }
+            queriedEntities.put(query, initialEntities);
+            return Collections.unmodifiableSet(initialEntities);
+        }
+        return queriedEntities.get(query);
     }
 }
