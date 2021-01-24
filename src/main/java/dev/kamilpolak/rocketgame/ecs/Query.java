@@ -36,4 +36,14 @@ public class Query {
     public Iterator<Class<? extends Component>> getExcludedComponents() {
         return Collections.unmodifiableSet(excluded).iterator();
     }
+
+    public boolean check(Entity entity) {
+        for(var component: included) {
+            if(!entity.hasComponent(component)) return false;
+        }
+        for(var component: excluded) {
+            if(entity.hasComponent(component)) return false;
+        }
+        return true;
+    }
 }
