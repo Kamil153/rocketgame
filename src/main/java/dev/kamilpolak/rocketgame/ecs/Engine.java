@@ -6,6 +6,7 @@ public class Engine {
     private final Set<Entity> entities = new HashSet<>();
     private final Map<Class<? extends Component>, Set<Entity>> componentEntityMap = new HashMap<>();
     private final Set<EntitySystem> systems = new TreeSet<>();
+    private final Map<Query, Set<Entity>> queriedEntities = new HashMap<>();
 
     public void addEntity(Entity entity) {
         entities.add(entity);
