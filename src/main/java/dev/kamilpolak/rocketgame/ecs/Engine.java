@@ -34,7 +34,7 @@ public class Engine {
         systems.forEach(system -> system.runUpdate(deltaTime));
     }
 
-    public Iterator<Entity> getEntities() {
-        return Collections.unmodifiableSet(entities).iterator();
+    public Set<Entity> getEntities() {
+        return Collections.unmodifiableSet(entities);
     }
 }
