@@ -46,4 +46,10 @@ public class Query {
         }
         return true;
     }
+
+    public Set<Class<? extends Component>> getRelevantComponents() {
+        var components = new HashSet<>(included);
+        components.addAll(excluded);
+        return components;
+    }
 }
