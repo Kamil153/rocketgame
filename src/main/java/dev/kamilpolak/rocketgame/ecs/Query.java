@@ -16,7 +16,7 @@ public class Query {
 
     Query(Collection<Class<? extends Component>> included, Collection<Class<? extends Component>> excluded) {
         this.included = new HashSet<>(included);
-        this.excluded = new HashSet<>(included);
+        this.excluded = new HashSet<>(excluded);
     }
 
     public Query include(Class<? extends Component> componentClass) {
