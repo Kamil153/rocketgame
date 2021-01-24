@@ -12,7 +12,8 @@ public class Engine {
     public void addEntity(Entity entity) {
         entities.add(entity);
         for(Component component: entity.getComponents()) {
-            Objects.requireNonNull(componentEntityMap.putIfAbsent(component.getClass(), new HashSet<>())).add(entity);
+            componentEntityMap.putIfAbsent(component.getClass(), new HashSet<>());
+            componentEntityMap.get(component.getClass()).add(entity);
         }
     }
 
