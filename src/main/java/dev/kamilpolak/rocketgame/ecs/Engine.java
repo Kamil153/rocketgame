@@ -48,6 +48,16 @@ public class Engine {
         return Collections.unmodifiableSet(entities);
     }
 
+    public Set<Entity> queryEntities(Query query) {
+        Set<Entity> result = new HashSet<>();
+        for(Entity entity: entities) {
+            if(query.check(entity)) {
+                result.add(entity);
+            }
+        }
+        return result;
+    }
+
     public Set<Entity> getAddedEntities() {
         return Collections.unmodifiableSet(addedEntities);
     }
