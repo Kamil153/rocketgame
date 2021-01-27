@@ -37,7 +37,7 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         return enabled;
     }
 
-    void addedToEngine(Engine engine) {
+    void addToEngine(Engine engine) {
         if(this.engine != null) {
             throw new IllegalArgumentException("System has already been added to an engine");
         }

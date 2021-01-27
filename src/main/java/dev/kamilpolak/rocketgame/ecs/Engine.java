@@ -36,7 +36,7 @@ public class Engine implements EntityListener {
 
     public void addSystem(EntitySystem system) {
         systems.add(system);
-        system.addedToEngine(this);
+        system.addToEngine(this);
     }
 
     public void removeSystem(EntitySystem system) {
