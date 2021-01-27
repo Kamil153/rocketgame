@@ -41,7 +41,7 @@ public class Engine implements EntityListener {
 
     public void removeSystem(EntitySystem system) {
         systems.remove(system);
-        system.removedFromEngine();
+        system.removeFromEngine();
     }
 
     public void update(float deltaTime) {
