@@ -5,6 +5,7 @@ import java.util.Comparator;
 public abstract class EntitySystem implements Comparable<EntitySystem> {
     private final int priority;
     private boolean enabled = true;
+    protected Engine engine = null;
 
     public static final Comparator<EntitySystem> PRIORITY_COMPARATOR = Comparator
             .comparing(EntitySystem::getPriority)
@@ -34,6 +35,20 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
 
     public boolean isEnabled() {
         return enabled;
+    }
+
+    void addedToEngine(Engine engine) {
+        if(this.engine != null) {
+            throw new IllegalArgumentException("System has already been added to an engine");
+        }
+        this.engine = engine;
+    }
+
+    void removedFromEngine() {
+        if(this.engine == null) {
+            throw new IllegalArgumentException("System has not been added to an engine");
+        }
+        this.engine = null;
     }
 
     @Override
