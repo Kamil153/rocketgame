@@ -5,10 +5,7 @@ import java.util.*;
 public class Engine implements EntityListener {
 
     private final Set<Entity> entities = new HashSet<>();
-    private final Map<Class<? extends Component>, Set<Entity>> componentEntityMap = new HashMap<>();
     private final Set<EntitySystem> systems = new TreeSet<>();
-    private final Map<Query, Set<Entity>> queriedEntities = new HashMap<>();
-    private final Map<Class<? extends Component>, Set<Query>> queryByComponent = new HashMap<>();
     private final Set<Entity> addedEntities = new HashSet<>();
     private final Set<Entity> removedEntities = new HashSet<>();
     private final Set<Entity> mutatedEntities = new HashSet<>();
@@ -16,8 +13,6 @@ public class Engine implements EntityListener {
     public void addEntity(Entity entity) {
         entities.add(entity);
         for(Component component: entity.getComponents()) {
-            componentEntityMap.putIfAbsent(component.getClass(), new HashSet<>());
-            componentEntityMap.get(component.getClass()).add(entity);
             addedEntities.add(entity);
             entity.addListener(this);
         }
@@ -26,7 +21,6 @@ public class Engine implements EntityListener {
     public void removeEntity(Entity entity) {
         entities.remove(entity);
         for(Component component: entity.getComponents()) {
-            componentEntityMap.get(component.getClass()).remove(entity);
             removedEntities.add(entity);
             entity.removeListener(this);
         }
