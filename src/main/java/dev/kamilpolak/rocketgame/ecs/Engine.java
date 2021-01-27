@@ -42,6 +42,9 @@ public class Engine {
 
     public void update(float deltaTime) {
         systems.forEach(system -> system.runUpdate(deltaTime));
+        addedEntities.clear();
+        removedEntities.clear();
+        mutatedEntities.clear();
     }
 
     public Set<Entity> getEntitiesView() {
