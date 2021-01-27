@@ -36,10 +36,12 @@ public class Engine implements EntityListener {
 
     public void addSystem(EntitySystem system) {
         systems.add(system);
+        system.addedToEngine(this);
     }
 
     public void removeSystem(EntitySystem system) {
         systems.remove(system);
+        system.removedFromEngine();
     }
 
     public void update(float deltaTime) {
