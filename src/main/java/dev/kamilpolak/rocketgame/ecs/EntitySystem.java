@@ -31,7 +31,7 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
         enabled = false;
     }
 
-    abstract void update(float deltaTime);
+    abstract public void update(float deltaTime);
 
     public boolean isEnabled() {
         return enabled;

@@ -14,7 +14,7 @@ public class EntitySystemTest {
         public TestSystem(int priority) { super(priority); }
 
         @Override
-        void update(float deltaTime) { throw new TestException(deltaTime); }
+        public void update(float deltaTime) { throw new TestException(deltaTime); }
     }
 
     @Test
@@ -31,7 +31,7 @@ public class EntitySystemTest {
     public void updateTest() {
         EntitySystem system = new TestSystem(10);
         int deltaTime = 10;
-        TestException ex = Assert.assertThrows(TestException.class, () -> system.runUpdate(deltaTime));
+        TestException ex = Assert.assertThrows(TestException.class, () -> system.update(deltaTime));
         Assert.assertEquals(deltaTime, ex.getDeltaTime(), 1);
     }
 
