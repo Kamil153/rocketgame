@@ -27,4 +27,9 @@ abstract public class IteratingSystem extends EntitySystem {
         super.removedFromEngine();
         entities.clear();
     }
+
+    @Override
+    final public void update(float deltaTime) {
+
+    }
 }
