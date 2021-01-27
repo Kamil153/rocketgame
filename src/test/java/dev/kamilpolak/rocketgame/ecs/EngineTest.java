@@ -30,4 +30,14 @@ public class EngineTest {
         Assert.assertTrue(result1.contains(entity1));
         Assert.assertEquals(1, result1.size());
     }
+
+    @Test
+    public void addedEntitiesTest() {
+        Engine engine = new Engine();
+        Entity entity1 = new Entity();
+        engine.addEntity(entity1);
+        Assert.assertTrue(engine.getAddedEntities().contains(entity1));
+        engine.update(1);
+        Assert.assertTrue(engine.getAddedEntities().isEmpty());
+    }
 }
