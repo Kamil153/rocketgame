@@ -21,6 +21,8 @@ public class Engine implements EntityListener {
     public void removeEntity(Entity entity) {
         entities.remove(entity);
         for(Component component: entity.getComponents()) {
+            addedEntities.remove(entity);
+            mutatedEntities.remove(entity);
             removedEntities.add(entity);
             entity.removeListener(this);
         }
