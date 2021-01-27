@@ -18,6 +18,7 @@ public class Engine {
         for(Component component: entity.getComponents()) {
             componentEntityMap.putIfAbsent(component.getClass(), new HashSet<>());
             componentEntityMap.get(component.getClass()).add(entity);
+            addedEntities.add(entity);
         }
     }
 
@@ -25,6 +26,7 @@ public class Engine {
         entities.remove(entity);
         for(Component component: entity.getComponents()) {
             componentEntityMap.get(component.getClass()).remove(entity);
+            removedEntities.add(entity);
         }
     }
 
