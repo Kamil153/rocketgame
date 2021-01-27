@@ -52,4 +52,19 @@ public class EngineTest {
         engine.update(1);
         Assert.assertTrue(engine.getRemovedEntities().isEmpty());
     }
+
+    @Test
+    public void mutatedEntitiesTest() {
+        Engine engine = new Engine();
+        Entity entity1 = new Entity();
+        engine.addEntity(entity1);
+        entity1.addComponent(new TestComponent1());
+        Assert.assertTrue(engine.getMutatedEntities().contains(entity1));
+        engine.update(1);
+        Assert.assertTrue(engine.getMutatedEntities().isEmpty());
+        entity1.removeComponent(TestComponent1.class);
+        Assert.assertTrue(engine.getMutatedEntities().contains(entity1));
+        engine.removeEntity(entity1);
+        Assert.assertTrue(engine.getMutatedEntities().isEmpty());
+    }
 }
