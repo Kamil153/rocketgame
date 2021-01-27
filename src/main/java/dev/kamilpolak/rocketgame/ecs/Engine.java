@@ -2,7 +2,7 @@ package dev.kamilpolak.rocketgame.ecs;
 
 import java.util.*;
 
-public class Engine {
+public class Engine implements EntityListener {
 
     private final Set<Entity> entities = new HashSet<>();
     private final Map<Class<? extends Component>, Set<Entity>> componentEntityMap = new HashMap<>();
@@ -19,6 +19,7 @@ public class Engine {
             componentEntityMap.putIfAbsent(component.getClass(), new HashSet<>());
             componentEntityMap.get(component.getClass()).add(entity);
             addedEntities.add(entity);
+            entity.addListener(this);
         }
     }
 
@@ -27,10 +28,19 @@ public class Engine {
         for(Component component: entity.getComponents()) {
             componentEntityMap.get(component.getClass()).remove(entity);
             removedEntities.add(entity);
+            entity.removeListener(this);
         }
     }
 
-    // TODO: handle component add/remove event
+    @Override
+    public void componentAdded(Class<? extends Component> componentClass, Entity entity) {
+        mutatedEntities.add(entity);
+    }
+
+    @Override
+    public void componentRemoved(Class<? extends Component> componentClass, Entity entity) {
+        removedEntities.add(entity);
+    }
 
     public void addSystem(EntitySystem system) {
         systems.add(system);
