@@ -31,7 +31,7 @@ public class Engine implements EntityListener {
 
     @Override
     public void componentRemoved(Class<? extends Component> componentClass, Entity entity) {
-        removedEntities.add(entity);
+        mutatedEntities.add(entity);
     }
 
     public void addSystem(EntitySystem system) {
