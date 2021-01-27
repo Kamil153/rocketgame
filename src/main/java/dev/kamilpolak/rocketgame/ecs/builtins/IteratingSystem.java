@@ -30,7 +30,25 @@ abstract public class IteratingSystem extends EntitySystem {
 
     @Override
     final public void update(float deltaTime) {
-
+        for(Entity entity: getCurrentEngine().getAddedEntities()) {
+            if(query.check(entity)) {
+                entities.add(entity);
+            }
+        }
+        for(Entity entity: getCurrentEngine().getRemovedEntities()) {
+            entities.remove(entity);
+        }
+        for(Entity entity: getCurrentEngine().getMutatedEntities()) {
+            if(query.check(entity)) {
+                entities.add(entity);
+            }
+            else {
+                entities.remove(entity);
+            }
+        }
+        for(Entity entity: entities) {
+            updateEntity(deltaTime, entity);
+        }
     }
 
     abstract protected void updateEntity(float deltaTime, Entity entity);
