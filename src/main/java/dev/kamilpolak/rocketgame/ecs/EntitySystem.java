@@ -42,6 +42,7 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
             throw new IllegalArgumentException("System has already been added to an engine");
         }
         this.engine = engine;
+        addedToEngine();
     }
 
     final void removeFromEngine() {
@@ -49,7 +50,11 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
             throw new IllegalArgumentException("System has not been added to an engine");
         }
         this.engine = null;
+        removedFromEngine();
     }
+
+    protected void addedToEngine() { }
+    protected void removedFromEngine() { }
 
     public Engine getCurrentEngine() {
         return engine;
