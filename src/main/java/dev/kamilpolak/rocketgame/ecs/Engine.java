@@ -30,6 +30,8 @@ public class Engine {
         }
     }
 
+    // TODO: handle component add/remove event
+
     public void addSystem(EntitySystem system) {
         systems.add(system);
     }
@@ -42,7 +44,7 @@ public class Engine {
         systems.forEach(system -> system.runUpdate(deltaTime));
     }
 
-    public Set<Entity> getEntities() {
+    public Set<Entity> getEntitiesView() {
         return Collections.unmodifiableSet(entities);
     }
 
