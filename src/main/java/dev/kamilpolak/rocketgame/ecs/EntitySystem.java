@@ -32,12 +32,6 @@ public abstract class EntitySystem implements Comparable<EntitySystem> {
 
     abstract void update(float deltaTime);
 
-    public void runUpdate(float deltaTime) {
-        if(enabled) {
-            update(deltaTime);
-        }
-    }
-
     public boolean isEnabled() {
         return enabled;
     }

@@ -43,7 +43,11 @@ public class Engine implements EntityListener {
     }
 
     public void update(float deltaTime) {
-        systems.forEach(system -> system.runUpdate(deltaTime));
+        systems.forEach(system -> {
+            if(system.isEnabled()) {
+                system.update(deltaTime);
+            }
+        });
         addedEntities.clear();
         removedEntities.clear();
         mutatedEntities.clear();
