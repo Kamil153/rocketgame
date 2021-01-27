@@ -40,4 +40,16 @@ public class EngineTest {
         engine.update(1);
         Assert.assertTrue(engine.getAddedEntities().isEmpty());
     }
+
+    @Test
+    public void removedEntitiesTest() {
+        Engine engine = new Engine();
+        Entity entity1 = new Entity();
+        engine.addEntity(entity1);
+        engine.removeEntity(entity1);
+        Assert.assertTrue(engine.getRemovedEntities().contains(entity1));
+        Assert.assertTrue(engine.getAddedEntities().isEmpty());
+        engine.update(1);
+        Assert.assertTrue(engine.getRemovedEntities().isEmpty());
+    }
 }
