@@ -3,11 +3,10 @@ package dev.kamilpolak.rocketgame.ecs;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 
 public class Entity {
     private final HashMap<Class<? extends Component>, Component> components = new HashMap<>();
-    private final Collection<EntityListener> listeners = new ArrayList<>();
+    private final Collection<IEntityListener> listeners = new ArrayList<>();
 
     public Entity() { }
 
@@ -29,11 +28,11 @@ public class Entity {
         removeComponent(component.getClass());
     }
 
-    public void addListener(EntityListener listener) {
+    public void addListener(IEntityListener listener) {
         listeners.add(listener);
     }
 
-    public void removeListener(EntityListener listener) {
+    public void removeListener(IEntityListener listener) {
         listeners.remove(listener);
     }
 

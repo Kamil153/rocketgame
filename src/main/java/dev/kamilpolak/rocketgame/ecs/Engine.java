@@ -2,13 +2,14 @@ package dev.kamilpolak.rocketgame.ecs;
 
 import java.util.*;
 
-public class Engine implements EntityListener {
+public class Engine implements IEntityListener {
 
     private final Set<Entity> entities = new HashSet<>();
     private final Set<EntitySystem> systems = new TreeSet<>();
     private final Set<Entity> addedEntities = new HashSet<>();
     private final Set<Entity> removedEntities = new HashSet<>();
     private final Set<Entity> mutatedEntities = new HashSet<>();
+    // TODO: fix entities not knowing about changes before update
 
     public void addEntity(Entity entity) {
         entities.add(entity);
