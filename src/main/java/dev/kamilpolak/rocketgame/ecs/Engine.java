@@ -6,37 +6,28 @@ public class Engine implements IEntityListener {
 
     private final Set<Entity> entities = new HashSet<>();
     private final Set<EntitySystem> systems = new TreeSet<>();
-    private final Set<Entity> addedEntities = new HashSet<>();
-    private final Set<Entity> removedEntities = new HashSet<>();
-    private final Set<Entity> mutatedEntities = new HashSet<>();
     private final Collection<IChangeListener> entityChangeListeners = new ArrayList<>();
     // TODO: fix entities not knowing about changes before update
 
     public void addEntity(Entity entity) {
         entities.add(entity);
-        addedEntities.add(entity);
         entity.addListener(this);
         entityChangeListeners.forEach(listener -> listener.entityAdded(entity));
     }
 
     public void removeEntity(Entity entity) {
         entities.remove(entity);
-        addedEntities.remove(entity);
-        mutatedEntities.remove(entity);
-        removedEntities.add(entity);
         entity.removeListener(this);
         entityChangeListeners.forEach(listener -> listener.entityRemoved(entity));
     }
 
     @Override
     public void componentAdded(Class<? extends IComponent> componentClass, Entity entity) {
-        mutatedEntities.add(entity);
         entityChangeListeners.forEach(listener -> listener.entityMutated(entity));
     }
 
     @Override
     public void componentRemoved(Class<? extends IComponent> componentClass, Entity entity) {
-        mutatedEntities.add(entity);
         entityChangeListeners.forEach(listener -> listener.entityMutated(entity));
     }
 
@@ -56,9 +47,6 @@ public class Engine implements IEntityListener {
                 system.update(deltaTime);
             }
         });
-        addedEntities.clear();
-        removedEntities.clear();
-        mutatedEntities.clear();
     }
 
     public Set<Entity> getEntitiesView() {
@@ -81,17 +69,5 @@ public class Engine implements IEntityListener {
 
     public void removeEntityChangeListener(IChangeListener listener) {
         entityChangeListeners.remove(listener);
-    }
-
-    public Set<Entity> getAddedEntities() {
-        return Collections.unmodifiableSet(addedEntities);
-    }
-
-    public Set<Entity> getRemovedEntities() {
-        return Collections.unmodifiableSet(removedEntities);
-    }
-
-    public Set<Entity> getMutatedEntities() {
-        return Collections.unmodifiableSet(mutatedEntities);
     }
 }
