@@ -6,8 +6,8 @@ import org.junit.Assert;
 public class EntityTest {
     @Test
     public void getComponentTest() {
-        class TestComponent implements Component { }
-        class TestComponent2 implements Component { }
+        class TestComponent implements IComponent { }
+        class TestComponent2 implements IComponent { }
         TestComponent testComponent = new TestComponent();
         Entity testEntity = new Entity();
         testEntity.addComponent(testComponent);

@@ -4,8 +4,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 public class QueryTest {
-    static class TestComponent1 implements Component {}
-    static class TestComponent2 implements Component {}
+    static class TestComponent1 implements IComponent {}
+    static class TestComponent2 implements IComponent {}
 
     @Test
     public void checkTest() {

@@ -26,12 +26,12 @@ public class Engine implements IEntityListener {
     }
 
     @Override
-    public void componentAdded(Class<? extends Component> componentClass, Entity entity) {
+    public void componentAdded(Class<? extends IComponent> componentClass, Entity entity) {
         mutatedEntities.add(entity);
     }
 
     @Override
-    public void componentRemoved(Class<? extends Component> componentClass, Entity entity) {
+    public void componentRemoved(Class<? extends IComponent> componentClass, Entity entity) {
         mutatedEntities.add(entity);
     }
 

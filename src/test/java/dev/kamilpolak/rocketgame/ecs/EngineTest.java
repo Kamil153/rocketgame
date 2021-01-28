@@ -6,8 +6,8 @@ import org.junit.Test;
 import java.util.Set;
 
 public class EngineTest {
-    static class TestComponent1 implements Component {}
-    static class TestComponent2 implements Component {}
+    static class TestComponent1 implements IComponent {}
+    static class TestComponent2 implements IComponent {}
 
     @Test
     public void queryEntitiesTest() {

@@ -5,26 +5,26 @@ import java.util.Collection;
 import java.util.HashMap;
 
 public class Entity {
-    private final HashMap<Class<? extends Component>, Component> components = new HashMap<>();
+    private final HashMap<Class<? extends IComponent>, IComponent> components = new HashMap<>();
     private final Collection<IEntityListener> listeners = new ArrayList<>();
 
     public Entity() { }
 
-    public <T extends Component> T getComponent(Class<T> componentClass) {
+    public <T extends IComponent> T getComponent(Class<T> componentClass) {
         return componentClass.cast(components.get(componentClass));
     }
 
-    public void addComponent(Component component) {
+    public void addComponent(IComponent component) {
         components.put(component.getClass(), component);
         listeners.forEach(listener -> listener.componentAdded(component.getClass(), this));
     }
 
-    public void removeComponent(Class<? extends Component> componentClass) {
+    public void removeComponent(Class<? extends IComponent> componentClass) {
         components.remove(componentClass);
         listeners.forEach(listener -> listener.componentRemoved(componentClass, this));
     }
 
-    public void removeComponent(Component component) {
+    public void removeComponent(IComponent component) {
         removeComponent(component.getClass());
     }
 
@@ -36,11 +36,11 @@ public class Entity {
         listeners.remove(listener);
     }
 
-    public boolean hasComponent(Class<? extends Component> componentClass) {
+    public boolean hasComponent(Class<? extends IComponent> componentClass) {
         return components.containsKey(componentClass);
     }
 
-    public Collection<Component> getComponents() {
+    public Collection<IComponent> getComponents() {
         return components.values();
     }
 }

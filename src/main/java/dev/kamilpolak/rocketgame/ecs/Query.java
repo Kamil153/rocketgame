@@ -3,37 +3,37 @@ package dev.kamilpolak.rocketgame.ecs;
 import java.util.*;
 
 public class Query {
-    private final Set<Class<? extends Component>> included;
-    private final Set<Class<? extends Component>> excluded;
+    private final Set<Class<? extends IComponent>> included;
+    private final Set<Class<? extends IComponent>> excluded;
 
     Query() {
         this(Collections.emptyList(), Collections.emptyList());
     }
 
-    Query(Collection<Class<? extends Component>> included) {
+    Query(Collection<Class<? extends IComponent>> included) {
         this(included, Collections.emptyList());
     }
 
-    Query(Collection<Class<? extends Component>> included, Collection<Class<? extends Component>> excluded) {
+    Query(Collection<Class<? extends IComponent>> included, Collection<Class<? extends IComponent>> excluded) {
         this.included = new HashSet<>(included);
         this.excluded = new HashSet<>(excluded);
     }
 
-    public Query include(Class<? extends Component> componentClass) {
+    public Query include(Class<? extends IComponent> componentClass) {
         included.add(componentClass);
         return this;
     }
 
-    public Query exclude(Class<? extends Component> componentClass) {
+    public Query exclude(Class<? extends IComponent> componentClass) {
         excluded.add(componentClass);
         return this;
     }
 
-    public Iterator<Class<? extends Component>> getIncludedComponents() {
+    public Iterator<Class<? extends IComponent>> getIncludedComponents() {
         return Collections.unmodifiableSet(included).iterator();
     }
 
-    public Iterator<Class<? extends Component>> getExcludedComponents() {
+    public Iterator<Class<? extends IComponent>> getExcludedComponents() {
         return Collections.unmodifiableSet(excluded).iterator();
     }
 
@@ -47,7 +47,7 @@ public class Query {
         return true;
     }
 
-    public Set<Class<? extends Component>> getRelevantComponents() {
+    public Set<Class<? extends IComponent>> getRelevantComponents() {
         var components = new HashSet<>(included);
         components.addAll(excluded);
         return components;
