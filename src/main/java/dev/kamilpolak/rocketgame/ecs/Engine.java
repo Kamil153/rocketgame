@@ -9,6 +9,7 @@ public class Engine implements IEntityListener {
     private final Set<Entity> addedEntities = new HashSet<>();
     private final Set<Entity> removedEntities = new HashSet<>();
     private final Set<Entity> mutatedEntities = new HashSet<>();
+    private final Collection<IChangeListener> entityChangeListeners = new ArrayList<>();
     // TODO: fix entities not knowing about changes before update
 
     public void addEntity(Entity entity) {
