@@ -16,6 +16,7 @@ public class Engine implements IEntityListener {
         entities.add(entity);
         addedEntities.add(entity);
         entity.addListener(this);
+        entityChangeListeners.forEach(listener -> listener.entityAdded(entity));
     }
 
     public void removeEntity(Entity entity) {
@@ -24,16 +25,19 @@ public class Engine implements IEntityListener {
         mutatedEntities.remove(entity);
         removedEntities.add(entity);
         entity.removeListener(this);
+        entityChangeListeners.forEach(listener -> listener.entityRemoved(entity));
     }
 
     @Override
     public void componentAdded(Class<? extends IComponent> componentClass, Entity entity) {
         mutatedEntities.add(entity);
+        entityChangeListeners.forEach(listener -> listener.entityMutated(entity));
     }
 
     @Override
     public void componentRemoved(Class<? extends IComponent> componentClass, Entity entity) {
         mutatedEntities.add(entity);
+        entityChangeListeners.forEach(listener -> listener.entityMutated(entity));
     }
 
     public void addSystem(EntitySystem system) {
