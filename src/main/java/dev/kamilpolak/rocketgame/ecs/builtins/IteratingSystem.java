@@ -2,18 +2,41 @@ package dev.kamilpolak.rocketgame.ecs.builtins;
 
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.EntitySystem;
+import dev.kamilpolak.rocketgame.ecs.IChangeListener;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 import java.util.HashSet;
 import java.util.Set;
 
-abstract public class IteratingSystem extends EntitySystem {
+abstract public class IteratingSystem extends EntitySystem implements IChangeListener {
     Query query;
     Set<Entity> entities = new HashSet<>();
 
     public IteratingSystem(int priority, Query query) {
         super(priority);
         this.query = query;
+    }
+
+    @Override
+    public void entityAdded(Entity entity) {
+        if(query.check(entity)) {
+            entities.add(entity);
+        }
+    }
+
+    @Override
+    public void entityRemoved(Entity entity) {
+        entities.remove(entity);
+    }
+
+    @Override
+    public void entityMutated(Entity entity) {
+        if(query.check(entity)) {
+            entities.add(entity);
+        }
+        else {
+            entities.remove(entity);
+        }
     }
 
     @Override
@@ -30,22 +53,6 @@ abstract public class IteratingSystem extends EntitySystem {
 
     @Override
     final public void update(float deltaTime) {
-        for(Entity entity: getCurrentEngine().getAddedEntities()) {
-            if(query.check(entity)) {
-                entities.add(entity);
-            }
-        }
-        for(Entity entity: getCurrentEngine().getRemovedEntities()) {
-            entities.remove(entity);
-        }
-        for(Entity entity: getCurrentEngine().getMutatedEntities()) {
-            if(query.check(entity)) {
-                entities.add(entity);
-            }
-            else {
-                entities.remove(entity);
-            }
-        }
         for(Entity entity: entities) {
             updateEntity(deltaTime, entity);
         }
