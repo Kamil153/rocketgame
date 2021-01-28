@@ -71,6 +71,10 @@ public class Engine implements IEntityListener {
         return result;
     }
 
+    public void addEntityChangeListener(IChangeListener listener) {
+        entityChangeListeners.add(listener);
+    }
+
     public Set<Entity> getAddedEntities() {
         return Collections.unmodifiableSet(addedEntities);
     }
