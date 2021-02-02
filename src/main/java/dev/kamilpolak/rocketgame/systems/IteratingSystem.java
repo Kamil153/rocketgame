@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame.ecs.builtins;
+package dev.kamilpolak.rocketgame.systems;
 
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.EntitySystem;
