@@ -1,7 +1,9 @@
 package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Texture;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 
@@ -13,7 +15,8 @@ public class RocketGame extends Game {
     @Override
     public void create() {
         loadingScreen = new LoadingScreen(this);
-        assets.load("assets/rocket.png", Texture.class);
+        assets.load("assets/textures/rocket.png", Texture.class);
+        FileHandle assetDir = Gdx.files.internal("assets");
         setScreen(loadingScreen);
     }
 
