@@ -14,4 +14,8 @@ public class RocketGame extends Game {
         loadingScreen = new LoadingScreen(this);
         setScreen(loadingScreen);
     }
+
+    public Engine getEngine() {
+        return ecs;
+    }
 }
