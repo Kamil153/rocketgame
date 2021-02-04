@@ -3,6 +3,12 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.Screen;
 
 public class LoadingScreen implements Screen {
+    RocketGame parent;
+
+    public LoadingScreen(RocketGame game) {
+        parent = game;
+    }
+
     @Override
     public void show() {
 
