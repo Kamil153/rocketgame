@@ -1,17 +1,31 @@
 package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class GameScreen implements Screen {
     RocketGame parent;
+    SpriteBatch batch;
+    Texture rocketTexture;
+    Sprite rocketSprite;
+    OrthographicCamera camera;
 
     public GameScreen(RocketGame game) {
         parent = game;
+        batch = new SpriteBatch();
+        camera = new OrthographicCamera();
     }
 
     @Override
     public void show() {
-
+        rocketTexture = parent.getAssets().get("assets/rocket.png");
+        rocketSprite = new Sprite(rocketTexture);
+        batch.begin();
+        rocketSprite.draw(batch);
+        batch.end();
     }
 
     @Override
