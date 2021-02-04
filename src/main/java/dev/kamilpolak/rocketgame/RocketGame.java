@@ -18,4 +18,8 @@ public class RocketGame extends Game {
     public Engine getEngine() {
         return ecs;
     }
+
+    public AssetManager getAssets() {
+        return assets;
+    }
 }
