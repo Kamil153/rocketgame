@@ -14,7 +14,7 @@ public enum TextureAsset implements IAsset<Texture> {
     private final AssetDescriptor<Texture> descriptor;
 
     TextureAsset(String filename) {
-        file = Gdx.files.internal("textures/" + filename);
+        file = Gdx.files.internal("assets/textures/" + filename);
         descriptor = new AssetDescriptor<>(file, Texture.class);
     }
 
