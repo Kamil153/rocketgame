@@ -3,6 +3,6 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.assets.AssetDescriptor;
 
 public interface IAsset <T> {
-    AssetDescriptor<T> getDescriptor();
+    AssetDescriptor<Class<T>> getDescriptor();
     String getPath();
 }
