@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame;
+package dev.kamilpolak.rocketgame.assets;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetDescriptor;
