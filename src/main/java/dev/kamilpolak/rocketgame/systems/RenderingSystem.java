@@ -68,4 +68,7 @@ public class RenderingSystem extends IteratingSystem {
         }
     }
 
+    public OrthographicCamera getCamera() {
+        return cam;
+    }
 }
