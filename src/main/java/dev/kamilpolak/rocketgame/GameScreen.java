@@ -6,12 +6,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import dev.kamilpolak.rocketgame.ecs.Engine;
+import dev.kamilpolak.rocketgame.systems.RenderingSystem;
 
 public class GameScreen implements Screen {
     RocketGame parent;
     SpriteBatch batch;
-    Texture rocketTexture;
-    Sprite rocketSprite;
     OrthographicCamera camera;
     private final Engine ecs = new Engine();
 
@@ -19,19 +18,19 @@ public class GameScreen implements Screen {
         parent = game;
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
+
+        RenderingSystem renderingSystem = new RenderingSystem(10, batch);
+        ecs.addSystem(renderingSystem);
     }
 
     @Override
     public void show() {
-        rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
-        rocketSprite = new Sprite(rocketTexture);
+
     }
 
     @Override
     public void render(float delta) {
-        batch.begin();
-        rocketSprite.draw(batch);
-        batch.end();
+        ecs.update(delta);
     }
 
     @Override
