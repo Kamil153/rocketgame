@@ -13,8 +13,8 @@ import dev.kamilpolak.rocketgame.entities.Rocket;
 import dev.kamilpolak.rocketgame.systems.RenderingSystem;
 
 public class GameScreen implements Screen {
-    RocketGame parent;
-    SpriteBatch batch;
+    private RocketGame parent;
+    private SpriteBatch batch;
     private World world;
     private final Engine ecs = new Engine();
 
