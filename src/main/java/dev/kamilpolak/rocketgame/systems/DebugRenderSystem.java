@@ -10,7 +10,8 @@ public class DebugRenderSystem extends EntitySystem {
     private final World world;
     private final Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
 
-    public DebugRenderSystem(OrthographicCamera camera, World world) {
+    public DebugRenderSystem(int priority, OrthographicCamera camera, World world) {
+        super(priority);
         this.camera = camera;
         this.world = world;
     }
