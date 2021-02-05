@@ -27,7 +27,7 @@ public class LoadingScreen implements Screen {
         Gdx.gl.glClearColor( 0, 0, 0, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         if(parent.getAssets().update()) {
-            parent.setScreen(new GameScreen(parent));
+            parent.startGame();
         }
         else {
             batch.begin();
