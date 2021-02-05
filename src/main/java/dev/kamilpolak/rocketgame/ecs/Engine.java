@@ -44,7 +44,7 @@ public class Engine implements IEntityListener {
     public void update(float deltaTime) {
         systems.forEach(system -> {
             if(system.isEnabled()) {
-                system.update(deltaTime);
+                system.runUpdate(deltaTime);
             }
         });
     }
