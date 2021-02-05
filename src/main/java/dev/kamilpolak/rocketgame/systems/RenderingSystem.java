@@ -16,8 +16,8 @@ public class RenderingSystem extends IteratingSystem {
             .include(TextureComponent.class)
             .include(TransformComponent.class);
 
-    private static final float CAMERA_WIDTH = 1600;
-    private static final float CAMERA_HEIGHT = 900;
+    private static final float CAMERA_WIDTH = 800;
+    private static final float CAMERA_HEIGHT = 450;
 
     private final PriorityQueue<Entity> renderingQueue = new PriorityQueue<>(new ZComparator());
 
