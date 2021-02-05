@@ -23,14 +23,13 @@ public class GameScreen implements Screen {
     public void show() {
         rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
         rocketSprite = new Sprite(rocketTexture);
-        batch.begin();
-        rocketSprite.draw(batch);
-        batch.end();
     }
 
     @Override
     public void render(float delta) {
-
+        batch.begin();
+        rocketSprite.draw(batch);
+        batch.end();
     }
 
     @Override
