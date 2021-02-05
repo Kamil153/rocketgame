@@ -15,6 +15,8 @@ import dev.kamilpolak.rocketgame.components.TextureComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.systems.DebugRenderSystem;
+import dev.kamilpolak.rocketgame.systems.PhysicsSystem;
 import dev.kamilpolak.rocketgame.systems.RenderingSystem;
 
 public class GameScreen implements Screen {
@@ -34,7 +36,11 @@ public class GameScreen implements Screen {
         ecs.addEntity(rocket);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
+        PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
+        DebugRenderSystem debugSystem = new DebugRenderSystem(5, renderingSystem.getCamera(), world);
         ecs.addSystem(renderingSystem);
+        ecs.addSystem(physicsSystem);
+        ecs.addSystem(debugSystem);
 
     }
 

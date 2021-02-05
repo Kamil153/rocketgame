@@ -17,11 +17,13 @@ public class BodyFactory {
         PolygonShape poly = new PolygonShape();
         poly.setAsBox(width/2.0f, height/2.0f);
 
+        /*
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.density = 0.5f;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0.0f;
-        Fixture fixture = body.createFixture(fixtureDef);
+        body.createFixture(fixtureDef);
+         */
         poly.dispose();
 
         return body;
