@@ -1,5 +1,7 @@
 package dev.kamilpolak.rocketgame.systems;
 
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
@@ -35,7 +37,12 @@ public class PhysicsSystem extends IteratingSystem {
             accumulator -= TIME_STEP;
         }
         for(Entity entity: entities) {
-
+            Body body = entity.getComponent(BodyComponent.class).body;
+            TransformComponent transform = entity.getComponent(TransformComponent.class);
+            Vector2 position = body.getPosition();
+            transform.position.x = body.getPosition().x;
+            transform.position.y = body.getPosition().y;
+            transform.rotation = body.getAngle();
         }
     }
 
