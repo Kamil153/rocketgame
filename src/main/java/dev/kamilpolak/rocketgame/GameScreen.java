@@ -21,7 +21,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        rocketTexture = parent.getAssets().get(AssetPath.ROCKET_TEXTURE.getPath());
+        rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
         rocketSprite = new Sprite(rocketTexture);
         batch.begin();
         rocketSprite.draw(batch);
