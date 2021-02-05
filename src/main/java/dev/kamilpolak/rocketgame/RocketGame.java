@@ -6,16 +6,14 @@ import dev.kamilpolak.rocketgame.ecs.Engine;
 
 public class RocketGame extends Game {
     private final AssetManager assets = new AssetManager();
-    private LoadingScreen loadingScreen;
     private final Engine ecs = new Engine();
 
     @Override
     public void create() {
-        loadingScreen = new LoadingScreen(this);
         for(Asset asset: Asset.values()) {
             assets.load(asset.getPath(), asset.getAssetType());
         }
-        setScreen(loadingScreen);
+        setScreen(new LoadingScreen(this));
     }
 
     public Engine getEngine() {
