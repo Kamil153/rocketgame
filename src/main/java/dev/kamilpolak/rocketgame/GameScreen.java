@@ -7,7 +7,9 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
+import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.components.FuelComponent;
 import dev.kamilpolak.rocketgame.components.TextureComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
@@ -20,11 +22,13 @@ public class GameScreen implements Screen {
     private SpriteBatch batch;
     private World world;
     private final Engine ecs = new Engine();
+    private final BodyFactory bodyFactory;
 
     public GameScreen(RocketGame game) {
         parent = game;
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
+        bodyFactory = new BodyFactory(world);
 
         Entity rocket = createRocket();
         ecs.addEntity(rocket);
@@ -75,10 +79,16 @@ public class GameScreen implements Screen {
     private Entity createRocket() {
         Entity rocket = new Entity();
         rocket.addComponent(new FuelComponent());
-        rocket.addComponent(new TransformComponent());
+        TransformComponent transform = new TransformComponent();
+        rocket.addComponent(transform);
         TextureComponent textureComponent = new TextureComponent();
-        textureComponent.region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
+        TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
+        textureComponent.region = region;
         rocket.addComponent(textureComponent);
+        Body body = bodyFactory.createRectangularBody(
+                transform.position.x, transform.position.y,
+                region.getRegionWidth(), region.getRegionHeight());
+        rocket.addComponent(new BodyComponent(body));
         return rocket;
     }
 }
