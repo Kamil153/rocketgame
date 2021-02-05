@@ -48,7 +48,7 @@ public class RenderingSystem extends IteratingSystem {
             float originX = tex.getRegionWidth()/2.0f;
             float originY = tex.getRegionHeight()/2.0f;
             batch.draw(tex,
-                    transform.position.x, transform.position.y,
+                    transform.position.x - originX, transform.position.y - originY,
                     originX, originY,
                     tex.getRegionWidth(), tex.getRegionHeight(),
                     transform.scale.x, transform.scale.y,
