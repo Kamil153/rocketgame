@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 
 public class RocketGame extends Game {
-    private final CustomAssetManager assets = new CustomAssetManager();
+    private final AssetManager assets = new AssetManager();
     private LoadingScreen loadingScreen;
     private final Engine ecs = new Engine();
 
@@ -24,7 +24,7 @@ public class RocketGame extends Game {
         return ecs;
     }
 
-    public CustomAssetManager getAssets() {
+    public AssetManager getAssets() {
         return assets;
     }
 }

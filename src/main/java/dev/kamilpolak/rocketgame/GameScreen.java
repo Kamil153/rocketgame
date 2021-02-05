@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import dev.kamilpolak.rocketgame.assets.TextureAsset;
 
 public class GameScreen implements Screen {
     RocketGame parent;
@@ -22,7 +21,7 @@ public class GameScreen implements Screen {
 
     @Override
     public void show() {
-        rocketTexture = parent.getAssets().get(TextureAsset.ROCKET);
+        rocketTexture = parent.getAssets().get(AssetPath.ROCKET_TEXTURE.getPath());
         rocketSprite = new Sprite(rocketTexture);
         batch.begin();
         rocketSprite.draw(batch);
