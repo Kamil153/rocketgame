@@ -15,8 +15,9 @@ public class RocketGame extends Game {
     @Override
     public void create() {
         loadingScreen = new LoadingScreen(this);
-        assets.load("assets/textures/rocket.png", Texture.class);
-        FileHandle assetDir = Gdx.files.internal("assets");
+        for(Asset asset: Asset.values()) {
+            assets.load(asset.getPath(), asset.getAssetType());
+        }
         setScreen(loadingScreen);
     }
 
