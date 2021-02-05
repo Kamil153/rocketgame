@@ -16,6 +16,9 @@ public class RenderingSystem extends IteratingSystem {
             .include(TextureComponent.class)
             .include(TransformComponent.class);
 
+    private static final float CAMERA_WIDTH = 1600;
+    private static final float CAMERA_HEIGHT = 900;
+
     private final PriorityQueue<Entity> renderingQueue = new PriorityQueue<>(new ZComparator());
 
     private final OrthographicCamera cam = new OrthographicCamera();
@@ -38,6 +41,7 @@ public class RenderingSystem extends IteratingSystem {
         while(!renderingQueue.isEmpty()) {
             Entity entity = renderingQueue.poll();
             TextureRegion tex = entity.getComponent(TextureComponent.class).region;
+            TransformComponent transform = entity.getComponent(TransformComponent.class);
         }
         batch.end();
     }
