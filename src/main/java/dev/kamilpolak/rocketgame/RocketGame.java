@@ -1,10 +1,7 @@
 package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.files.FileHandle;
-import com.badlogic.gdx.graphics.Texture;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 
 public class RocketGame extends Game {
