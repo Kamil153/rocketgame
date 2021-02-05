@@ -8,9 +8,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 
 public class LoadingScreen implements Screen {
-    RocketGame parent;
-    SpriteBatch batch;
-    BitmapFont font = new BitmapFont();
+    private final RocketGame parent;
+    private final SpriteBatch batch;
+    private final BitmapFont font = new BitmapFont();
 
     public LoadingScreen(RocketGame game) {
         parent = game;
