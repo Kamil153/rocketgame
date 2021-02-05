@@ -7,6 +7,7 @@ import dev.kamilpolak.rocketgame.ecs.Engine;
 public class RocketGame extends Game {
     private final AssetManager assets = new AssetManager();
     private final Engine ecs = new Engine();
+    private GameScreen gameScreen;
 
     @Override
     public void create() {
@@ -22,5 +23,10 @@ public class RocketGame extends Game {
 
     public AssetManager getAssets() {
         return assets;
+    }
+
+    public void startGame() {
+        gameScreen = new GameScreen(this);
+        setScreen(gameScreen);
     }
 }
