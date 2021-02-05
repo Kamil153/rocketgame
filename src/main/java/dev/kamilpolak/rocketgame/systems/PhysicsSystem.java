@@ -39,7 +39,6 @@ public class PhysicsSystem extends IteratingSystem {
         for(Entity entity: entities) {
             Body body = entity.getComponent(BodyComponent.class).body;
             TransformComponent transform = entity.getComponent(TransformComponent.class);
-            Vector2 position = body.getPosition();
             transform.position.x = body.getPosition().x;
             transform.position.y = body.getPosition().y;
             transform.rotation = body.getAngle();
