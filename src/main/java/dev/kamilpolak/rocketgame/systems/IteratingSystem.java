@@ -52,10 +52,14 @@ abstract public class IteratingSystem extends EntitySystem implements IChangeLis
     }
 
     @Override
-    public void update(float deltaTime) {
+    public void preUpdate(float deltaTime) {
         for(Entity entity: entities) {
             updateEntity(deltaTime, entity);
         }
+    }
+
+    protected void update(float deltaTime) {
+
     }
 
     abstract protected void updateEntity(float deltaTime, Entity entity);
