@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame;
+package dev.kamilpolak.rocketgame.entities;
 
 import dev.kamilpolak.rocketgame.components.FuelComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
