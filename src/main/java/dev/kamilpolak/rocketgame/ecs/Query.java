@@ -6,7 +6,7 @@ public class Query {
     private final Set<Class<? extends IComponent>> included;
     private final Set<Class<? extends IComponent>> excluded;
 
-    Query() {
+    public Query() {
         this(Collections.emptyList(), Collections.emptyList());
     }
 
