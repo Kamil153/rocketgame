@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import dev.kamilpolak.rocketgame.ecs.Engine;
 
 public class GameScreen implements Screen {
     RocketGame parent;
@@ -12,6 +13,7 @@ public class GameScreen implements Screen {
     Texture rocketTexture;
     Sprite rocketSprite;
     OrthographicCamera camera;
+    private final Engine ecs = new Engine();
 
     public GameScreen(RocketGame game) {
         parent = game;
