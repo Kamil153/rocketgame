@@ -8,8 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import dev.kamilpolak.rocketgame.components.FuelComponent;
+import dev.kamilpolak.rocketgame.components.TextureComponent;
+import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
-import dev.kamilpolak.rocketgame.entities.Rocket;
+import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.RenderingSystem;
 
 public class GameScreen implements Screen {
@@ -23,9 +26,7 @@ public class GameScreen implements Screen {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
 
-        Rocket rocket = new Rocket(
-                new TextureRegion(parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath(), Texture.class))
-        );
+        Entity rocket = createRocket();
         ecs.addEntity(rocket);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
@@ -69,5 +70,15 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
 
+    }
+
+    private Entity createRocket() {
+        Entity rocket = new Entity();
+        rocket.addComponent(new FuelComponent());
+        rocket.addComponent(new TransformComponent());
+        TextureComponent textureComponent = new TextureComponent();
+        textureComponent.region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
+        rocket.addComponent(textureComponent);
+        return rocket;
     }
 }
