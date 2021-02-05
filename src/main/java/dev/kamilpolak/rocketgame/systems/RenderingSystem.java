@@ -2,6 +2,7 @@ package dev.kamilpolak.rocketgame.systems;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dev.kamilpolak.rocketgame.components.TextureComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
@@ -26,13 +27,19 @@ public class RenderingSystem extends IteratingSystem {
     }
 
     @Override
-    protected void update(float deltaTime) {
-        super.update(deltaTime);
+    protected void updateEntity(float deltaTime, Entity entity) {
+        renderingQueue.add(entity);
     }
 
     @Override
-    protected void updateEntity(float deltaTime, Entity entity) {
-
+    protected void update(float deltaTime) {
+        super.update(deltaTime);
+        batch.begin();
+        while(!renderingQueue.isEmpty()) {
+            Entity entity = renderingQueue.poll();
+            TextureRegion tex = entity.getComponent(TextureComponent.class).region;
+        }
+        batch.end();
     }
 
     static class ZComparator implements Comparator<Entity> {
