@@ -21,12 +21,13 @@ public class RenderingSystem extends IteratingSystem {
 
     private final PriorityQueue<Entity> renderingQueue = new PriorityQueue<>(new ZComparator());
 
-    private final OrthographicCamera cam = new OrthographicCamera();
+    private final OrthographicCamera cam;
     private final SpriteBatch batch;
 
     public RenderingSystem(int priority, SpriteBatch batch) {
         super(priority, query);
         this.batch = batch;
+        cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
     }
 
     @Override
@@ -37,11 +38,22 @@ public class RenderingSystem extends IteratingSystem {
     @Override
     protected void update(float deltaTime) {
         super.update(deltaTime);
+        cam.update();
+        batch.setProjectionMatrix(cam.combined);
         batch.begin();
         while(!renderingQueue.isEmpty()) {
             Entity entity = renderingQueue.poll();
             TextureRegion tex = entity.getComponent(TextureComponent.class).region;
             TransformComponent transform = entity.getComponent(TransformComponent.class);
+            float originX = tex.getRegionWidth()/2.0f;
+            float originY = tex.getRegionHeight()/2.0f;
+            batch.draw(tex,
+                    transform.position.x, transform.position.y,
+                    originX, originY,
+                    tex.getRegionWidth(), tex.getRegionHeight(),
+                    transform.scale.x, transform.scale.y,
+                    transform.rotation
+            );
         }
         batch.end();
     }
