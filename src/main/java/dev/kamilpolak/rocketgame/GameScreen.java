@@ -144,6 +144,7 @@ public class GameScreen implements Screen {
         BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
 
         Entity plume = new Entity();
+        plume.addComponent(new PlumeComponent());
         plume.addComponent(textureComponent);
         plume.addComponent(transform);
         plume.addComponent(binding);
