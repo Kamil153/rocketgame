@@ -11,10 +11,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
-import dev.kamilpolak.rocketgame.systems.BindSystem;
-import dev.kamilpolak.rocketgame.systems.DebugRenderSystem;
-import dev.kamilpolak.rocketgame.systems.PhysicsSystem;
-import dev.kamilpolak.rocketgame.systems.RenderingSystem;
+import dev.kamilpolak.rocketgame.systems.*;
 
 public class GameScreen implements Screen {
     private final RocketGame parent;
@@ -33,11 +30,12 @@ public class GameScreen implements Screen {
         Entity ground = createGroundEntity();
         Entity plume = createRocketPlume(rocket);
 
-        RenderingSystem renderingSystem = new RenderingSystem(10, batch);
-        OrthographicCamera camera = renderingSystem.getCamera();
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
-        DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
         BindSystem bindSystem = new BindSystem(14);
+        RenderingSystem renderingSystem = new RenderingSystem(10, batch);
+        PlumeSystem plumeSystem = new PlumeSystem(7);
+        OrthographicCamera camera = renderingSystem.getCamera();
+        DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
 
         // TODO: set groundHeight to texture height
         float groundHeight = 30;
@@ -51,6 +49,7 @@ public class GameScreen implements Screen {
         ecs.addSystem(physicsSystem);
         ecs.addSystem(debugSystem);
         ecs.addSystem(bindSystem);
+        ecs.addSystem(plumeSystem);
     }
 
     @Override
