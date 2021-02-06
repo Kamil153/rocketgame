@@ -9,10 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
-import dev.kamilpolak.rocketgame.components.BodyComponent;
-import dev.kamilpolak.rocketgame.components.FuelComponent;
-import dev.kamilpolak.rocketgame.components.TextureComponent;
-import dev.kamilpolak.rocketgame.components.TransformComponent;
+import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.DebugRenderSystem;
@@ -129,5 +126,22 @@ public class GameScreen implements Screen {
         ground.addComponent(texComponent);
         ground.addComponent(transform);
         return ground;
+    }
+
+    private Entity createRocketPlume(Entity rocket) {
+        TextureRegion texture = new TextureRegion(parent.getAssets().get(Asset.PLUME_TEXTURE.getPath(), Texture.class));
+        TextureComponent textureComponent = new TextureComponent();
+        textureComponent.region = texture;
+        Texture rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
+        TransformComponent transform = new TransformComponent();
+        float offsetX = 0;
+        float offsetY = -texture.getRegionHeight()/2.0f - rocketTexture.getHeight()/2.0f;
+        BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
+
+        Entity plume = new Entity();
+        plume.addComponent(textureComponent);
+        plume.addComponent(transform);
+        plume.addComponent(binding);
+        return plume;
     }
 }
