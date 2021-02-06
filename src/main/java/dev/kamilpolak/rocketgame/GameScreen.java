@@ -30,6 +30,7 @@ public class GameScreen implements Screen {
         Entity ground = createGroundEntity();
         Entity plume = createRocketPlume(rocket);
 
+        ThrustSystem thrustSystem = new ThrustSystem(16);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         BindSystem bindSystem = new BindSystem(14);
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
@@ -50,6 +51,7 @@ public class GameScreen implements Screen {
         ecs.addSystem(debugSystem);
         ecs.addSystem(bindSystem);
         ecs.addSystem(plumeSystem);
+        ecs.addSystem(thrustSystem);
     }
 
     @Override
@@ -103,7 +105,9 @@ public class GameScreen implements Screen {
                 region.getRegionWidth(), region.getRegionHeight(),
                 transform.rotation);
         rocket.addComponent(new FuelComponent());
-        rocket.addComponent(new EngineStateComponent());
+        EngineStateComponent engine = new EngineStateComponent();
+        engine.running = true;
+        rocket.addComponent(engine);
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(transform);
         rocket.addComponent(textureComponent);

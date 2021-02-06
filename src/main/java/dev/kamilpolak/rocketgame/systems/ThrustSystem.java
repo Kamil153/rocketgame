@@ -21,7 +21,7 @@ public class ThrustSystem extends IteratingSystem {
         boolean running = entity.getComponent(EngineStateComponent.class).running;
         if(running) {
             Body body = entity.getComponent(BodyComponent.class).body;
-            Vector2 force = new Vector2(0, 20);
+            Vector2 force = new Vector2(0, 20*body.getMass());
             body.applyForceToCenter(force, true);
         }
     }
