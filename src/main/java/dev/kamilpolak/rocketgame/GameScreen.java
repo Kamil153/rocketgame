@@ -17,9 +17,9 @@ import dev.kamilpolak.rocketgame.systems.PhysicsSystem;
 import dev.kamilpolak.rocketgame.systems.RenderingSystem;
 
 public class GameScreen implements Screen {
-    private RocketGame parent;
-    private SpriteBatch batch;
-    private World world;
+    private final RocketGame parent;
+    private final SpriteBatch batch;
+    private final World world;
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
