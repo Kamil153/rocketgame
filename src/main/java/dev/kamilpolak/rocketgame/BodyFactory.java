@@ -29,7 +29,7 @@ public class BodyFactory {
         return body;
     }
 
-    public Body createGroundBody(float x, float y, float width, float height) {
+    public Body createStaticRectangle(float x, float y, float width, float height) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(x, y);
         Body body = world.createBody(bodyDef);
