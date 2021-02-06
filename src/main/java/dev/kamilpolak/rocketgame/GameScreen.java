@@ -20,8 +20,8 @@ public class GameScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
-    private static final float CAMERA_WIDTH = 800;
-    private static final float CAMERA_HEIGHT = 450;
+    private static final float CAMERA_WIDTH = 1200;
+    private static final float CAMERA_HEIGHT = 672;
 
     public GameScreen(RocketGame game) {
         parent = game;
@@ -112,6 +112,7 @@ public class GameScreen implements Screen {
                 transform.rotation);
         System.out.println(body.getMass());
         rocket.addComponent(new FuelComponent());
+        rocket.addComponent(new ThrustComponent());
         EngineStateComponent engine = new EngineStateComponent();
         engine.running = true;
         rocket.addComponent(engine);
