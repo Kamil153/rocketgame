@@ -43,17 +43,19 @@ public class RenderingSystem extends IteratingSystem {
         batch.begin();
         while(!renderingQueue.isEmpty()) {
             Entity entity = renderingQueue.poll();
-            TextureRegion tex = entity.getComponent(TextureComponent.class).region;
             TransformComponent transform = entity.getComponent(TransformComponent.class);
-            float originX = tex.getRegionWidth()/2.0f;
-            float originY = tex.getRegionHeight()/2.0f;
-            batch.draw(tex,
-                    transform.position.x - originX, transform.position.y - originY,
-                    originX, originY,
-                    tex.getRegionWidth(), tex.getRegionHeight(),
-                    transform.scale.x, transform.scale.y,
-                    transform.rotation * 180.0f/(float)Math.PI  // conversion from radians to degrees
-            );
+            if(!transform.hidden) {
+                TextureRegion tex = entity.getComponent(TextureComponent.class).region;
+                float originX = tex.getRegionWidth() / 2.0f;
+                float originY = tex.getRegionHeight() / 2.0f;
+                batch.draw(tex,
+                        transform.position.x - originX, transform.position.y - originY,
+                        originX, originY,
+                        tex.getRegionWidth(), tex.getRegionHeight(),
+                        transform.scale.x, transform.scale.y,
+                        transform.rotation * 180.0f / (float) Math.PI  // conversion from radians to degrees
+                );
+            }
         }
         batch.end();
     }
