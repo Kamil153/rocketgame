@@ -9,10 +9,11 @@ public class BodyFactory {
         this.world = world;
     }
 
-    public Body createDynamicRectangle(float x, float y, float width, float height) {
+    public Body createDynamicRectangle(float x, float y, float width, float height, float rotation) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
+        bodyDef.angle = rotation;
         Body body = world.createBody(bodyDef);
         PolygonShape poly = new PolygonShape();
         poly.setAsBox(width/2.0f, height/2.0f);

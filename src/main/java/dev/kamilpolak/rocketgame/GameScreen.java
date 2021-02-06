@@ -96,10 +96,12 @@ public class GameScreen implements Screen {
         TransformComponent transform = new TransformComponent();
         transform.position.x = 0;
         transform.position.y = region.getRegionHeight()/2.0f;
+        transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
                 transform.position.x, transform.position.y,
-                region.getRegionWidth(), region.getRegionHeight());
+                region.getRegionWidth(), region.getRegionHeight(),
+                transform.rotation);
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(transform);
         rocket.addComponent(textureComponent);
