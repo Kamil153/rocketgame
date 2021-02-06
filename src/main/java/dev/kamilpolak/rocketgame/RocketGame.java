@@ -2,7 +2,6 @@ package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import dev.kamilpolak.rocketgame.ecs.Engine;
 
 public class RocketGame extends Game {
     private final AssetManager assets = new AssetManager();
