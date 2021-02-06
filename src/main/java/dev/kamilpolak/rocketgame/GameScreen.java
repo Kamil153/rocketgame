@@ -2,10 +2,7 @@ package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
@@ -42,12 +39,16 @@ public class GameScreen implements Screen {
         ecs.addEntity(ground);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
+        OrthographicCamera camera = renderingSystem.getCamera();
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
-        DebugRenderSystem debugSystem = new DebugRenderSystem(5, renderingSystem.getCamera(), world);
+        DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
         ecs.addSystem(renderingSystem);
         ecs.addSystem(physicsSystem);
         ecs.addSystem(debugSystem);
 
+        // TODO: set groundHeight to texture height
+        float groundHeight = 30;
+        camera.position.y = camera.viewportHeight/2.0f - groundHeight;
     }
 
     @Override
