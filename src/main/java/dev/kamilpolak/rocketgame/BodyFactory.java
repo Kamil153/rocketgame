@@ -28,4 +28,15 @@ public class BodyFactory {
 
         return body;
     }
+
+    public Body createGroundBody(float x, float y, float width, float height) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.position.set(x, y);
+        Body body = world.createBody(bodyDef);
+        PolygonShape box = new PolygonShape();
+        box.setAsBox(width/2.0f, height/2.0f);
+        body.createFixture(box, 0.0f);
+        box.dispose();
+        return body;
+    }
 }
