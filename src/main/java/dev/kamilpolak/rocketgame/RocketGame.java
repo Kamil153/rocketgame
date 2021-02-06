@@ -5,7 +5,7 @@ import com.badlogic.gdx.assets.AssetManager;
 
 public class RocketGame extends Game {
     private final AssetManager assets = new AssetManager();
-    private GameScreen gameScreen;
+    private MainScreen mainScreen;
 
     @Override
     public void create() {
@@ -20,7 +20,7 @@ public class RocketGame extends Game {
     }
 
     public void startGame() {
-        gameScreen = new GameScreen(this);
-        setScreen(gameScreen);
+        mainScreen = new MainScreen(this);
+        setScreen(mainScreen);
     }
 }

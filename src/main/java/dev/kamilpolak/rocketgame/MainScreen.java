@@ -13,7 +13,7 @@ import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 
-public class GameScreen implements Screen {
+public class MainScreen implements Screen {
     private final RocketGame parent;
     private final SpriteBatch batch;
     private final World world;
@@ -23,7 +23,7 @@ public class GameScreen implements Screen {
     private static final float CAMERA_WIDTH = 1200;
     private static final float CAMERA_HEIGHT = 672;
 
-    public GameScreen(RocketGame game) {
+    public MainScreen(RocketGame game) {
         parent = game;
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
