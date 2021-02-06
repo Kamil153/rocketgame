@@ -31,6 +31,7 @@ public class GameScreen implements Screen {
 
         Entity rocket = createRocket();
         Entity ground = createGroundEntity();
+        Entity plume = createRocketPlume(rocket);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
         OrthographicCamera camera = renderingSystem.getCamera();
@@ -44,6 +45,8 @@ public class GameScreen implements Screen {
 
         ecs.addEntity(rocket);
         ecs.addEntity(ground);
+        ecs.addEntity(plume);
+
         ecs.addSystem(renderingSystem);
         ecs.addSystem(physicsSystem);
         ecs.addSystem(debugSystem);
