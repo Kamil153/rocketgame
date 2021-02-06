@@ -20,11 +20,16 @@ public class GameScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
+    private static final float CAMERA_WIDTH = 800;
+    private static final float CAMERA_HEIGHT = 450;
+
     public GameScreen(RocketGame game) {
         parent = game;
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
+
+        OrthographicCamera camera = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
 
         Entity rocket = createRocket();
         Entity ground = createGroundEntity();
@@ -33,9 +38,8 @@ public class GameScreen implements Screen {
         ThrustSystem thrustSystem = new ThrustSystem(16);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         BindSystem bindSystem = new BindSystem(14);
-        RenderingSystem renderingSystem = new RenderingSystem(10, batch);
+        RenderingSystem renderingSystem = new RenderingSystem(10, batch, camera);
         PlumeSystem plumeSystem = new PlumeSystem(7);
-        OrthographicCamera camera = renderingSystem.getCamera();
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
 
         // TODO: set groundHeight to texture height

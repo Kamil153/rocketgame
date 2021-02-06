@@ -16,9 +16,6 @@ public class RenderingSystem extends IteratingSystem {
             .include(TextureComponent.class)
             .include(TransformComponent.class);
 
-    private static final float CAMERA_WIDTH = 800;
-    private static final float CAMERA_HEIGHT = 450;
-
     public static final float MPP = 2; // meters per game pixel
     public static final float PIXEL_TO_METER_RATIO = 1/MPP;
 
@@ -31,10 +28,10 @@ public class RenderingSystem extends IteratingSystem {
     private final OrthographicCamera cam;
     private final SpriteBatch batch;
 
-    public RenderingSystem(int priority, SpriteBatch batch) {
+    public RenderingSystem(int priority, SpriteBatch batch, OrthographicCamera camera) {
         super(priority, query);
         this.batch = batch;
-        cam = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+        this.cam = camera;
     }
 
     @Override
