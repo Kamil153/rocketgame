@@ -103,7 +103,7 @@ public class MainScreen implements Screen {
         float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
         float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
         transform.position.x = 0;
-        transform.position.y = height/2.0f;
+        transform.position.y = height/2.0f + 10;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
@@ -112,7 +112,9 @@ public class MainScreen implements Screen {
                 transform.rotation);
         System.out.println(body.getMass());
         rocket.addComponent(new FuelComponent());
-        rocket.addComponent(new ThrustComponent());
+        ThrustComponent thrustComponent = new ThrustComponent();
+        thrustComponent.offset.y = -height/2.0f;
+        rocket.addComponent(thrustComponent);
         EngineStateComponent engine = new EngineStateComponent();
         engine.running = true;
         rocket.addComponent(engine);

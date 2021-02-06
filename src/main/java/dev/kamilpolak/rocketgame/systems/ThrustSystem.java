@@ -28,14 +28,25 @@ public class ThrustSystem extends IteratingSystem {
         if(running) {
             Body body = entity.getComponent(BodyComponent.class).body;
             ThrustComponent thrustComponent = entity.getComponent(ThrustComponent.class);
-            float yThrust = thrustComponent.thrust;
-            float xThrust = (float)random.nextGaussian()*100;
+            float angle = (float)Math.PI/2.0f + body.getAngle();
             if(!entity.hasComponent(FinsComponent.class)) {
-                xThrust *= 10;
+                angle += (float)random.nextGaussian()*0.1f;
             }
+            float xThrust = thrustComponent.thrust*(float)Math.cos(angle);
+            float yThrust = thrustComponent.thrust*(float)Math.sin(angle);
             Vector2 force = new Vector2(xThrust, yThrust);
-            Vector2 point = body.getPosition().cpy().add(thrustComponent.offset);
+            Vector2 point = calculateThrustPoint(body.getPosition(), body.getAngle(), thrustComponent.offset);
             body.applyForce(force, point, true);
+            System.out.println(yThrust-body.getMass()*10);
         }
+    }
+
+    private static Vector2 calculateThrustPoint(Vector2 position, float rotation, Vector2 offset) {
+        float radius = offset.len();
+        float angle = offset.angleRad();
+        Vector2 result = new Vector2();
+        result.x = position.x + radius*(float)Math.cos(rotation + angle);
+        result.y = position.y + radius*(float)Math.sin(rotation + angle);
+        return result;
     }
 }
