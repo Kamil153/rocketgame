@@ -90,7 +90,7 @@ public class GameScreen implements Screen {
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
         textureComponent.region = region;
         rocket.addComponent(textureComponent);
-        Body body = bodyFactory.createRectangularBody(
+        Body body = bodyFactory.createDynamicRectangle(
                 transform.position.x, transform.position.y,
                 region.getRegionWidth(), region.getRegionHeight());
         rocket.addComponent(new BodyComponent(body));

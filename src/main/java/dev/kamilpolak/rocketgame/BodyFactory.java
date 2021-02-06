@@ -9,7 +9,7 @@ public class BodyFactory {
         this.world = world;
     }
 
-    public Body createRectangularBody(float x, float y, float width, float height) {
+    public Body createDynamicRectangle(float x, float y, float width, float height) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
         bodyDef.position.set(x, y);
