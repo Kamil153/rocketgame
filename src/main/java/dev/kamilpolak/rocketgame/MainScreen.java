@@ -21,7 +21,7 @@ public class MainScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
-    private static final float CAMERA_HEIGHT = 300.0f;
+    private static final float CAMERA_HEIGHT = 350.0f;
 
     public MainScreen(RocketGame game) {
         parent = game;
@@ -33,6 +33,10 @@ public class MainScreen implements Screen {
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(CAMERA_HEIGHT * (w / h), CAMERA_HEIGHT);
 
+        // TODO: set groundHeight to texture height
+        int groundTextureHeight = 30;
+        float cameraLowerBound = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
+
         Entity rocket = createRocket();
         Entity ground = createGroundEntity();
         Entity plume = createRocketPlume(rocket);
@@ -40,14 +44,10 @@ public class MainScreen implements Screen {
         ThrustSystem thrustSystem = new ThrustSystem(16);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         BindSystem bindSystem = new BindSystem(14);
-        CameraSystem cameraSystem = new CameraSystem(12, camera, 0);
+        CameraSystem cameraSystem = new CameraSystem(12, camera, cameraLowerBound);
         RenderingSystem renderingSystem = new RenderingSystem(10, batch, camera);
         PlumeSystem plumeSystem = new PlumeSystem(7);
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
-
-        // TODO: set groundHeight to texture height
-        int groundTextureHeight = 30;
-        camera.position.y = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
 
         ecs.addEntity(rocket);
         ecs.addEntity(ground);
