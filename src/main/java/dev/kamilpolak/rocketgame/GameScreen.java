@@ -97,7 +97,7 @@ public class GameScreen implements Screen {
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
         TransformComponent transform = new TransformComponent();
         transform.position.x = 0;
-        transform.position.y = region.getRegionHeight()/2.0f + 10;
+        transform.position.y = region.getRegionHeight()/2.0f;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
