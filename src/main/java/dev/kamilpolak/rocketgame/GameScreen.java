@@ -96,14 +96,17 @@ public class GameScreen implements Screen {
         TextureComponent textureComponent = new TextureComponent();
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
         TransformComponent transform = new TransformComponent();
+        float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
+        float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
         transform.position.x = 0;
-        transform.position.y = region.getRegionHeight()/2.0f;
+        transform.position.y = height/2.0f;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
                 transform.position.x, transform.position.y,
-                region.getRegionWidth(), region.getRegionHeight(),
+                width, height,
                 transform.rotation);
+        System.out.println(body.getMass());
         rocket.addComponent(new FuelComponent());
         EngineStateComponent engine = new EngineStateComponent();
         engine.running = true;
@@ -116,11 +119,13 @@ public class GameScreen implements Screen {
 
     private Entity createGroundEntity() {
         // TODO: use ground texture instead of pixmap
-        int width = 50;
-        int height = 30;
+        int texWidth = 50;
+        int texHeight = 30;
+        float width = RenderingSystem.pixelsToMeters(texWidth);
+        float height = RenderingSystem.pixelsToMeters(texHeight);
         float x = 0.0f;
         float y = -height/2.0f;
-        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        Pixmap pixmap = new Pixmap(texWidth, texHeight, Pixmap.Format.RGBA8888);
         pixmap.setColor(Color.GREEN);
         pixmap.fill();
         TextureComponent texComponent = new TextureComponent();
@@ -143,8 +148,10 @@ public class GameScreen implements Screen {
         textureComponent.region = texture;
         Texture rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
         TransformComponent transform = new TransformComponent();
+        float height = RenderingSystem.pixelsToMeters(texture.getRegionHeight());
+        float rocketHeight = RenderingSystem.pixelsToMeters(rocketTexture.getHeight());
         float offsetX = 0;
-        float offsetY = -texture.getRegionHeight()/2.0f - rocketTexture.getHeight()/2.0f;
+        float offsetY = -height/2.0f - rocketHeight/2.0f;
         BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
 
         Entity plume = new Entity();

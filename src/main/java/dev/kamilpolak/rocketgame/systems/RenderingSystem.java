@@ -19,6 +19,13 @@ public class RenderingSystem extends IteratingSystem {
     private static final float CAMERA_WIDTH = 800;
     private static final float CAMERA_HEIGHT = 450;
 
+    public static final float MPP = 2; // meters per game pixel
+    public static final float PIXEL_TO_METER_RATIO = 1/MPP;
+
+    public static float pixelsToMeters(int pixels) {
+        return pixels*MPP;
+    }
+
     private final PriorityQueue<Entity> renderingQueue = new PriorityQueue<>(new ZComparator());
 
     private final OrthographicCamera cam;
@@ -46,12 +53,14 @@ public class RenderingSystem extends IteratingSystem {
             TransformComponent transform = entity.getComponent(TransformComponent.class);
             if(!transform.hidden) {
                 TextureRegion tex = entity.getComponent(TextureComponent.class).region;
-                float originX = tex.getRegionWidth() / 2.0f;
-                float originY = tex.getRegionHeight() / 2.0f;
+                float width = pixelsToMeters(tex.getRegionWidth());
+                float height = pixelsToMeters(tex.getRegionHeight());
+                float originX = width / 2.0f;
+                float originY = height / 2.0f;
                 batch.draw(tex,
                         transform.position.x - originX, transform.position.y - originY,
                         originX, originY,
-                        tex.getRegionWidth(), tex.getRegionHeight(),
+                        width, height,
                         transform.scale.x, transform.scale.y,
                         transform.rotation * 180.0f / (float) Math.PI  // conversion from radians to degrees
                 );
