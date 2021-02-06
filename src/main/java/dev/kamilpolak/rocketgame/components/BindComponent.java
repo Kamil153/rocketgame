@@ -8,12 +8,12 @@ public class BindComponent implements IComponent {
     public final Entity target;
     public final Vector2 offset;
 
-    BindComponent(Entity target, Vector2 offset) {
+    public BindComponent(Entity target, Vector2 offset) {
         this.target = target;
         this.offset = offset.cpy();
     }
 
-    BindComponent(Entity target) {
+    public BindComponent(Entity target) {
         this(target, new Vector2());
     }
 }
