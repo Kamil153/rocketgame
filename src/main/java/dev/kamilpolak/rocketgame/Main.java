@@ -7,8 +7,8 @@ public class Main {
     public static void main(String[] args) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
         config.title = "Game";
-        config.width = 800;
-        config.height = 480;
+        config.width = 1200;
+        config.height = 600;
         new LwjglApplication(new RocketGame(), config);
     }
 }

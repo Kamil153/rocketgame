@@ -16,7 +16,7 @@ public class RenderingSystem extends IteratingSystem {
             .include(TextureComponent.class)
             .include(TransformComponent.class);
 
-    public static final float MPP = 2; // meters per game pixel
+    public static final float MPP = 1; // meters per game pixel
     public static final float PIXEL_TO_METER_RATIO = 1/MPP;
 
     public static float pixelsToMeters(int pixels) {

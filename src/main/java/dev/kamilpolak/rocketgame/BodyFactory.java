@@ -20,7 +20,7 @@ public class BodyFactory {
 
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.shape = poly;
-        fixtureDef.density = 0.5f;
+        fixtureDef.density = width*5;
         fixtureDef.friction = 0.4f;
         fixtureDef.restitution = 0.0f;
         body.createFixture(fixtureDef);

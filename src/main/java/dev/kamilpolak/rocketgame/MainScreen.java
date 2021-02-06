@@ -17,11 +17,11 @@ public class MainScreen implements Screen {
     private final RocketGame parent;
     private final SpriteBatch batch;
     private final World world;
+    private final OrthographicCamera camera;
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
-    private static final float CAMERA_WIDTH = 1200.0f;
-    private static final float CAMERA_HEIGHT = 675.0f;
+    private static final float CAMERA_HEIGHT = 300.0f;
 
     public MainScreen(RocketGame game) {
         parent = game;
@@ -29,7 +29,9 @@ public class MainScreen implements Screen {
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
 
-        OrthographicCamera camera = new OrthographicCamera(CAMERA_WIDTH, CAMERA_HEIGHT);
+        float w = Gdx.graphics.getWidth();
+        float h = Gdx.graphics.getHeight();
+        camera = new OrthographicCamera(CAMERA_HEIGHT * (w / h), CAMERA_HEIGHT);
 
         Entity rocket = createRocket();
         Entity ground = createGroundEntity();
@@ -38,13 +40,13 @@ public class MainScreen implements Screen {
         ThrustSystem thrustSystem = new ThrustSystem(16);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         BindSystem bindSystem = new BindSystem(14);
+        CameraSystem cameraSystem = new CameraSystem(12, camera, 0);
         RenderingSystem renderingSystem = new RenderingSystem(10, batch, camera);
         PlumeSystem plumeSystem = new PlumeSystem(7);
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
 
         // TODO: set groundHeight to texture height
         int groundTextureHeight = 30;
-        System.out.println(camera.viewportHeight);
         camera.position.y = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
 
         ecs.addEntity(rocket);
@@ -57,6 +59,7 @@ public class MainScreen implements Screen {
         ecs.addSystem(bindSystem);
         ecs.addSystem(plumeSystem);
         ecs.addSystem(thrustSystem);
+        ecs.addSystem(cameraSystem);
     }
 
     @Override
@@ -73,7 +76,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-
+        camera.viewportWidth = CAMERA_HEIGHT * ((float)width / (float)height);
     }
 
     @Override
@@ -111,6 +114,7 @@ public class MainScreen implements Screen {
                 transform.position.x, transform.position.y,
                 width, height,
                 transform.rotation);
+        System.out.println(body.getMass());
         rocket.addComponent(new FuelComponent());
         ThrustComponent thrustComponent = new ThrustComponent();
         thrustComponent.offset.y = -height/2.0f;
