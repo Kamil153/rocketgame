@@ -52,7 +52,7 @@ public class RenderingSystem extends IteratingSystem {
                     originX, originY,
                     tex.getRegionWidth(), tex.getRegionHeight(),
                     transform.scale.x, transform.scale.y,
-                    transform.rotation
+                    transform.rotation * 180.0f/(float)Math.PI  // conversion from radians to degrees
             );
         }
         batch.end();
