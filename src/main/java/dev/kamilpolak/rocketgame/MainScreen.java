@@ -121,6 +121,7 @@ public class MainScreen implements Screen {
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(transform);
         rocket.addComponent(textureComponent);
+        rocket.addComponent(new RocketComponent());
         return rocket;
     }
 
