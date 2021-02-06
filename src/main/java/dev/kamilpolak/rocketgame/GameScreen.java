@@ -33,22 +33,22 @@ public class GameScreen implements Screen {
         bodyFactory = new BodyFactory(world);
 
         Entity rocket = createRocket();
-        ecs.addEntity(rocket);
-
         Entity ground = createGroundEntity();
-        ecs.addEntity(ground);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
         OrthographicCamera camera = renderingSystem.getCamera();
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
-        ecs.addSystem(renderingSystem);
-        ecs.addSystem(physicsSystem);
-        ecs.addSystem(debugSystem);
 
         // TODO: set groundHeight to texture height
         float groundHeight = 30;
         camera.position.y = camera.viewportHeight/2.0f - groundHeight;
+
+        ecs.addEntity(rocket);
+        ecs.addEntity(ground);
+        ecs.addSystem(renderingSystem);
+        ecs.addSystem(physicsSystem);
+        ecs.addSystem(debugSystem);
     }
 
     @Override
