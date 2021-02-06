@@ -37,7 +37,6 @@ public class ThrustSystem extends IteratingSystem {
             Vector2 force = new Vector2(xThrust, yThrust);
             Vector2 point = calculateThrustPoint(body.getPosition(), body.getAngle(), thrustComponent.offset);
             body.applyForce(force, point, true);
-            System.out.println(yThrust-body.getMass()*10);
         }
     }
 
