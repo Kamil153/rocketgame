@@ -12,7 +12,7 @@ import dev.kamilpolak.rocketgame.ecs.Query;
 import java.util.Random;
 
 public class ThrustSystem extends IteratingSystem {
-    private static final float RANDOM_THRUST_STD = 0.2f;
+    private static final float RANDOM_ANGLE_STD = 0.2f;
     private static final Random random = new Random();
     private static final Query query = (new Query())
             .include(EngineStateComponent.class)
@@ -31,7 +31,7 @@ public class ThrustSystem extends IteratingSystem {
             ThrustComponent thrustComponent = entity.getComponent(ThrustComponent.class);
             float angle = (float)Math.PI/2.0f + body.getAngle();
             if(!entity.hasComponent(FinsComponent.class)) {
-                angle += (float)random.nextGaussian()*RANDOM_THRUST_STD;
+                angle += (float)random.nextGaussian()* RANDOM_ANGLE_STD;
             }
             float xThrust = thrustComponent.thrust*(float)Math.cos(angle);
             float yThrust = thrustComponent.thrust*(float)Math.sin(angle);
