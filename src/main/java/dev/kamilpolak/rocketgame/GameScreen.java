@@ -119,7 +119,7 @@ public class GameScreen implements Screen {
         pixmap.fill();
         TextureComponent texComponent = new TextureComponent();
         texComponent.region = new TextureRegion(new Texture(pixmap));
-        Body body = bodyFactory.createStaticRectangle(x, y, width, height);
+        Body body = bodyFactory.createStaticRectangle(x, y, width, height, 0);
         TransformComponent transform = new TransformComponent();
         transform.position.x = x;
         transform.position.y = y;

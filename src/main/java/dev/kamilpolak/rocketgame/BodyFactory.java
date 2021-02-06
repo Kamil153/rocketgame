@@ -30,9 +30,10 @@ public class BodyFactory {
         return body;
     }
 
-    public Body createStaticRectangle(float x, float y, float width, float height) {
+    public Body createStaticRectangle(float x, float y, float width, float height, float rotation) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.position.set(x, y);
+        bodyDef.angle = rotation;
         Body body = world.createBody(bodyDef);
         PolygonShape box = new PolygonShape();
         box.setAsBox(width/2.0f, height/2.0f);
