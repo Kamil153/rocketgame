@@ -2,11 +2,14 @@ package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
@@ -34,6 +37,9 @@ public class GameScreen implements Screen {
 
         Entity rocket = createRocket();
         ecs.addEntity(rocket);
+
+        Entity ground = createGroundEntity();
+        ecs.addEntity(ground);
 
         RenderingSystem renderingSystem = new RenderingSystem(10, batch);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
@@ -84,16 +90,41 @@ public class GameScreen implements Screen {
     private Entity createRocket() {
         Entity rocket = new Entity();
         rocket.addComponent(new FuelComponent());
-        TransformComponent transform = new TransformComponent();
-        rocket.addComponent(transform);
         TextureComponent textureComponent = new TextureComponent();
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
+        TransformComponent transform = new TransformComponent();
+        transform.position.x = 0;
+        transform.position.y = region.getRegionHeight()/2.0f;
         textureComponent.region = region;
-        rocket.addComponent(textureComponent);
         Body body = bodyFactory.createDynamicRectangle(
                 transform.position.x, transform.position.y,
                 region.getRegionWidth(), region.getRegionHeight());
         rocket.addComponent(new BodyComponent(body));
+        rocket.addComponent(transform);
+        rocket.addComponent(textureComponent);
         return rocket;
+    }
+
+    private Entity createGroundEntity() {
+        // TODO: use ground texture instead of pixmap
+        int width = 50;
+        int height = 30;
+        float x = 0.0f;
+        float y = -height/2.0f;
+        Pixmap pixmap = new Pixmap(width, height, Pixmap.Format.RGBA8888);
+        pixmap.setColor(Color.GREEN);
+        pixmap.fill();
+        TextureComponent texComponent = new TextureComponent();
+        texComponent.region = new TextureRegion(new Texture(pixmap));
+        Body body = bodyFactory.createStaticRectangle(x, y, width, height);
+        TransformComponent transform = new TransformComponent();
+        transform.position.x = x;
+        transform.position.y = y;
+
+        Entity ground = new Entity();
+        ground.addComponent(new BodyComponent(body));
+        ground.addComponent(texComponent);
+        ground.addComponent(transform);
+        return ground;
     }
 }
