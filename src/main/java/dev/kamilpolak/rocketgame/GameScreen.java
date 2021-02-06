@@ -91,7 +91,6 @@ public class GameScreen implements Screen {
 
     private Entity createRocket() {
         Entity rocket = new Entity();
-        rocket.addComponent(new FuelComponent());
         TextureComponent textureComponent = new TextureComponent();
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
         TransformComponent transform = new TransformComponent();
@@ -103,6 +102,8 @@ public class GameScreen implements Screen {
                 transform.position.x, transform.position.y,
                 region.getRegionWidth(), region.getRegionHeight(),
                 transform.rotation);
+        rocket.addComponent(new FuelComponent());
+        rocket.addComponent(new EngineStateComponent());
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(transform);
         rocket.addComponent(textureComponent);
