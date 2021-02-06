@@ -20,8 +20,8 @@ public class MainScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
 
-    private static final float CAMERA_WIDTH = 1200;
-    private static final float CAMERA_HEIGHT = 672;
+    private static final float CAMERA_WIDTH = 1200.0f;
+    private static final float CAMERA_HEIGHT = 675.0f;
 
     public MainScreen(RocketGame game) {
         parent = game;
@@ -43,8 +43,9 @@ public class MainScreen implements Screen {
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
 
         // TODO: set groundHeight to texture height
-        float groundHeight = 30;
-        camera.position.y = camera.viewportHeight/2.0f - groundHeight;
+        int groundTextureHeight = 30;
+        System.out.println(camera.viewportHeight);
+        camera.position.y = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
 
         ecs.addEntity(rocket);
         ecs.addEntity(ground);
@@ -103,14 +104,13 @@ public class MainScreen implements Screen {
         float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
         float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
         transform.position.x = 0;
-        transform.position.y = height/2.0f + 10;
+        transform.position.y = height/2.0f;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
                 transform.position.x, transform.position.y,
                 width, height,
                 transform.rotation);
-        System.out.println(body.getMass());
         rocket.addComponent(new FuelComponent());
         ThrustComponent thrustComponent = new ThrustComponent();
         thrustComponent.offset.y = -height/2.0f;
