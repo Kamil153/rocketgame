@@ -6,12 +6,12 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.systems.BindSystem;
 import dev.kamilpolak.rocketgame.systems.DebugRenderSystem;
 import dev.kamilpolak.rocketgame.systems.PhysicsSystem;
 import dev.kamilpolak.rocketgame.systems.RenderingSystem;
@@ -36,6 +36,7 @@ public class GameScreen implements Screen {
         OrthographicCamera camera = renderingSystem.getCamera();
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
+        BindSystem bindSystem = new BindSystem(14);
 
         // TODO: set groundHeight to texture height
         float groundHeight = 30;
@@ -46,6 +47,7 @@ public class GameScreen implements Screen {
         ecs.addSystem(renderingSystem);
         ecs.addSystem(physicsSystem);
         ecs.addSystem(debugSystem);
+        ecs.addSystem(bindSystem);
     }
 
     @Override
@@ -92,7 +94,7 @@ public class GameScreen implements Screen {
         TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
         TransformComponent transform = new TransformComponent();
         transform.position.x = 0;
-        transform.position.y = region.getRegionHeight()/2.0f;
+        transform.position.y = region.getRegionHeight()/2.0f + 10;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
