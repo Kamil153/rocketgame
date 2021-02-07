@@ -15,7 +15,7 @@ public class RocketTurnSystem extends IteratingSystem {
             .include(RocketComponent.class)
             .include(EngineAngleComponent.class);
 
-    public RocketTurnSystem(int priority, Query query) {
+    public RocketTurnSystem(int priority) {
         super(priority, query);
     }
 
