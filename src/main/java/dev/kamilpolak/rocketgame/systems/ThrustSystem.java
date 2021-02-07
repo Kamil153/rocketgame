@@ -2,10 +2,7 @@ package dev.kamilpolak.rocketgame.systems;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
-import dev.kamilpolak.rocketgame.components.BodyComponent;
-import dev.kamilpolak.rocketgame.components.EngineStateComponent;
-import dev.kamilpolak.rocketgame.components.FinsComponent;
-import dev.kamilpolak.rocketgame.components.ThrustComponent;
+import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
@@ -30,6 +27,9 @@ public class ThrustSystem extends IteratingSystem {
             Body body = entity.getComponent(BodyComponent.class).body;
             ThrustComponent thrustComponent = entity.getComponent(ThrustComponent.class);
             float angle = (float)Math.PI/2.0f + body.getAngle();
+            if(entity.hasComponent(EngineAngleComponent.class)) {
+                angle += entity.getComponent(EngineAngleComponent.class).angle;
+            }
             if(!entity.hasComponent(FinsComponent.class)) {
                 angle += (float)random.nextGaussian() * RANDOM_ANGLE_STD;
             }
