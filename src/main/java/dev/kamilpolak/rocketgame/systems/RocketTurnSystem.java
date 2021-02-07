@@ -23,8 +23,8 @@ public class RocketTurnSystem extends IteratingSystem {
     protected void updateEntity(float deltaTime, Entity entity) {
         EngineAngleComponent angleComponent = entity.getComponent(EngineAngleComponent.class);
         if(entity.hasComponent(TVCComponent.class)) {
-            boolean leftPressed = Gdx.input.isButtonPressed(Input.Keys.LEFT);
-            boolean rightPressed = Gdx.input.isButtonPressed(Input.Keys.RIGHT);
+            boolean leftPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
+            boolean rightPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
             if(leftPressed) {
                 angleComponent.angle = -TURN_ANGLE;
             }
