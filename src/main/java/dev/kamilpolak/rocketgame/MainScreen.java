@@ -128,6 +128,8 @@ public class MainScreen implements Screen {
         rocket.addComponent(transform);
         rocket.addComponent(textureComponent);
         rocket.addComponent(new RocketComponent());
+        rocket.addComponent(new EngineAngleComponent());
+        rocket.addComponent(new TVCComponent());
         return rocket;
     }
 
