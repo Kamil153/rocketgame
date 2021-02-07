@@ -41,6 +41,7 @@ public class MainScreen implements Screen {
         Entity ground = createGroundEntity();
         Entity plume = createRocketPlume(rocket);
 
+        RocketTurnSystem turnSystem = new RocketTurnSystem(17);
         ThrustSystem thrustSystem = new ThrustSystem(16);
         PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
         BindSystem bindSystem = new BindSystem(14);
@@ -60,6 +61,7 @@ public class MainScreen implements Screen {
         ecs.addSystem(plumeSystem);
         ecs.addSystem(thrustSystem);
         ecs.addSystem(cameraSystem);
+        ecs.addSystem(turnSystem);
     }
 
     @Override
