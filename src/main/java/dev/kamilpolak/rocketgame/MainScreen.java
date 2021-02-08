@@ -34,7 +34,7 @@ public class MainScreen implements Screen {
         camera = new OrthographicCamera(CAMERA_HEIGHT * (w / h), CAMERA_HEIGHT);
 
         // TODO: set groundHeight to texture height
-        int groundTextureHeight = 30;
+        int groundTextureHeight = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getHeight();
         float cameraLowerBound = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
 
         Entity rocket = createRocket();
@@ -134,18 +134,13 @@ public class MainScreen implements Screen {
     }
 
     private Entity createGroundEntity() {
-        // TODO: use ground texture instead of pixmap
-        int texWidth = 50;
-        int texHeight = 30;
-        float width = RenderingSystem.pixelsToMeters(texWidth);
-        float height = RenderingSystem.pixelsToMeters(texHeight);
+        Texture texture = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath());
+        float width = RenderingSystem.pixelsToMeters(texture.getWidth());
+        float height = RenderingSystem.pixelsToMeters(texture.getHeight());
         float x = 0.0f;
         float y = -height/2.0f;
-        Pixmap pixmap = new Pixmap(texWidth, texHeight, Pixmap.Format.RGBA8888);
-        pixmap.setColor(Color.GREEN);
-        pixmap.fill();
         TextureComponent texComponent = new TextureComponent();
-        texComponent.region = new TextureRegion(new Texture(pixmap));
+        texComponent.region = new TextureRegion(texture);
         Body body = bodyFactory.createStaticRectangle(x, y, width, height, 0);
         TransformComponent transform = new TransformComponent();
         transform.position.x = x;
