@@ -29,4 +29,9 @@ public class EntityFactory {
         entity.addComponent(transformComponent);
         return entity;
     }
+
+    private TextureRegion getTextureRegion(Asset asset) {
+        Texture texture = assets.get(asset.getPath(), Texture.class);
+        return new TextureRegion(texture);
+    }
 }
