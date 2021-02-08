@@ -55,6 +55,17 @@ public class MainScreen implements Screen {
         ecs.addEntity(ground);
         ecs.addEntity(plume);
         ecs.addEntity(launchpad);
+        final int GROUND_COUNT = 16;
+        float groundWidth = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
+        ecs.addEntity(entityFactory.createEarth());
+        float groundX = 0;
+        for(int i = 1; i < GROUND_COUNT; i++) {
+            groundX = -groundX;
+            if(i % 2 == 1) {
+                groundX += groundWidth;
+            }
+            ecs.addEntity(entityFactory.createEarth(groundX));
+        }
 
         ecs.addSystem(renderingSystem);
         ecs.addSystem(physicsSystem);
