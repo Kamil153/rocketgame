@@ -20,6 +20,7 @@ public class MainScreen implements Screen {
     private final OrthographicCamera camera;
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
+    private final EntityFactory entityFactory;
 
     private static final float CAMERA_HEIGHT = 350.0f;
 
@@ -28,6 +29,7 @@ public class MainScreen implements Screen {
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
+        entityFactory = new EntityFactory(world, parent.getAssets());
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -35,7 +37,7 @@ public class MainScreen implements Screen {
 
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
-        Entity rocket = createRocket();
+        Entity rocket = entityFactory.createRocket();
         Entity ground = createGroundEntity();
         Entity plume = createRocketPlume(rocket);
         Entity launchpad = createLaunchpad();
@@ -99,38 +101,6 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
 
-    }
-
-    private Entity createRocket() {
-        Entity rocket = new Entity();
-        TextureComponent textureComponent = new TextureComponent();
-        TextureRegion region = new TextureRegion(parent.getAssets().get(Asset.ROCKET_OFF_TEXTURE.getPath(), Texture.class));
-        TransformComponent transform = new TransformComponent();
-        float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
-        float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
-        transform.position.x = 0;
-        transform.position.y = height/2.0f + 25;
-        transform.rotation = 0;
-        textureComponent.region = region;
-        Body body = bodyFactory.createDynamicRectangle(
-                transform.position.x, transform.position.y,
-                width, height,
-                transform.rotation);
-        System.out.println(body.getMass());
-        rocket.addComponent(new FuelComponent());
-        ThrustComponent thrustComponent = new ThrustComponent();
-        thrustComponent.offset.y = -height/2.0f;
-        rocket.addComponent(thrustComponent);
-        EngineStateComponent engine = new EngineStateComponent();
-        engine.running = true;
-        rocket.addComponent(engine);
-        rocket.addComponent(new BodyComponent(body));
-        rocket.addComponent(transform);
-        rocket.addComponent(textureComponent);
-        rocket.addComponent(new RocketComponent());
-        rocket.addComponent(new EngineAngleComponent());
-        rocket.addComponent(new ControlComponent());
-        return rocket;
     }
 
     private Entity createGroundEntity() {
