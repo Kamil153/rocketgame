@@ -9,7 +9,7 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 public class RocketTurnSystem extends IteratingSystem {
-    private static final float TURN_ANGLE = 0.5f;
+    private static final float TURN_ANGLE = 0.3f;
 
     private static final Query query = (new Query())
             .include(RocketComponent.class)
