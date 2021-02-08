@@ -38,7 +38,7 @@ public class MainScreen implements Screen {
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
         Entity rocket = entityFactory.createRocket();
-        Entity ground = createGroundEntity();
+        Entity ground = entityFactory.createEarth();
         Entity plume = entityFactory.createRocketPlume(rocket);
         Entity launchpad = createLaunchpad();
 
@@ -101,27 +101,6 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
 
-    }
-
-    private Entity createGroundEntity() {
-        Texture texture = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath());
-        float width = RenderingSystem.pixelsToMeters(texture.getWidth());
-        float height = RenderingSystem.pixelsToMeters(texture.getHeight());
-        float x = 0.0f;
-        float y = EntityData.EARTH_Y;
-        TextureComponent texComponent = new TextureComponent();
-        texComponent.region = new TextureRegion(texture);
-        Body body = bodyFactory.createStaticRectangle(x, y, width, height, 0);
-        TransformComponent transform = new TransformComponent();
-        transform.position.x = x;
-        transform.position.y = y;
-        transform.position.z = EntityData.EARTH_Z;
-
-        Entity ground = new Entity();
-        ground.addComponent(new BodyComponent(body));
-        ground.addComponent(texComponent);
-        ground.addComponent(transform);
-        return ground;
     }
 
     private Entity createLaunchpad() {

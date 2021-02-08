@@ -80,4 +80,22 @@ public class EntityFactory {
         plume.addComponent(binding);
         return plume;
     }
+
+    public Entity createEarth(float x, float y, float z, float rotation) {
+        TextureRegion region = getTextureRegion(Asset.EARTH_TEXTURE);
+        float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
+        float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
+        Entity earth = createEntity(x, y, z, rotation, region);
+        Body body = bodyFactory.createStaticRectangle(x, y, width, height, rotation);
+        earth.addComponent(new BodyComponent(body));
+        return earth;
+    }
+
+    public Entity createEarth(float x) {
+        return createEarth(x, EntityData.EARTH_Y, EntityData.EARTH_Z, 0);
+    }
+
+    public Entity createEarth() {
+        return createEarth(0);
+    }
 }
