@@ -33,9 +33,7 @@ public class MainScreen implements Screen {
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(CAMERA_HEIGHT * (w / h), CAMERA_HEIGHT);
 
-        // TODO: set groundHeight to texture height
-        int groundTextureHeight = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getHeight();
-        float cameraLowerBound = camera.viewportHeight/2.0f - RenderingSystem.pixelsToMeters(groundTextureHeight);
+        float cameraLowerBound = camera.viewportHeight/2.0f;
 
         Entity rocket = createRocket();
         Entity ground = createGroundEntity();
