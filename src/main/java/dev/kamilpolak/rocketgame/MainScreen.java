@@ -136,7 +136,7 @@ public class MainScreen implements Screen {
         float width = RenderingSystem.pixelsToMeters(texture.getWidth());
         float height = RenderingSystem.pixelsToMeters(texture.getHeight());
         float x = 0.0f;
-        float y = -height/2.0f;
+        float y = height/2.0f;
         TextureComponent texComponent = new TextureComponent();
         texComponent.region = new TextureRegion(texture);
         Body body = bodyFactory.createStaticRectangle(x, y, width, height, 0);
