@@ -170,4 +170,24 @@ public class MainScreen implements Screen {
         plume.addComponent(binding);
         return plume;
     }
+
+    private Entity createLaunchpad() {
+        TextureRegion texture = new TextureRegion(parent.getAssets().get(
+                Asset.LAUNCHPAD_TEXTURE.getPath(),Texture.class));
+        TextureComponent textureComponent = new TextureComponent();
+        textureComponent.region = texture;
+        float width = texture.getRegionWidth();
+        float height = texture.getRegionHeight();
+        float x = 0.0f;
+        float y = texture.getRegionHeight()/2.0f;
+        TransformComponent transform = new TransformComponent();
+        transform.position.set(x, y, 0);
+        Body body = bodyFactory.createStaticRectangle(x, y, width, height, transform.rotation);
+
+        Entity launchpad = new Entity();
+        launchpad.addComponent(new BodyComponent(body));
+        launchpad.addComponent(textureComponent);
+        launchpad.addComponent(transform);
+        return launchpad;
+    }
 }
