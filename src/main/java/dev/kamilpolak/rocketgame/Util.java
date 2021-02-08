@@ -4,7 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Util {
 
-    private static Vector2 calculateRelativePosition(Vector2 position, float rotation, Vector2 offset) {
+    public static Vector2 calculateRelativePosition(Vector2 position, float rotation, Vector2 offset) {
         float radius = offset.len();
         float angle = offset.angleRad();
         Vector2 result = new Vector2();
