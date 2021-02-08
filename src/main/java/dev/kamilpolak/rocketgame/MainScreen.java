@@ -107,7 +107,7 @@ public class MainScreen implements Screen {
         float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
         float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
         transform.position.x = 0;
-        transform.position.y = height/2.0f;
+        transform.position.y = height/2.0f + 25;
         transform.rotation = 0;
         textureComponent.region = region;
         Body body = bodyFactory.createDynamicRectangle(
