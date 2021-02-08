@@ -39,7 +39,7 @@ public class MainScreen implements Screen {
 
         Entity rocket = entityFactory.createRocket();
         Entity ground = createGroundEntity();
-        Entity plume = createRocketPlume(rocket);
+        Entity plume = entityFactory.createRocketPlume(rocket);
         Entity launchpad = createLaunchpad();
 
         RocketTurnSystem turnSystem = new RocketTurnSystem(17);
@@ -108,39 +108,20 @@ public class MainScreen implements Screen {
         float width = RenderingSystem.pixelsToMeters(texture.getWidth());
         float height = RenderingSystem.pixelsToMeters(texture.getHeight());
         float x = 0.0f;
-        float y = height/2.0f;
+        float y = EntityData.EARTH_Y;
         TextureComponent texComponent = new TextureComponent();
         texComponent.region = new TextureRegion(texture);
         Body body = bodyFactory.createStaticRectangle(x, y, width, height, 0);
         TransformComponent transform = new TransformComponent();
         transform.position.x = x;
         transform.position.y = y;
+        transform.position.z = EntityData.EARTH_Z;
 
         Entity ground = new Entity();
         ground.addComponent(new BodyComponent(body));
         ground.addComponent(texComponent);
         ground.addComponent(transform);
         return ground;
-    }
-
-    private Entity createRocketPlume(Entity rocket) {
-        TextureRegion texture = new TextureRegion(parent.getAssets().get(Asset.PLUME_TEXTURE.getPath(), Texture.class));
-        TextureComponent textureComponent = new TextureComponent();
-        textureComponent.region = texture;
-        Texture rocketTexture = parent.getAssets().get(Asset.ROCKET_TEXTURE.getPath());
-        TransformComponent transform = new TransformComponent();
-        float height = RenderingSystem.pixelsToMeters(texture.getRegionHeight());
-        float rocketHeight = RenderingSystem.pixelsToMeters(rocketTexture.getHeight());
-        float offsetX = 0;
-        float offsetY = -height/2.0f - rocketHeight/2.0f;
-        BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
-
-        Entity plume = new Entity();
-        plume.addComponent(new PlumeComponent());
-        plume.addComponent(textureComponent);
-        plume.addComponent(transform);
-        plume.addComponent(binding);
-        return plume;
     }
 
     private Entity createLaunchpad() {

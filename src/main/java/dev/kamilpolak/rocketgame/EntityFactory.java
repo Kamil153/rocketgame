@@ -3,6 +3,7 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
@@ -64,5 +65,19 @@ public class EntityFactory {
 
     public Entity createRocket() {
         return createRocket(EntityData.ROCKET_POSITION, EntityData.ROCKET_ANGLE);
+    }
+
+    public Entity createRocketPlume(Entity rocket) {
+        TextureRegion texture = getTextureRegion(Asset.PLUME_TEXTURE);
+        Entity plume = createEntity(0, 0, 0, 0, texture);
+        Texture rocketTexture = assets.get(Asset.ROCKET_TEXTURE.getPath());
+        float height = RenderingSystem.pixelsToMeters(texture.getRegionHeight());
+        float rocketHeight = RenderingSystem.pixelsToMeters(rocketTexture.getHeight());
+        float offsetX = 0;
+        float offsetY = -height/2.0f - rocketHeight/2.0f;
+        BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
+        plume.addComponent(new PlumeComponent());
+        plume.addComponent(binding);
+        return plume;
     }
 }
