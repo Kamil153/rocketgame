@@ -1,6 +1,7 @@
 package dev.kamilpolak.rocketgame.systems;
 
 import com.badlogic.gdx.math.Vector2;
+import dev.kamilpolak.rocketgame.Util;
 import dev.kamilpolak.rocketgame.components.BindComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
@@ -20,11 +21,13 @@ public class BindSystem extends IteratingSystem {
         TransformComponent transform = entity.getComponent(TransformComponent.class);
         BindComponent binding = entity.getComponent(BindComponent.class);
         TransformComponent targetTransform = binding.target.getComponent(TransformComponent.class);
-        float radius = binding.offset.len();
-        float angle = binding.offset.angleRad();
         float targetRotation = targetTransform.rotation;
         transform.rotation = targetRotation;
-        transform.position.x = targetTransform.position.x + radius*(float)Math.cos(targetRotation + angle);
-        transform.position.y = targetTransform.position.y + radius*(float)Math.sin(targetRotation + angle);
+        transform.position.set(
+                Util.calculateRelativePosition(
+                        new Vector2(targetTransform.position.x, targetTransform.position.y),
+                        targetRotation,
+                        binding.offset),
+                transform.position.z);
     }
 }
