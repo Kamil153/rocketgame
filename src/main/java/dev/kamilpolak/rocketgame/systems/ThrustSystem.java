@@ -2,6 +2,7 @@ package dev.kamilpolak.rocketgame.systems;
 
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
+import dev.kamilpolak.rocketgame.Util;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.Query;
@@ -36,17 +37,8 @@ public class ThrustSystem extends IteratingSystem {
             float xThrust = thrustComponent.thrust*(float)Math.cos(angle)*1000;
             float yThrust = thrustComponent.thrust*(float)Math.sin(angle)*1000;
             Vector2 force = new Vector2(xThrust, yThrust);
-            Vector2 point = calculateThrustPoint(body.getPosition(), body.getAngle(), thrustComponent.offset);
+            Vector2 point = Util.calculateRelativePosition(body.getPosition(), body.getAngle(), thrustComponent.offset);
             body.applyForce(force, point, true);
         }
-    }
-
-    private static Vector2 calculateThrustPoint(Vector2 position, float rotation, Vector2 offset) {
-        float radius = offset.len();
-        float angle = offset.angleRad();
-        Vector2 result = new Vector2();
-        result.x = position.x + radius*(float)Math.cos(rotation + angle);
-        result.y = position.y + radius*(float)Math.sin(rotation + angle);
-        return result;
     }
 }
