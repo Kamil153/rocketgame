@@ -121,4 +121,12 @@ public class EntityFactory {
         TextureRegion region = getTextureRegion(Asset.TREES_TEXTURE);
         return createEntity(x, y, z, rotation, region);
     }
+
+    public Entity createTrees(float x) {
+        return createTrees(x, EntityData.TREES_Y, EntityData.TREES_Z, 0);
+    }
+
+    public Entity createTrees() {
+        return createTrees(0);
+    }
 }
