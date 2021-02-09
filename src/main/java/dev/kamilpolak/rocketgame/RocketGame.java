@@ -27,6 +27,7 @@ public class RocketGame extends Game {
         fontParams.fontFileName = FONT_PATH;
         fontParams.fontParameters.size = FONT_SIZE;
         assets.load("font.ttf", BitmapFont.class, fontParams);
+        assets.finishLoadingAsset("font.ttf");
 
         for(Asset asset: Asset.values()) {
             assets.load(asset.getPath(), asset.getAssetType());
