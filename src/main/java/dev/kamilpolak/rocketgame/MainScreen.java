@@ -56,6 +56,7 @@ public class MainScreen implements Screen {
         ecs.addEntity(plume);
         ecs.addEntity(launchpad);
         final int GROUND_COUNT = 16;
+        final int TREES_COUNT = 5;
         float groundWidth = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
         ecs.addEntity(entityFactory.createEarth());
         float groundX = 0;
@@ -65,6 +66,16 @@ public class MainScreen implements Screen {
                 groundX += groundWidth;
             }
             ecs.addEntity(entityFactory.createEarth(groundX));
+        }
+        float treesWidth = parent.getAssets().get(Asset.TREES_TEXTURE.getPath(), Texture.class).getWidth();
+        ecs.addEntity(entityFactory.createTrees());
+        float treesX = 0;
+        for(int i = 1; i < TREES_COUNT; i++) {
+            treesX = -treesX;
+            if(i % 2 == 1) {
+                treesX += treesWidth;
+            }
+            ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
         ecs.addSystem(renderingSystem);
