@@ -10,7 +10,6 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 public class LoadingScreen implements Screen {
     private final RocketGame parent;
     private final SpriteBatch batch;
-    private final BitmapFont font = new BitmapFont();
 
     public LoadingScreen(RocketGame game) {
         parent = game;
@@ -31,7 +30,7 @@ public class LoadingScreen implements Screen {
         }
         else {
             batch.begin();
-            font.draw(batch, "Loading...", 20, 20);
+            parent.getFont().draw(batch, "Loading...", 20, 20);
             batch.end();
         }
     }
