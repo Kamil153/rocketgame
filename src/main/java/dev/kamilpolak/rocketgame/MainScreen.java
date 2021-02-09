@@ -42,15 +42,6 @@ public class MainScreen implements Screen {
         Entity plume = entityFactory.createRocketPlume(rocket);
         Entity launchpad = entityFactory.createLaunchpad();
 
-        RocketTurnSystem turnSystem = new RocketTurnSystem(17);
-        ThrustSystem thrustSystem = new ThrustSystem(16);
-        PhysicsSystem physicsSystem = new PhysicsSystem(15, world);
-        BindSystem bindSystem = new BindSystem(14);
-        CameraSystem cameraSystem = new CameraSystem(12, camera, cameraLowerBound);
-        RenderingSystem renderingSystem = new RenderingSystem(10, batch, camera);
-        PlumeSystem plumeSystem = new PlumeSystem(7);
-        DebugRenderSystem debugSystem = new DebugRenderSystem(5, camera, world);
-
         ecs.addEntity(rocket);
         ecs.addEntity(ground);
         ecs.addEntity(plume);
@@ -78,14 +69,14 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
-        ecs.addSystem(renderingSystem);
-        ecs.addSystem(physicsSystem);
-        ecs.addSystem(debugSystem);
-        ecs.addSystem(bindSystem);
-        ecs.addSystem(plumeSystem);
-        ecs.addSystem(thrustSystem);
-        ecs.addSystem(cameraSystem);
-        ecs.addSystem(turnSystem);
+        ecs.addSystem(new RocketTurnSystem(17));
+        ecs.addSystem(new ThrustSystem(16));
+        ecs.addSystem(new PhysicsSystem(15, world));
+        ecs.addSystem(new BindSystem(14));
+        ecs.addSystem(new CameraSystem(12, camera, cameraLowerBound));
+        ecs.addSystem(new RenderingSystem(10, batch, camera));
+        ecs.addSystem(new PlumeSystem(7));
+        ecs.addSystem(new DebugRenderSystem(5, camera, world));
     }
 
     @Override
