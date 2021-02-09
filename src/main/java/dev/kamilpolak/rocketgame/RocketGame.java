@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreetypeFontLoader.FreeTypeFontLoa
 
 public class RocketGame extends Game {
     private static final String FONT_PATH = "assets/retro_gaming.ttf";
-    private static final int FONT_SIZE = 10;
+    private static final int FONT_SIZE = 20;
 
     private final AssetManager assets = new AssetManager();
     private MainScreen mainScreen;
