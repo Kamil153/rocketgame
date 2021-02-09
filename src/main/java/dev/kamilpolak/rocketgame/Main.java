@@ -9,6 +9,7 @@ public class Main {
         config.title = "Game";
         config.width = 1200;
         config.height = 600;
+        //config.fullscreen = true;
         new LwjglApplication(new RocketGame(), config);
     }
 }
