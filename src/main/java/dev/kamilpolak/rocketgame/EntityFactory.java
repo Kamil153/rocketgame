@@ -102,8 +102,8 @@ public class EntityFactory {
     public Entity createLaunchpad(float x, float y, float z, float rotation) {
         TextureRegion region = getTextureRegion(Asset.LAUNCHPAD_TEXTURE);
         Entity launchpad = createEntity(x, y, z, rotation, region);
-        float width = region.getRegionWidth();
-        float height = region.getRegionHeight();
+        float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
+        float height = RenderingSystem.getForegroundLength(region.getRegionHeight());
         Body body = bodyFactory.createStaticRectangle(x, y, width, height, rotation);
         launchpad.addComponent(new BodyComponent(body));
         return launchpad;
