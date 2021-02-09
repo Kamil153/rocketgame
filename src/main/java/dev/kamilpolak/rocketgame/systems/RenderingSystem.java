@@ -19,7 +19,7 @@ public class RenderingSystem extends IteratingSystem {
     public static final float MPP = 1; // meters per game pixel
     public static final float PIXEL_TO_METER_RATIO = 1/MPP;
 
-    public static float pixelsToMeters(int pixels) {
+    public static float getForegroundLength(int pixels) {
         return pixels*MPP;
     }
 
@@ -50,8 +50,8 @@ public class RenderingSystem extends IteratingSystem {
             TransformComponent transform = entity.getComponent(TransformComponent.class);
             if(!transform.hidden) {
                 TextureRegion tex = entity.getComponent(TextureComponent.class).region;
-                float width = pixelsToMeters(tex.getRegionWidth());
-                float height = pixelsToMeters(tex.getRegionHeight());
+                float width = getForegroundLength(tex.getRegionWidth());
+                float height = getForegroundLength(tex.getRegionHeight());
                 float originX = width / 2.0f;
                 float originY = height / 2.0f;
                 batch.draw(tex,

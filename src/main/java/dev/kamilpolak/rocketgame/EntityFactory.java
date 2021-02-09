@@ -41,8 +41,8 @@ public class EntityFactory {
 
     public Entity createRocket(float x, float y, float z, float angle) {
         TextureRegion region = getTextureRegion(Asset.ROCKET_TEXTURE);
-        float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
-        float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
+        float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
+        float height = RenderingSystem.getForegroundLength(region.getRegionHeight());
         Entity rocket = createEntity(x, y, z, angle, region);
         Body body = bodyFactory.createDynamicRectangle(x, y, width, height, angle);
         ThrustComponent thrustComponent = new ThrustComponent();
@@ -71,8 +71,8 @@ public class EntityFactory {
         TextureRegion texture = getTextureRegion(Asset.PLUME_TEXTURE);
         Entity plume = createEntity(0, 0, 0, 0, texture);
         Texture rocketTexture = assets.get(Asset.ROCKET_TEXTURE.getPath());
-        float height = RenderingSystem.pixelsToMeters(texture.getRegionHeight());
-        float rocketHeight = RenderingSystem.pixelsToMeters(rocketTexture.getHeight());
+        float height = RenderingSystem.getForegroundLength(texture.getRegionHeight());
+        float rocketHeight = RenderingSystem.getForegroundLength(rocketTexture.getHeight());
         float offsetX = 0;
         float offsetY = -height/2.0f - rocketHeight/2.0f;
         BindComponent binding = new BindComponent(rocket, new Vector2(offsetX, offsetY));
@@ -83,8 +83,8 @@ public class EntityFactory {
 
     public Entity createEarth(float x, float y, float z, float rotation) {
         TextureRegion region = getTextureRegion(Asset.EARTH_TEXTURE);
-        float width = RenderingSystem.pixelsToMeters(region.getRegionWidth());
-        float height = RenderingSystem.pixelsToMeters(region.getRegionHeight());
+        float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
+        float height = RenderingSystem.getForegroundLength(region.getRegionHeight());
         Entity earth = createEntity(x, y, z, rotation, region);
         Body body = bodyFactory.createStaticRectangle(x, y, width, height, rotation);
         earth.addComponent(new BodyComponent(body));
