@@ -22,7 +22,10 @@ public class MainScreen implements Screen {
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
 
-    private static final float CAMERA_HEIGHT = 350.0f;
+    private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
+    private static final float CAMERA_HEIGHT_MENU = 150.0f;
+
+    private float cameraHeight = CAMERA_HEIGHT_MENU;
 
     public MainScreen(RocketGame game) {
         parent = game;
@@ -33,7 +36,7 @@ public class MainScreen implements Screen {
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera(CAMERA_HEIGHT * (w / h), CAMERA_HEIGHT);
+        camera = new OrthographicCamera(cameraHeight * (w / h), cameraHeight);
 
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
@@ -89,7 +92,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = CAMERA_HEIGHT * ((float)width / (float)height);
+        camera.viewportWidth = cameraHeight * ((float)width / (float)height);
     }
 
     @Override
