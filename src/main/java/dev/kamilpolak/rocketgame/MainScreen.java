@@ -38,14 +38,10 @@ public class MainScreen implements Screen {
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
         Entity rocket = entityFactory.createRocket();
-        Entity ground = entityFactory.createEarth();
-        Entity plume = entityFactory.createRocketPlume(rocket);
-        Entity launchpad = entityFactory.createLaunchpad();
-
         ecs.addEntity(rocket);
-        ecs.addEntity(ground);
-        ecs.addEntity(plume);
-        ecs.addEntity(launchpad);
+        ecs.addEntity(entityFactory.createEarth());
+        ecs.addEntity(entityFactory.createRocketPlume(rocket));
+        ecs.addEntity(entityFactory.createLaunchpad());
         final int GROUND_COUNT = 16;
         final int TREES_COUNT = 5;
         float groundWidth = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
