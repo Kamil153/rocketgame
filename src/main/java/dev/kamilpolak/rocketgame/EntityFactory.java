@@ -67,9 +67,9 @@ public class EntityFactory {
         return createRocket(EntityData.ROCKET_POSITION, EntityData.ROCKET_ANGLE);
     }
 
-    public Entity createRocketPlume(Entity rocket) {
+    public Entity createRocketPlume(float z, Entity rocket) {
         TextureRegion texture = getTextureRegion(Asset.PLUME_TEXTURE);
-        Entity plume = createEntity(0, 0, 0, 0, texture);
+        Entity plume = createEntity(0, 0, z, 0, texture);
         Texture rocketTexture = assets.get(Asset.ROCKET_TEXTURE.getPath());
         float height = RenderingSystem.getForegroundLength(texture.getRegionHeight());
         float rocketHeight = RenderingSystem.getForegroundLength(rocketTexture.getHeight());
