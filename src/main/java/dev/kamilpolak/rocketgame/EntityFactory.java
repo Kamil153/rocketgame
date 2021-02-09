@@ -81,6 +81,10 @@ public class EntityFactory {
         return plume;
     }
 
+    public Entity createRocketPlume(Entity rocket) {
+        return createRocketPlume(EntityData.PLUME_Z, rocket);
+    }
+
     public Entity createEarth(float x, float y, float z, float rotation) {
         TextureRegion region = getTextureRegion(Asset.EARTH_TEXTURE);
         float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
