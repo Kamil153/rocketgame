@@ -11,4 +11,5 @@ public class EntityData {
     public static final float LAUNCHPAD_ANGLE = 0;
     public static final Vector3 ROCKET_POSITION = new Vector3(0, 55.5f, 5);
     public static final float ROCKET_ANGLE = 0;
+    public static final float PLUME_Z = 4;
 }
