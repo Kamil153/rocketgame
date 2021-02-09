@@ -69,7 +69,7 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
-        flightStage = new FlightStage(rocket);
+        flightStage = new FlightStage(rocket, parent.getFont());
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
