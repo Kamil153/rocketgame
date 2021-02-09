@@ -38,6 +38,10 @@ public class RocketGame extends Game {
         return assets;
     }
 
+    public BitmapFont getFont() {
+        return assets.get("font.ttf");
+    }
+
     public void startGame() {
         mainScreen = new MainScreen(this);
         setScreen(mainScreen);
