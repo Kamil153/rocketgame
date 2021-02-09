@@ -116,4 +116,9 @@ public class EntityFactory {
     public Entity createLaunchpad() {
         return createLaunchpad(EntityData.LAUNCHPAD_POSITION, EntityData.LAUNCHPAD_ANGLE);
     }
+
+    public Entity createTrees(float x, float y, float z, float rotation) {
+        TextureRegion region = getTextureRegion(Asset.TREES_TEXTURE);
+        return createEntity(x, y, z, rotation, region);
+    }
 }
