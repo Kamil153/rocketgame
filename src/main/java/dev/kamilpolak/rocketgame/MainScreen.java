@@ -40,7 +40,7 @@ public class MainScreen implements Screen {
         Entity rocket = entityFactory.createRocket();
         Entity ground = entityFactory.createEarth();
         Entity plume = entityFactory.createRocketPlume(rocket);
-        Entity launchpad = createLaunchpad();
+        Entity launchpad = entityFactory.createLaunchpad();
 
         RocketTurnSystem turnSystem = new RocketTurnSystem(17);
         ThrustSystem thrustSystem = new ThrustSystem(16);
@@ -112,26 +112,5 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
 
-    }
-
-    private Entity createLaunchpad() {
-        TextureRegion texture = new TextureRegion(parent.getAssets().get(
-                Asset.LAUNCHPAD_TEXTURE.getPath(),Texture.class));
-        Texture groundTexture = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath());
-        TextureComponent textureComponent = new TextureComponent();
-        textureComponent.region = texture;
-        float width = texture.getRegionWidth();
-        float height = texture.getRegionHeight();
-        float x = 0.0f;
-        float y = texture.getRegionHeight()/2.0f + groundTexture.getHeight();
-        TransformComponent transform = new TransformComponent();
-        transform.position.set(x, y, 0);
-        Body body = bodyFactory.createStaticRectangle(x, y, width, height, transform.rotation);
-
-        Entity launchpad = new Entity();
-        launchpad.addComponent(new BodyComponent(body));
-        launchpad.addComponent(textureComponent);
-        launchpad.addComponent(transform);
-        return launchpad;
     }
 }

@@ -98,4 +98,22 @@ public class EntityFactory {
     public Entity createEarth() {
         return createEarth(0);
     }
+
+    public Entity createLaunchpad(float x, float y, float z, float rotation) {
+        TextureRegion region = getTextureRegion(Asset.LAUNCHPAD_TEXTURE);
+        Entity launchpad = createEntity(x, y, z, rotation, region);
+        float width = region.getRegionWidth();
+        float height = region.getRegionHeight();
+        Body body = bodyFactory.createStaticRectangle(x, y, width, height, rotation);
+        launchpad.addComponent(new BodyComponent(body));
+        return launchpad;
+    }
+
+    public Entity createLaunchpad(Vector3 position, float rotation) {
+        return createLaunchpad(position.x, position.y, position.z, rotation);
+    }
+
+    public Entity createLaunchpad() {
+        return createLaunchpad(EntityData.LAUNCHPAD_POSITION, EntityData.LAUNCHPAD_ANGLE);
+    }
 }
