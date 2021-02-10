@@ -30,4 +30,8 @@ public class Countdown {
     public int getMinutes() {
         return (int)Math.abs(Math.ceil(time)) / 60;
     }
+
+    public boolean isPastT0() {
+        return time < 0;
+    }
 }
