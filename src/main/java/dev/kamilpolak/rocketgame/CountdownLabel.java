@@ -3,30 +3,22 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 public class CountdownLabel extends Label {
-    private static final String COUNTDOWN_TEXT = "T%c%d:%d";
-    private Countdown countdown;
+    private static final String COUNTDOWN_TEXT = "T%c%02d:%02d";
 
 
-    public CountdownLabel(Countdown countdown, LabelStyle style) {
+    public CountdownLabel(LabelStyle style) {
         super("", style);
-        this.countdown = countdown;
-        setText(getFormattedText());
+        setText(formatCountdownText(false, 0, 0));
     }
 
-    private String getFormattedText() {
+    private String formatCountdownText(boolean pastT0, int minutes, int seconds) {
         return String.format(COUNTDOWN_TEXT,
-                countdown.isPastT0() ? '+' : '-',
-                countdown.getMinutes(),
-                countdown.getSeconds());
+                pastT0 ? '+' : '-',
+                minutes,
+                seconds);
     }
 
-    public void setCountdown(Countdown countdown) {
-        this.countdown = countdown;
-    }
-
-    @Override
-    public void act(float delta) {
-        setText(getFormattedText());
-        super.act(delta);
+    public void setTime(boolean pastT0, int minutes, int seconds) {
+        setText(formatCountdownText(pastT0, minutes, seconds));
     }
 }
