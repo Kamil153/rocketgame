@@ -22,6 +22,7 @@ public class MainScreen implements Screen {
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
     private final FlightStage flightStage;
+    private final Countdown countdown = new Countdown();
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
@@ -69,7 +70,9 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
+        countdown.setTime(5);
         flightStage = new FlightStage(rocket, parent.getFont());
+        flightStage.setCountdown(countdown);
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
@@ -91,6 +94,7 @@ public class MainScreen implements Screen {
         Gdx.gl.glClearColor( 0, 0, 0, 1 );
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         ecs.update(delta);
+        countdown.update(delta);
         flightStage.act(delta);
         flightStage.draw();
     }
