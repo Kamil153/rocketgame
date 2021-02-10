@@ -32,8 +32,10 @@ public class FlightStage extends Stage {
         countdownLabel = new CountdownLabel(labelStyle);
         countdownLabel.setVisible(false);
         telemetryTable = new TelemetryTable(labelStyle);
-        table.add(telemetryTable);
-        table.add(countdownLabel).expand().top();
+        table.top();
+        table.add(countdownLabel).expandX().top();
+        table.row().expand();
+        table.add(telemetryTable).bottom().left();
     }
 
     public void setCountdown(Countdown countdown) {
