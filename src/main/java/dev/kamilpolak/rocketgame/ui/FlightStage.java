@@ -13,6 +13,7 @@ public class FlightStage extends Stage {
     private final BitmapFont font;
     private Countdown countdown = null;
     private final CountdownLabel countdownLabel;
+    private final TelemetryTable telemetryTable;
 
     public FlightStage(Entity rocket, BitmapFont font) {
         this.rocket = rocket;
@@ -28,6 +29,8 @@ public class FlightStage extends Stage {
         labelStyle.font = font;
         countdownLabel = new CountdownLabel(labelStyle);
         countdownLabel.setVisible(false);
+        telemetryTable = new TelemetryTable(labelStyle);
+        table.add(telemetryTable);
         table.add(countdownLabel).expand().top();
     }
 
