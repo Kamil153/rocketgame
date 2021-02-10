@@ -29,7 +29,7 @@ public class FlightStage extends Stage {
         labelStyle.font = font;
         countdownLabel = new CountdownLabel(labelStyle);
         countdownLabel.setVisible(false);
-        table.add(countdownLabel);
+        table.add(countdownLabel).expand().top();
     }
 
     public void setCountdown(Countdown countdown) {
