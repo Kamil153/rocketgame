@@ -1,10 +1,12 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.Countdown;
+import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
 public class FlightStage extends Stage {
@@ -46,6 +48,9 @@ public class FlightStage extends Stage {
 
     @Override
     public void act(float delta) {
+        Body body = rocket.getComponent(BodyComponent.class).body;
+        telemetryTable.setSpeed(body.getLinearVelocity().len());
+        telemetryTable.setAltitude(body.getPosition().y);
         if(countdown != null) {
             countdownLabel.setTime(countdown.isPastT0(), countdown.getMinutes(), countdown.getSeconds());
         }
