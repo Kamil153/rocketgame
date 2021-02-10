@@ -12,8 +12,8 @@ public class FlightStage extends Stage {
     private final Entity rocket;
     private final Table table;
     private final BitmapFont font;
-    private final Countdown countdown = null;
-    private final Label countdownLabel;
+    private Countdown countdown = null;
+    private final CountdownLabel countdownLabel;
 
     public FlightStage(Entity rocket, BitmapFont font) {
         this.rocket = rocket;
@@ -28,11 +28,25 @@ public class FlightStage extends Stage {
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = font;
         countdownLabel = new CountdownLabel(labelStyle);
+        countdownLabel.setVisible(false);
         table.add(countdownLabel);
+    }
+
+    public void setCountdown(Countdown countdown) {
+        this.countdown = countdown;
+        countdownLabel.setVisible(true);
+    }
+
+    public void removeCountdown() {
+        this.countdown = null;
+        countdownLabel.setVisible(false);
     }
 
     @Override
     public void act(float delta) {
+        if(countdown != null) {
+            countdownLabel.setTime(countdown.isPastT0(), countdown.getMinutes(), countdown.getSeconds());
+        }
         super.act(delta);
     }
 }
