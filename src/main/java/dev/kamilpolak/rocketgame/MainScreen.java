@@ -26,6 +26,7 @@ public class MainScreen implements Screen {
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
 
     private float cameraHeight = CAMERA_HEIGHT_MENU;
+    private GameState currentState = GameState.MENU;
 
     public MainScreen(RocketGame game) {
         parent = game;
