@@ -15,11 +15,12 @@ public class TelemetryTable extends Table {
     TelemetryTable(LabelStyle labelStyle) {
         speedLabel = new Label(String.format(SPEED_FORMAT, 0.0f), labelStyle);
         altitudeLabel = new Label(String.format(ALTITUDE_FORMAT_M, 0.0f), labelStyle);
-        add(new Label("Speed", labelStyle)).expandX();
-        add(speedLabel);
+        debug();
+        add(new Label("Speed", labelStyle)).right();
+        add(speedLabel).left().spaceLeft(20);
         row();
-        add(new Label("Altitude", labelStyle));
-        add(altitudeLabel);
+        add(new Label("Altitude", labelStyle)).right();
+        add(altitudeLabel).left().spaceLeft(20);
     }
 
     public void setSpeed(float speed) {
