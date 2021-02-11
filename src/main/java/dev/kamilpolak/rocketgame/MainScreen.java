@@ -37,7 +37,7 @@ public class MainScreen implements Screen {
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera(cameraHeight * (w / h), cameraHeight);
+        camera = new OrthographicCamera(calculateViewportWidth(w, h, cameraHeight), cameraHeight);
 
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
@@ -83,6 +83,10 @@ public class MainScreen implements Screen {
         ecs.addSystem(new DebugRenderSystem(5, camera, world));
     }
 
+    private static float calculateViewportWidth(float width, float height, float viewportHeight) {
+        return viewportHeight * (width / height);
+    }
+
     @Override
     public void show() {
 
@@ -100,7 +104,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = cameraHeight * ((float)width / (float)height);
+        camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
         flightStage.getViewport().update(width, height);
     }
 
