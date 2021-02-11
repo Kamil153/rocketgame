@@ -1,6 +1,7 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -26,5 +27,9 @@ public class MenuStage extends Stage {
         launchButton = new TextButton("Launch", textButtonStyle);
         table.add(launchButton);
         table.bottom().right();
+    }
+
+    public void addClickListener(EventListener listener) {
+        launchButton.addListener(listener);
     }
 }
