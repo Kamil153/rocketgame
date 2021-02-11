@@ -29,7 +29,7 @@ public class MenuStage extends Stage {
         table.bottom().right();
     }
 
-    public void addClickListener(EventListener listener) {
+    public void addLaunchListener(EventListener listener) {
         launchButton.addListener(listener);
     }
 }
