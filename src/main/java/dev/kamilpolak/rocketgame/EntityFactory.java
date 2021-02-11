@@ -48,7 +48,7 @@ public class EntityFactory {
         ThrustComponent thrustComponent = new ThrustComponent();
         thrustComponent.offset.y = -height/2.0f;
         EngineStateComponent engine = new EngineStateComponent();
-        engine.running = true;
+        engine.running = false;
         rocket.addComponent(thrustComponent);
         rocket.addComponent(engine);
         rocket.addComponent(new FuelComponent());

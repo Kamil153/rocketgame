@@ -6,10 +6,15 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import dev.kamilpolak.rocketgame.components.EngineStateComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightStage;
+import dev.kamilpolak.rocketgame.ui.MenuStage;
+
 
 public class MainScreen implements Screen {
     private final RocketGame parent;
@@ -20,10 +25,12 @@ public class MainScreen implements Screen {
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
     private final FlightStage flightStage;
+    private final MenuStage menuStage;
     private final Countdown countdown = new Countdown();
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
+    private static final float COUNTDOWN_TIME = 5.0f;
 
     private float cameraHeight = CAMERA_HEIGHT_MENU;
     private GameState currentState = GameState.MENU;
@@ -69,9 +76,20 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
-        countdown.setTime(5);
         flightStage = new FlightStage(rocket, parent.getFont());
         flightStage.setCountdown(countdown);
+        menuStage = new MenuStage(rocket, parent.getFont());
+        menuStage.addLaunchListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                if(currentState == GameState.MENU) {
+                    currentState = GameState.STARTING;
+                    countdown.setTime(COUNTDOWN_TIME);
+                    rocket.getComponent(EngineStateComponent.class).running = true;
+                }
+            }
+        });
+        Gdx.input.setInputProcessor(menuStage);
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
@@ -99,7 +117,13 @@ public class MainScreen implements Screen {
         ecs.update(delta);
         countdown.update(delta);
         flightStage.act(delta);
-        flightStage.draw();
+        menuStage.act(delta);
+        if(currentState == GameState.MENU) {
+            menuStage.draw();
+        }
+        else {
+            flightStage.draw();
+        }
     }
 
     @Override

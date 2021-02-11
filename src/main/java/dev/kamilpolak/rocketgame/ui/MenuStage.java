@@ -19,6 +19,8 @@ public class MenuStage extends Stage {
         this.rocket = rocket;
         this.font = font;
         this.table = new Table();
+        table.setFillParent(true);
+        table.debug();
         addActor(table);
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = font;
@@ -26,7 +28,6 @@ public class MenuStage extends Stage {
         textButtonStyle.font = font;
         launchButton = new TextButton("Launch", textButtonStyle);
         table.add(launchButton);
-        table.bottom().right();
     }
 
     public void addLaunchListener(EventListener listener) {
