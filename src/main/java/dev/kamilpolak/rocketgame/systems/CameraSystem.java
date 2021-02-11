@@ -25,7 +25,7 @@ public class CameraSystem extends IteratingSystem {
     protected void updateEntity(float deltaTime, Entity entity) {
         Vector3 position = entity.getComponent(TransformComponent.class).position;
         float x = position.x;
-        float y = Math.max(position.y, lowerBound);
+        float y = Math.max(position.y, camera.viewportHeight/2.0f + lowerBound);
         camera.position.set(x, y, camera.position.z);
     }
 }

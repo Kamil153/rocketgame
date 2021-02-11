@@ -50,8 +50,6 @@ public class MainScreen implements Screen {
         float h = Gdx.graphics.getHeight();
         camera = new OrthographicCamera(calculateViewportWidth(w, h, cameraHeight), cameraHeight);
 
-        float cameraLowerBound = camera.viewportHeight/2.0f;
-
         rocket = entityFactory.createRocket();
         ecs.addEntity(rocket);
         ecs.addEntity(entityFactory.createEarth());
@@ -99,7 +97,7 @@ public class MainScreen implements Screen {
         ecs.addSystem(new ThrustSystem(16));
         ecs.addSystem(new PhysicsSystem(15, world));
         ecs.addSystem(new BindSystem(14));
-        ecs.addSystem(new CameraSystem(12, camera, cameraLowerBound));
+        ecs.addSystem(new CameraSystem(12, camera, 0));
         ecs.addSystem(new RenderingSystem(10, batch, camera));
         ecs.addSystem(new PlumeSystem(7));
         ecs.addSystem(new DebugRenderSystem(5, camera, world));
