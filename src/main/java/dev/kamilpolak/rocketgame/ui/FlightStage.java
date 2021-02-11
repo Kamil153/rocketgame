@@ -12,14 +12,12 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 public class FlightStage extends Stage {
     private final Entity rocket;
     private final Table table;
-    private final BitmapFont font;
     private Countdown countdown = null;
     private final CountdownLabel countdownLabel;
     private final TelemetryTable telemetryTable;
 
     public FlightStage(Entity rocket, BitmapFont font) {
         this.rocket = rocket;
-        this.font = font;
 
         table = new Table();
         table.setFillParent(true);
