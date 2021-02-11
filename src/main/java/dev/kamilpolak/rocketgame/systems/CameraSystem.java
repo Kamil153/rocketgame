@@ -1,7 +1,6 @@
 package dev.kamilpolak.rocketgame.systems;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import dev.kamilpolak.rocketgame.components.RocketComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;

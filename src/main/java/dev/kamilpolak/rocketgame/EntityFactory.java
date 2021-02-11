@@ -55,7 +55,6 @@ public class EntityFactory {
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(new RocketComponent());
         rocket.addComponent(new EngineAngleComponent());
-        rocket.addComponent(new ControlComponent());
         return rocket;
     }
 

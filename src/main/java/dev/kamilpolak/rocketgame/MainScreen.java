@@ -4,10 +4,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import dev.kamilpolak.rocketgame.components.ControlComponent;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
@@ -27,10 +29,12 @@ public class MainScreen implements Screen {
     private final FlightStage flightStage;
     private final MenuStage menuStage;
     private final Countdown countdown = new Countdown();
+    private final Entity rocket;
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
     private static final float COUNTDOWN_TIME = 5.0f;
+    private static final float ZOOM_OUT_TIME = 3.0f;
 
     private float cameraHeight = CAMERA_HEIGHT_MENU;
     private GameState currentState = GameState.MENU;
@@ -48,7 +52,7 @@ public class MainScreen implements Screen {
 
         float cameraLowerBound = camera.viewportHeight/2.0f;
 
-        Entity rocket = entityFactory.createRocket();
+        rocket = entityFactory.createRocket();
         ecs.addEntity(rocket);
         ecs.addEntity(entityFactory.createEarth());
         ecs.addEntity(entityFactory.createRocketPlume(rocket));
@@ -83,9 +87,9 @@ public class MainScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 if(currentState == GameState.MENU) {
-                    currentState = GameState.STARTING;
+                    currentState = GameState.COUNTDOWN;
                     countdown.setTime(COUNTDOWN_TIME);
-                    rocket.getComponent(EngineStateComponent.class).running = true;
+                    Gdx.input.setInputProcessor(flightStage);
                 }
             }
         });
@@ -118,6 +122,23 @@ public class MainScreen implements Screen {
         countdown.update(delta);
         flightStage.act(delta);
         menuStage.act(delta);
+        if(countdown.isPastT0() && currentState == GameState.COUNTDOWN) {
+            currentState = GameState.STARTING;
+            rocket.getComponent(EngineStateComponent.class).running = true;
+        }
+        if(currentState == GameState.STARTING) {
+            float progress = Math.min(1.0f, Math.abs(countdown.getTime())/ZOOM_OUT_TIME);
+            float viewportHeight = Interpolation.smooth.apply(CAMERA_HEIGHT_MENU, CAMERA_HEIGHT_FLIGHT, progress);
+            camera.viewportHeight = viewportHeight;
+            camera.viewportWidth = calculateViewportWidth(
+                    Gdx.graphics.getWidth(),
+                    Gdx.graphics.getHeight(),
+                    viewportHeight);
+            if(viewportHeight == CAMERA_HEIGHT_FLIGHT) {
+                currentState = GameState.FLIGHT;
+                rocket.addComponent(new ControlComponent());
+            }
+        }
         if(currentState == GameState.MENU) {
             menuStage.draw();
         }
