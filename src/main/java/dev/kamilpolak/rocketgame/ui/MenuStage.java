@@ -20,7 +20,6 @@ public class MenuStage extends Stage {
         this.font = font;
         this.table = new Table();
         table.setFillParent(true);
-        table.debug();
         addActor(table);
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = font;

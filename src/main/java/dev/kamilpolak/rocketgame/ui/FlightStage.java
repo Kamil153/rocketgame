@@ -19,12 +19,9 @@ public class FlightStage extends Stage {
 
     public FlightStage(Entity rocket, BitmapFont font) {
         this.rocket = rocket;
-
         table = new Table();
         table.setFillParent(true);
         addActor(table);
-
-        table.debug();
 
         LabelStyle labelStyle = new LabelStyle();
         labelStyle.font = font;

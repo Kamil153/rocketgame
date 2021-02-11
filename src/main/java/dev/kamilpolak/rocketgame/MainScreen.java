@@ -80,7 +80,9 @@ public class MainScreen implements Screen {
 
         flightStage = new FlightStage(rocket, parent.getFont());
         flightStage.setCountdown(countdown);
+        flightStage.setDebugAll(true);
         menuStage = new MenuStage(rocket, parent.getFont());
+        menuStage.setDebugAll(true);
         menuStage.addLaunchListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {

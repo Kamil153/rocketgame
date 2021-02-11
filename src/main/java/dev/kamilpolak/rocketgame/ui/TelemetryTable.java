@@ -15,7 +15,6 @@ public class TelemetryTable extends Table {
     TelemetryTable(LabelStyle labelStyle) {
         speedLabel = new Label(String.format(SPEED_FORMAT, 0.0f), labelStyle);
         altitudeLabel = new Label(String.format(ALTITUDE_FORMAT_M, 0.0f), labelStyle);
-        debug();
         add(new Label("Speed", labelStyle)).right();
         add(speedLabel).left().spaceLeft(20);
         row();
