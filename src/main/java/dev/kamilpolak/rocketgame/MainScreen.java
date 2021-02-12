@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import dev.kamilpolak.rocketgame.components.ControlComponent;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
@@ -78,10 +79,11 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
-        flightStage = new FlightStage(rocket, parent.getFont());
+        Skin uiSkin = parent.getAssets().get(Asset.UI_SKIN.getPath());
+        flightStage = new FlightStage(rocket, uiSkin);
         flightStage.setCountdown(countdown);
         flightStage.setDebugAll(true);
-        menuStage = new MenuStage(rocket, parent.getFont());
+        menuStage = new MenuStage(rocket, uiSkin);
         menuStage.setDebugAll(true);
         menuStage.addLaunchListener(new ChangeListener() {
             @Override

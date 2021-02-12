@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.Countdown;
 import dev.kamilpolak.rocketgame.EntityData;
@@ -17,17 +18,16 @@ public class FlightStage extends Stage {
     private final CountdownLabel countdownLabel;
     private final TelemetryTable telemetryTable;
 
-    public FlightStage(Entity rocket, BitmapFont font) {
+    public FlightStage(Entity rocket, Skin skin) {
+        super();
         this.rocket = rocket;
         table = new Table();
         table.setFillParent(true);
         addActor(table);
 
-        LabelStyle labelStyle = new LabelStyle();
-        labelStyle.font = font;
-        countdownLabel = new CountdownLabel(labelStyle);
+        countdownLabel = new CountdownLabel(skin);
         countdownLabel.setVisible(false);
-        telemetryTable = new TelemetryTable(labelStyle);
+        telemetryTable = new TelemetryTable(skin);
         table.top();
         table.add(countdownLabel).expandX().top();
         table.row().expand();

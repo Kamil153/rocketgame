@@ -1,6 +1,7 @@
 package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public enum Asset {
     ROCKET_TEXTURE("assets/textures/rocket.png", Texture.class),
@@ -9,7 +10,8 @@ public enum Asset {
     EARTH_TEXTURE("assets/textures/earth.png", Texture.class),
     LAUNCHPAD_TEXTURE("assets/textures/launchpad.png", Texture.class),
     MOUNTAINS_TEXTURE("assets/textures/mountains.png", Texture.class),
-    TREES_TEXTURE("assets/textures/trees.png", Texture.class);
+    TREES_TEXTURE("assets/textures/trees.png", Texture.class),
+    UI_SKIN("assets/ui/uiskin.json", Skin.class);
 
     private final String path;
     private final Class<?> assetType;

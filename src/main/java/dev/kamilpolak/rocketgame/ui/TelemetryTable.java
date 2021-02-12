@@ -2,6 +2,7 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class TelemetryTable extends Table {
@@ -12,13 +13,14 @@ public class TelemetryTable extends Table {
     private final Label speedLabel;
     private final Label altitudeLabel;
 
-    TelemetryTable(LabelStyle labelStyle) {
-        speedLabel = new Label(String.format(SPEED_FORMAT, 0.0f), labelStyle);
-        altitudeLabel = new Label(String.format(ALTITUDE_FORMAT_M, 0.0f), labelStyle);
-        add(new Label("Speed", labelStyle)).right();
+    TelemetryTable(Skin skin) {
+        super();
+        speedLabel = new Label(String.format(SPEED_FORMAT, 0.0f), skin);
+        altitudeLabel = new Label(String.format(ALTITUDE_FORMAT_M, 0.0f), skin);
+        add(new Label("Speed", skin)).right();
         add(speedLabel).left().spaceLeft(20);
         row();
-        add(new Label("Altitude", labelStyle)).right();
+        add(new Label("Altitude", skin)).right();
         add(altitudeLabel).left().spaceLeft(20);
     }
 

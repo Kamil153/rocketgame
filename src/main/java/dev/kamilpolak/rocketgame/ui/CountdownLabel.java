@@ -1,13 +1,14 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public class CountdownLabel extends Label {
     private static final String COUNTDOWN_TEXT = "T%c%02d:%02d";
 
 
-    public CountdownLabel(LabelStyle style) {
-        super("", style);
+    public CountdownLabel(Skin skin) {
+        super("", skin);
         setText(formatCountdownText(false, 0, 0));
     }
 
