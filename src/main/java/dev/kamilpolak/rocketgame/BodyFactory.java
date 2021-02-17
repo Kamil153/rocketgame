@@ -9,6 +9,29 @@ public class BodyFactory {
         this.world = world;
     }
 
+    public Body createBody(float x, float y, float rotation, BodyData data) {
+        BodyDef bodyDef = new BodyDef();
+        bodyDef.type = data.dynamic ? BodyDef.BodyType.DynamicBody : BodyDef.BodyType.StaticBody;
+        bodyDef.position.set(x, y);
+        bodyDef.angle = rotation;
+        bodyDef.allowSleep = data.allowSleep;
+        bodyDef.angularDamping = data.angularDamping;
+        bodyDef.linearDamping = data.linearDamping;
+        Body body = world.createBody(bodyDef);
+        for(FixtureData fixtureData: data.getFixtures()) {
+            PolygonShape poly = new PolygonShape();
+            poly.set(fixtureData.vertices);
+            FixtureDef fixtureDef = new FixtureDef();
+            fixtureDef.shape = poly;
+            fixtureDef.density = fixtureData.density;
+            fixtureDef.friction = fixtureData.friction;
+            fixtureDef.restitution = fixtureData.restitution;
+            body.createFixture(fixtureDef);
+            poly.dispose();
+        }
+        return body;
+    }
+
     public Body createDynamicRectangle(float x, float y, float width, float height, float rotation) {
         BodyDef bodyDef = new BodyDef();
         bodyDef.type = BodyDef.BodyType.DynamicBody;
