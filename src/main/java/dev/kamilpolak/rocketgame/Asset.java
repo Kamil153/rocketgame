@@ -11,7 +11,9 @@ public enum Asset {
     LAUNCHPAD_TEXTURE("assets/textures/launchpad.png", Texture.class),
     MOUNTAINS_TEXTURE("assets/textures/mountains.png", Texture.class),
     TREES_TEXTURE("assets/textures/trees.png", Texture.class),
-    UI_SKIN("assets/ui/uiskin.json", Skin.class);
+    UI_SKIN("assets/ui/uiskin.json", Skin.class),
+    ROCKET_BODY("assets/body/rocket.xml", BodyData.class),
+    LAUNCHPAD_BODY("assets/body/rocket.xml", BodyData.class);
 
     private final String path;
     private final Class<?> assetType;
