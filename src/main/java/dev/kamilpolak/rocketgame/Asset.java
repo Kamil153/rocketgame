@@ -4,22 +4,24 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
 public enum Asset {
-    ROCKET_TEXTURE("assets/textures/rocket.png", Texture.class),
-    ROCKET_OFF_TEXTURE("assets/textures/rocket_off.png", Texture.class),
-    PLUME_TEXTURE("assets/textures/plume.png", Texture.class),
-    EARTH_TEXTURE("assets/textures/earth.png", Texture.class),
-    LAUNCHPAD_TEXTURE("assets/textures/launchpad.png", Texture.class),
-    MOUNTAINS_TEXTURE("assets/textures/mountains.png", Texture.class),
-    TREES_TEXTURE("assets/textures/trees.png", Texture.class),
-    UI_SKIN("assets/ui/uiskin.json", Skin.class),
-    ROCKET_BODY("assets/body/rocket.xml", BodyData.class),
-    LAUNCHPAD_BODY("assets/body/rocket.xml", BodyData.class);
+    ROCKET_TEXTURE("textures/rocket.png", Texture.class),
+    ROCKET_OFF_TEXTURE("textures/rocket_off.png", Texture.class),
+    PLUME_TEXTURE("textures/plume.png", Texture.class),
+    EARTH_TEXTURE("textures/earth.png", Texture.class),
+    LAUNCHPAD_TEXTURE("textures/launchpad.png", Texture.class),
+    MOUNTAINS_TEXTURE("textures/mountains.png", Texture.class),
+    TREES_TEXTURE("textures/trees.png", Texture.class),
+    UI_SKIN("ui/uiskin.json", Skin.class),
+    ROCKET_BODY("body/rocket.xml", BodyData.class),
+    LAUNCHPAD_BODY("body/rocket.xml", BodyData.class);
+
+    private static final String prefix = "assets/";
 
     private final String path;
     private final Class<?> assetType;
 
     Asset(String path, Class<?> assetType) {
-        this.path = path;
+        this.path = prefix + path;
         this.assetType = assetType;
     }
 
