@@ -44,7 +44,7 @@ public class EntityFactory {
         float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
         float height = RenderingSystem.getForegroundLength(region.getRegionHeight());
         Entity rocket = createEntity(x, y, z, angle, region);
-        Body body = bodyFactory.createDynamicRectangle(x, y, width, height, angle);
+        Body body = bodyFactory.createBody(x, y, angle, assets.get(Asset.ROCKET_BODY.getPath()));
         ThrustComponent thrustComponent = new ThrustComponent();
         thrustComponent.offset.y = -height/2.0f;
         EngineStateComponent engine = new EngineStateComponent();
