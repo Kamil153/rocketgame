@@ -1,5 +1,7 @@
 package dev.kamilpolak.rocketgame;
 
+import java.util.Arrays;
+
 public class FixtureData {
     public final float density;
     public final float friction;
@@ -10,6 +12,6 @@ public class FixtureData {
         this.density = density;
         this.friction = friction;
         this.restitution = restitution;
-        this.vertices = vertices;
+        this.vertices = Arrays.copyOf(vertices, vertices.length);
     }
 }
