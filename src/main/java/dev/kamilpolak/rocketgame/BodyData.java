@@ -12,9 +12,9 @@ public class BodyData {
     private final float linearDamping;
     private final float angularDamping;
     private final boolean allowSleep;
-    private final ArrayList<FixtureDef> fixtures;
+    private final ArrayList<FixtureData> fixtures;
 
-    public BodyData(boolean dynamic, float linearDamping, float angularDamping, boolean allowSleep, Collection<FixtureDef> fixtures) {
+    public BodyData(boolean dynamic, float linearDamping, float angularDamping, boolean allowSleep, Collection<FixtureData> fixtures) {
         this.dynamic = dynamic;
         this.linearDamping = linearDamping;
         this.angularDamping = angularDamping;
@@ -38,7 +38,7 @@ public class BodyData {
         return allowSleep;
     }
 
-    public List<FixtureDef> getFixtures() {
+    public List<FixtureData> getFixtures() {
         return Collections.unmodifiableList(fixtures);
     }
 }
