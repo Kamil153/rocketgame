@@ -13,7 +13,7 @@ public enum Asset {
     TREES_TEXTURE("textures/trees.png", Texture.class),
     UI_SKIN("ui/uiskin.json", Skin.class),
     ROCKET_BODY("body/rocket.xml", BodyData.class),
-    LAUNCHPAD_BODY("body/rocket.xml", BodyData.class);
+    LAUNCHPAD_BODY("body/launchpad.xml", BodyData.class);
 
     private static final String prefix = "assets/";
 
