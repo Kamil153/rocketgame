@@ -10,6 +10,6 @@
         <filter_category_bits>1</filter_category_bits>
         <filter_mask_bits>65535</filter_mask_bits>
         <filter_group_index>0</filter_group_index>
-        <polygon>0.0000, 0.0000, 66.0000, 0.0000, 55.0000, 11.0000, 11.0000, 11.0000</polygon>
+        <polygon>  -33.0000, -5.9950  ,  33.0000, -5.9950  ,  22.0000, 5.0050  ,  -22.0000, 5.0050 </polygon>
     </fixture>
 </body>
