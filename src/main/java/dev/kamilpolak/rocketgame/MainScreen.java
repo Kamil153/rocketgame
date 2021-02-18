@@ -12,6 +12,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import dev.kamilpolak.rocketgame.components.ControlComponent;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
+import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
@@ -92,6 +93,7 @@ public class MainScreen implements Screen {
                     currentState = GameState.COUNTDOWN;
                     countdown.setTime(COUNTDOWN_TIME);
                     Gdx.input.setInputProcessor(flightStage);
+                    rocket.removeComponent(ThrustNoiseComponent.class);
                 }
             }
         });
@@ -118,7 +120,7 @@ public class MainScreen implements Screen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor( 0, 0, 0, 1 );
+        Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         ecs.update(delta);
         countdown.update(delta);
@@ -139,6 +141,7 @@ public class MainScreen implements Screen {
             if(viewportHeight == CAMERA_HEIGHT_FLIGHT) {
                 currentState = GameState.FLIGHT;
                 rocket.addComponent(new ControlComponent());
+                rocket.addComponent(new ThrustNoiseComponent());
             }
         }
         if(currentState == GameState.MENU) {

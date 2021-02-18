@@ -31,7 +31,7 @@ public class ThrustSystem extends IteratingSystem {
             if(entity.hasComponent(EngineAngleComponent.class)) {
                 angle += entity.getComponent(EngineAngleComponent.class).angle;
             }
-            if(!entity.hasComponent(FinsComponent.class)) {
+            if(!entity.hasComponent(FinsComponent.class) && entity.hasComponent(ThrustNoiseComponent.class)) {
                 angle += (float)random.nextGaussian() * RANDOM_ANGLE_STD;
             }
             float xThrust = thrustComponent.thrust*(float)Math.cos(angle)*1000;
