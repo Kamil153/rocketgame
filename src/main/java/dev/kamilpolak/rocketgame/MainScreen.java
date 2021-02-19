@@ -10,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.components.ControlComponent;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
 import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
@@ -53,6 +54,7 @@ public class MainScreen implements Screen {
         camera = new OrthographicCamera(calculateViewportWidth(w, h, cameraHeight), cameraHeight);
 
         rocket = entityFactory.createRocket();
+        System.out.println(rocket.getComponent(BodyComponent.class).body.getMass());
         ecs.addEntity(rocket);
         ecs.addEntity(entityFactory.createEarth());
         ecs.addEntity(entityFactory.createRocketPlume(rocket));
