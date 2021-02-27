@@ -15,6 +15,8 @@ public class UpgradeList extends VerticalGroup {
         addActor(new ScrollPane(upgradesWidget, skin));
         upgradesWidget.left();
         upgradesWidget.grow();
+        space(10);
+        pad(10);
     }
 
     public void addUpgrade(Upgrade upgrade) {
