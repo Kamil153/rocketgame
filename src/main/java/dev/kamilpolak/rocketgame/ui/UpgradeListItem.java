@@ -16,6 +16,7 @@ public class UpgradeListItem extends Table {
         add(nameLabel).expandX().left();
         priceLabel = new Label("$" + upgrade.getPrice(), skin);
         add(priceLabel);
+        pad(5);
     }
 
     public void setPriceColor(Color color) {
