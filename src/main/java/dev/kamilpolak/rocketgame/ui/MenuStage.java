@@ -28,7 +28,7 @@ public class MenuStage extends Stage {
         launchButton = new TextButton("Launch", skin);
         table.add(new Widget()).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
         table.add(launchButton).top().expand();
-        table.add(upgradeList).width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table)).expandY().fill();
+        table.add(upgradeList).width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table)).expandY().fill().pad(10);
     }
 
     public void addLaunchListener(EventListener listener) {
