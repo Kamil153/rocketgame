@@ -22,7 +22,7 @@ public class MenuStage extends Stage {
         this.table = new Table();
         this.upgradeList = new UpgradeList(skin);
         upgradeList.addUpgrade(new Upgrade("Fins", 100));
-        upgradeList.addUpgrade(new Upgrade("TVC", 500));
+        upgradeList.addUpgrade(new Upgrade("TVC", 50000000));
         table.setFillParent(true);
         addActor(table);
         launchButton = new TextButton("Launch", skin);

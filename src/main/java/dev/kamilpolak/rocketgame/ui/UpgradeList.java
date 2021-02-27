@@ -10,12 +10,11 @@ public class UpgradeList extends VerticalGroup {
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
-        fill();
-        expand();
+        grow();
         addActor(new Label("Upgrades", skin));
         addActor(new ScrollPane(upgradesWidget, skin));
         upgradesWidget.left();
-        upgradesWidget.fill();
+        upgradesWidget.grow();
     }
 
     public void addUpgrade(Upgrade upgrade) {
