@@ -4,22 +4,22 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import dev.kamilpolak.rocketgame.Upgrade;
 
 
-public class UpgradeList extends VerticalGroup {
-    private final VerticalGroup upgradesWidget = new VerticalGroup();
+public class UpgradeList extends Table {
+    private final Table upgradesWidget = new Table();
     private final Skin skin;
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
-        grow();
-        addActor(new Label("Upgrades", skin));
-        addActor(new ScrollPane(upgradesWidget, skin));
+        add(new Label("Upgrades", skin)).expand().fill();
+        row();
+        ScrollPane scrollPane = new ScrollPane(upgradesWidget, skin);
+        add(scrollPane).expand().fill();
         upgradesWidget.left();
-        upgradesWidget.grow();
-        space(10);
         pad(10);
     }
 
     public void addUpgrade(Upgrade upgrade) {
-        upgradesWidget.addActor(new UpgradeListItem(upgrade, skin));
+        upgradesWidget.add(new UpgradeListItem(upgrade, skin)).grow();
+        upgradesWidget.row();
     }
 }

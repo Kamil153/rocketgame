@@ -158,6 +158,7 @@ public class MainScreen implements Screen {
     public void resize(int width, int height) {
         camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
         flightStage.getViewport().update(width, height);
+        menuStage.getViewport().update(width, height);
     }
 
     @Override

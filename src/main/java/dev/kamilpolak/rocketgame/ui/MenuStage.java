@@ -15,6 +15,7 @@ public class MenuStage extends Stage {
     private final UpgradeList upgradeList;
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.25f;
+    private static final float UPGRADE_LIST_HEIGHT_PERCENT = 0.65f;
 
     public MenuStage(Entity rocket, Skin skin) {
         super();
@@ -23,6 +24,9 @@ public class MenuStage extends Stage {
         this.upgradeList = new UpgradeList(skin);
         upgradeList.addUpgrade(new Upgrade("Fins", 100));
         upgradeList.addUpgrade(new Upgrade("TVC", 50000000));
+        for(int i = 0; i < 100; i++) {
+            upgradeList.addUpgrade(new Upgrade("Upgrade " + (i+1), 150));
+        }
         addActor(table);
         table.setFillParent(true);
         table.pad(10);
@@ -30,7 +34,8 @@ public class MenuStage extends Stage {
         launchButton.pad(5, 20, 5, 20);
         table.add(new Widget()).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
         table.add(launchButton).top().expand();
-        table.add(upgradeList).expandY().fill().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
+        table.add(upgradeList).top().expandY().fill().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table))
+                .height(Value.percentHeight(UPGRADE_LIST_HEIGHT_PERCENT, table));
     }
 
     public void addLaunchListener(EventListener listener) {
