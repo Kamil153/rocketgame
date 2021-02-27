@@ -14,7 +14,7 @@ public class UpgradeListItem extends Table {
         this.upgrade = upgrade;
         Label nameLabel = new Label(upgrade.getName(), skin);
         add(nameLabel).expandX().left();
-        priceLabel = new Label(String.valueOf(upgrade.getPrice()), skin);
+        priceLabel = new Label("$" + upgrade.getPrice(), skin);
         add(priceLabel);
     }
 
