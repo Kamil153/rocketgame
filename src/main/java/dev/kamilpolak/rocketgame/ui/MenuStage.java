@@ -23,12 +23,13 @@ public class MenuStage extends Stage {
         this.upgradeList = new UpgradeList(skin);
         upgradeList.addUpgrade(new Upgrade("Fins", 100));
         upgradeList.addUpgrade(new Upgrade("TVC", 50000000));
-        table.setFillParent(true);
         addActor(table);
+        table.setFillParent(true);
+        table.pad(10);
         launchButton = new TextButton("Launch", skin);
         table.add(new Widget()).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
         table.add(launchButton).top().expand();
-        table.add(upgradeList).width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table)).expandY().fill().pad(10);
+        table.add(upgradeList).expandY().fill().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
     }
 
     public void addLaunchListener(EventListener listener) {
