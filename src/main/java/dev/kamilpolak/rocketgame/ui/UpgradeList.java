@@ -1,22 +1,24 @@
 package dev.kamilpolak.rocketgame.ui;
 
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import dev.kamilpolak.rocketgame.Upgrade;
+
 
 public class UpgradeList extends VerticalGroup {
-    private final VerticalGroup upgrades;
+    private final VerticalGroup upgradesWidget = new VerticalGroup();
     private final Skin skin;
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
+        fill();
+        expand();
         addActor(new Label("Upgrades", skin));
-        upgrades = new VerticalGroup();
-        addActor(new ScrollPane(upgrades, skin));
+        addActor(new ScrollPane(upgradesWidget, skin));
+        upgradesWidget.left();
+        upgradesWidget.fill();
     }
 
-    public void addUpgrade(String name) {
-        upgrades.addActor(new UpgradeListItem(name, skin));
+    public void addUpgrade(Upgrade upgrade) {
+        upgradesWidget.addActor(new UpgradeListItem(upgrade, skin));
     }
 }
