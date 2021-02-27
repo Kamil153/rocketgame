@@ -27,6 +27,7 @@ public class MenuStage extends Stage {
         table.setFillParent(true);
         table.pad(10);
         launchButton = new TextButton("Launch", skin);
+        launchButton.pad(5, 20, 5, 20);
         table.add(new Widget()).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
         table.add(launchButton).top().expand();
         table.add(upgradeList).expandY().fill().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, table));
