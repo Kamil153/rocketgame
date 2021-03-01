@@ -74,6 +74,9 @@ public class RenderingSystem extends IteratingSystem {
 
         @Override
         public int compare(Entity entity1, Entity entity2) {
+            if(!entity1.hasComponent(TransformComponent.class) || !entity2.hasComponent(TransformComponent.class)) {
+                return 0;
+            }
             float z1 = entity1.getComponent(TransformComponent.class).position.z;
             float z2 = entity2.getComponent(TransformComponent.class).position.z;
             return Float.compare(z1, z2);
