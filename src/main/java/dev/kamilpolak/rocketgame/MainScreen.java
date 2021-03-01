@@ -92,12 +92,7 @@ public class MainScreen implements Screen {
         menuStage.addLaunchListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                if(currentState == GameState.MENU) {
-                    currentState = GameState.COUNTDOWN;
-                    countdown.setTime(COUNTDOWN_TIME);
-                    Gdx.input.setInputProcessor(flightStage);
-                    rocket.removeComponent(ThrustNoiseComponent.class);
-                }
+                startFlight();
             }
         });
         Gdx.input.setInputProcessor(menuStage);
@@ -114,6 +109,15 @@ public class MainScreen implements Screen {
 
     private static float calculateViewportWidth(float width, float height, float viewportHeight) {
         return viewportHeight * (width / height);
+    }
+
+    private void startFlight() {
+        if(currentState == GameState.MENU) {
+            currentState = GameState.COUNTDOWN;
+            countdown.setTime(COUNTDOWN_TIME);
+            Gdx.input.setInputProcessor(flightStage);
+            rocket.removeComponent(ThrustNoiseComponent.class);
+        }
     }
 
     @Override
