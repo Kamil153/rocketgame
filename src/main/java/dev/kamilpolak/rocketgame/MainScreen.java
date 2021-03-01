@@ -17,7 +17,7 @@ import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
-import dev.kamilpolak.rocketgame.ui.FlightStage;
+import dev.kamilpolak.rocketgame.ui.FlightTable;
 import dev.kamilpolak.rocketgame.ui.MenuStage;
 
 
@@ -29,7 +29,7 @@ public class MainScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
-    private final FlightStage flightStage;
+    private final FlightTable flightTable;
     private final MenuStage menuStage;
     private final Countdown countdown = new Countdown();
     private final Entity rocket;
@@ -84,9 +84,9 @@ public class MainScreen implements Screen {
         }
 
         Skin uiSkin = parent.getAssets().get(Asset.UI_SKIN.getPath());
-        flightStage = new FlightStage(rocket, uiSkin);
-        flightStage.setCountdown(countdown);
-        flightStage.setDebugAll(true);
+        flightTable = new FlightTable(rocket, uiSkin);
+        flightTable.setCountdown(countdown);
+        flightTable.setDebugAll(true);
         menuStage = new MenuStage(rocket, uiSkin);
         menuStage.setDebugAll(true);
         menuStage.addLaunchListener(new ChangeListener() {
@@ -115,7 +115,7 @@ public class MainScreen implements Screen {
         if(currentState == GameState.MENU) {
             currentState = GameState.COUNTDOWN;
             countdown.setTime(COUNTDOWN_TIME);
-            Gdx.input.setInputProcessor(flightStage);
+            Gdx.input.setInputProcessor(flightTable);
             rocket.removeComponent(ThrustNoiseComponent.class);
         }
     }
@@ -131,7 +131,7 @@ public class MainScreen implements Screen {
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         ecs.update(delta);
         countdown.update(delta);
-        flightStage.act(delta);
+        flightTable.act(delta);
         menuStage.act(delta);
         if(countdown.isPastT0() && currentState == GameState.COUNTDOWN) {
             currentState = GameState.STARTING;
@@ -155,14 +155,14 @@ public class MainScreen implements Screen {
             menuStage.draw();
         }
         else {
-            flightStage.draw();
+            flightTable.draw();
         }
     }
 
     @Override
     public void resize(int width, int height) {
         camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
-        flightStage.getViewport().update(width, height);
+        flightTable.getViewport().update(width, height);
         menuStage.getViewport().update(width, height);
     }
 
@@ -183,6 +183,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        flightStage.dispose();
+        flightTable.dispose();
     }
 }
