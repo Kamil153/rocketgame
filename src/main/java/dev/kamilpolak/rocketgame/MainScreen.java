@@ -59,6 +59,7 @@ public class MainScreen implements Screen {
         ecs.addEntity(entityFactory.createEarth());
         ecs.addEntity(entityFactory.createRocketPlume(rocket));
         ecs.addEntity(entityFactory.createLaunchpad());
+        ecs.addEntity(entityFactory.createMountains());
         final int GROUND_COUNT = 16;
         final int TREES_COUNT = 5;
         float groundWidth = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
