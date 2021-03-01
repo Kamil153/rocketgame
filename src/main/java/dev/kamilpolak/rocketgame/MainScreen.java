@@ -18,7 +18,7 @@ import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
-import dev.kamilpolak.rocketgame.ui.MenuStage;
+import dev.kamilpolak.rocketgame.ui.MenuTable;
 
 
 public class MainScreen implements Screen {
@@ -30,7 +30,7 @@ public class MainScreen implements Screen {
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
     private final FlightTable flightTable;
-    private final MenuStage menuStage;
+    private final MenuTable menuTable;
     private final Countdown countdown = new Countdown();
     private final Entity rocket;
 
@@ -87,15 +87,15 @@ public class MainScreen implements Screen {
         flightTable = new FlightTable(rocket, uiSkin);
         flightTable.setCountdown(countdown);
         flightTable.setDebugAll(true);
-        menuStage = new MenuStage(rocket, uiSkin);
-        menuStage.setDebugAll(true);
-        menuStage.addLaunchListener(new ChangeListener() {
+        menuTable = new MenuTable(rocket, uiSkin);
+        menuTable.setDebugAll(true);
+        menuTable.addLaunchListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 startFlight();
             }
         });
-        Gdx.input.setInputProcessor(menuStage);
+        Gdx.input.setInputProcessor(menuTable);
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
@@ -132,7 +132,7 @@ public class MainScreen implements Screen {
         ecs.update(delta);
         countdown.update(delta);
         flightTable.act(delta);
-        menuStage.act(delta);
+        menuTable.act(delta);
         if(countdown.isPastT0() && currentState == GameState.COUNTDOWN) {
             currentState = GameState.STARTING;
             rocket.getComponent(EngineStateComponent.class).running = true;
@@ -152,7 +152,7 @@ public class MainScreen implements Screen {
             }
         }
         if(currentState == GameState.MENU) {
-            menuStage.draw();
+            menuTable.draw();
         }
         else {
             flightTable.draw();
@@ -163,7 +163,7 @@ public class MainScreen implements Screen {
     public void resize(int width, int height) {
         camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
         flightTable.getViewport().update(width, height);
-        menuStage.getViewport().update(width, height);
+        menuTable.getViewport().update(width, height);
     }
 
     @Override
