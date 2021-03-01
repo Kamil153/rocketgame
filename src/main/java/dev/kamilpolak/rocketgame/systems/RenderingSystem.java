@@ -59,11 +59,15 @@ public class RenderingSystem extends IteratingSystem {
                         originX, originY,
                         width, height,
                         transform.scale.x, transform.scale.y,
-                        transform.rotation * 180.0f / (float) Math.PI  // conversion from radians to degrees
+                        radiansToDegrees(transform.rotation)  // conversion from radians to degrees
                 );
             }
         }
         batch.end();
+    }
+
+    private static float radiansToDegrees(float radians) {
+        return radians * 180.0f / (float) Math.PI;
     }
 
     static class ZComparator implements Comparator<Entity> {
