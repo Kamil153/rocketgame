@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
@@ -29,6 +30,7 @@ public class MainScreen implements Screen {
     private final Engine ecs = new Engine();
     private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
+    private final Stage gameStage;
     private final FlightTable flightTable;
     private final MenuTable menuTable;
     private final Countdown countdown = new Countdown();
@@ -84,18 +86,14 @@ public class MainScreen implements Screen {
         }
 
         Skin uiSkin = parent.getAssets().get(Asset.UI_SKIN.getPath());
+        gameStage = new Stage();
+        gameStage.setDebugAll(true);
+        Gdx.input.setInputProcessor(gameStage);
+
         flightTable = new FlightTable(rocket, uiSkin);
         flightTable.setCountdown(countdown);
-        flightTable.setDebugAll(true);
         menuTable = new MenuTable(rocket, uiSkin);
-        menuTable.setDebugAll(true);
-        menuTable.addLaunchListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                startFlight();
-            }
-        });
-        Gdx.input.setInputProcessor(menuTable);
+        showMenu();
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
@@ -111,28 +109,29 @@ public class MainScreen implements Screen {
         return viewportHeight * (width / height);
     }
 
+    private void showMenu() {
+        gameStage.clear();
+        gameStage.addActor(menuTable);
+        menuTable.addLaunchListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                startFlight();
+            }
+        });
+    }
+
     private void startFlight() {
         if(currentState == GameState.MENU) {
+            gameStage.clear();
+            gameStage.addActor(flightTable);
             currentState = GameState.COUNTDOWN;
             countdown.setTime(COUNTDOWN_TIME);
-            Gdx.input.setInputProcessor(flightTable);
+            Gdx.input.setInputProcessor(gameStage);
             rocket.removeComponent(ThrustNoiseComponent.class);
         }
     }
 
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
-        ecs.update(delta);
-        countdown.update(delta);
-        flightTable.act(delta);
-        menuTable.act(delta);
+    private void updateFlight() {
         if(countdown.isPastT0() && currentState == GameState.COUNTDOWN) {
             currentState = GameState.STARTING;
             rocket.getComponent(EngineStateComponent.class).running = true;
@@ -151,19 +150,28 @@ public class MainScreen implements Screen {
                 rocket.addComponent(new ThrustNoiseComponent());
             }
         }
-        if(currentState == GameState.MENU) {
-            menuTable.draw();
-        }
-        else {
-            flightTable.draw();
-        }
+    }
+
+    @Override
+    public void show() {
+
+    }
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
+        ecs.update(delta);
+        countdown.update(delta);
+        updateFlight();
+        gameStage.act();
+        gameStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
         camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
-        flightTable.getViewport().update(width, height);
-        menuTable.getViewport().update(width, height);
+        gameStage.getViewport().update(width, height);
     }
 
     @Override
@@ -183,6 +191,6 @@ public class MainScreen implements Screen {
 
     @Override
     public void dispose() {
-        flightTable.dispose();
+        gameStage.dispose();
     }
 }
