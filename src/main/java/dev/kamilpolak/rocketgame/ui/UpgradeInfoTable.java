@@ -6,10 +6,21 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.Upgrade;
 
 public class UpgradeInfoTable extends Table {
+    private final Label titleLabel;
+    private final Label descriptionLabel;
+
     public UpgradeInfoTable(Skin skin, Upgrade upgrade) {
-        add(new Label(upgrade.getName(), skin)).expand().fill();
+        titleLabel = new Label("", skin);
+        descriptionLabel = new Label("", skin);
+        add(titleLabel).expand().fill();
         row().space(10);
-        add(new Label(upgrade.getDescription(), skin)).expand().fill();
+        add(descriptionLabel).expand().fill();
         pad(10);
+        setUpgrade(upgrade);
+    }
+
+    public void setUpgrade(Upgrade upgrade) {
+        titleLabel.setText(upgrade.getName());
+        descriptionLabel.setText(upgrade.getDescription());
     }
 }
