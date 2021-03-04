@@ -17,6 +17,7 @@ public class UpgradeInfoTable extends Table {
     public UpgradeInfoTable(Skin skin) {
         titleLabel = new Label("", skin);
         descriptionLabel = new Label("", skin);
+        descriptionLabel.setWrap(true);
         add(titleLabel).expand().fill();
         row().space(10);
         add(descriptionLabel).expand().fill();
