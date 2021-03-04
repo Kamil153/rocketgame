@@ -10,13 +10,17 @@ public class UpgradeInfoTable extends Table {
     private final Label descriptionLabel;
 
     public UpgradeInfoTable(Skin skin, Upgrade upgrade) {
+        this(skin);
+        setUpgrade(upgrade);
+    }
+
+    public UpgradeInfoTable(Skin skin) {
         titleLabel = new Label("", skin);
         descriptionLabel = new Label("", skin);
         add(titleLabel).expand().fill();
         row().space(10);
         add(descriptionLabel).expand().fill();
         pad(10);
-        setUpgrade(upgrade);
     }
 
     public void setUpgrade(Upgrade upgrade) {
