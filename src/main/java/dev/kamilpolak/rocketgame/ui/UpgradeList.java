@@ -10,6 +10,7 @@ import dev.kamilpolak.rocketgame.Upgrade;
 public class UpgradeList extends Table {
     private final Table upgradesWidget = new Table();
     private final Skin skin;
+    private UpgradeListItem selected = null;
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
@@ -23,7 +24,19 @@ public class UpgradeList extends Table {
     }
 
     public void addUpgrade(Upgrade upgrade) {
-        upgradesWidget.add(new UpgradeListItem(upgrade, skin)).grow();
+        UpgradeListItem item = new UpgradeListItem(upgrade, skin);
+        upgradesWidget.add(item).grow();
         upgradesWidget.row();
+        item.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                super.clicked(event, x, y);
+                if(selected != null) {
+                    selected.setHighlighted(false);
+                }
+                item.setHighlighted(true);
+                selected = item;
+            }
+        });
     }
 }

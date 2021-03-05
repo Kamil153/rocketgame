@@ -1,10 +1,12 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import dev.kamilpolak.rocketgame.Upgrade;
 
 public class UpgradeListItem extends Table {
@@ -13,8 +15,10 @@ public class UpgradeListItem extends Table {
     private final Skin skin;
 
     public UpgradeListItem(Upgrade upgrade, Skin skin) {
+        super(skin);
         this.upgrade = upgrade;
         this.skin = skin;
+        setTouchable(Touchable.enabled);
         Label nameLabel = new Label(upgrade.getName(), skin);
         add(nameLabel).expandX().left();
         priceLabel = new Label("$" + upgrade.getPrice(), skin);
@@ -31,7 +35,7 @@ public class UpgradeListItem extends Table {
             setBackground("selection");
         }
         else {
-            setBackground("default");
+            setBackground((Drawable) null);
         }
     }
 }
