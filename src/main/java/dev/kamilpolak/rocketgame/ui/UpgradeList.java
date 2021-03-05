@@ -55,8 +55,4 @@ public class UpgradeList extends Table {
     public void addUpgradeSelectionListener(UpgradeSelectionListener listener) {
         selectionListeners.add(listener);
     }
-
-    abstract static class UpgradeSelectionListener implements EventListener {
-        abstract public void selected(Upgrade upgrade);
-    }
 }
