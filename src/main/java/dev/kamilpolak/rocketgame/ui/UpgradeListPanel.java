@@ -3,7 +3,7 @@ package dev.kamilpolak.rocketgame.ui;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import dev.kamilpolak.rocketgame.Upgrade;
+import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 
 import java.util.ArrayList;
 import java.util.Collection;

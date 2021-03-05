@@ -2,7 +2,7 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import dev.kamilpolak.rocketgame.Upgrade;
+import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
 public class MenuTable extends Table implements IUpgradeSelectionListener {

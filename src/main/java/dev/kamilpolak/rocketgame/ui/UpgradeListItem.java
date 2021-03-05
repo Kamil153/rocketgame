@@ -3,11 +3,10 @@ package dev.kamilpolak.rocketgame.ui;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.Touchable;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.List.ListStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
-import dev.kamilpolak.rocketgame.Upgrade;
+import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 
 public class UpgradeListItem extends Table {
     private final Upgrade upgrade;

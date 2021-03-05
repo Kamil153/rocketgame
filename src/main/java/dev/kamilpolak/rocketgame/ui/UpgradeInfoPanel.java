@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import dev.kamilpolak.rocketgame.Upgrade;
+import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 
 public class UpgradeInfoPanel extends Panel {
     private final Label descriptionLabel;

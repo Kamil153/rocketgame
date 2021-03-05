@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame;
+package dev.kamilpolak.rocketgame.upgrades;
 
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
