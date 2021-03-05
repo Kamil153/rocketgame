@@ -42,6 +42,9 @@ public class UpgradeList extends Table {
                 }
                 item.setHighlighted(true);
                 selected = item;
+                for(UpgradeSelectionListener listener: selectionListeners) {
+                    listener.selected(item.getUpgrade());
+                }
             }
         });
     }
