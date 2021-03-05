@@ -9,7 +9,7 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
     private final Entity rocket;
     private final TextButton launchButton;
     private final UpgradeList upgradeList;
-    private final UpgradeInfoTable upgradeInfo;
+    private final UpgradeInfoPanel upgradeInfo;
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.25f;
     private static final float UPGRADE_LIST_HEIGHT_PERCENT = 0.65f;
@@ -18,7 +18,7 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
         super();
         this.rocket = rocket;
         this.upgradeList = new UpgradeList(skin);
-        this.upgradeInfo = new UpgradeInfoTable(skin);
+        this.upgradeInfo = new UpgradeInfoPanel(skin);
         upgradeList.addUpgradeSelectionListener(this);
         setFillParent(true);
         pad(10);
@@ -44,7 +44,7 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
         upgradeInfo.setUpgrade(upgrade);
     }
 
-    public UpgradeInfoTable getUpgradeInfo() {
+    public UpgradeInfoPanel getUpgradeInfo() {
         return upgradeInfo;
     }
 

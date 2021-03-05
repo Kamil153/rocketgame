@@ -2,18 +2,17 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.Upgrade;
 
-public class UpgradeInfoTable extends Panel {
+public class UpgradeInfoPanel extends Panel {
     private final Label descriptionLabel;
 
-    public UpgradeInfoTable(Skin skin, Upgrade upgrade) {
+    public UpgradeInfoPanel(Skin skin, Upgrade upgrade) {
         this(skin);
         setUpgrade(upgrade);
     }
 
-    public UpgradeInfoTable(Skin skin) {
+    public UpgradeInfoPanel(Skin skin) {
         super(skin, "");
         descriptionLabel = new Label("", skin);
         descriptionLabel.setWrap(true);
