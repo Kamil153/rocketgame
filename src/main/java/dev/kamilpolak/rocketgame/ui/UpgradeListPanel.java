@@ -27,7 +27,7 @@ public class UpgradeListPanel extends Panel {
 
     public void addUpgrade(Upgrade upgrade) {
         UpgradeListItem item = new UpgradeListItem(upgrade, skin);
-        upgradesWidget.add(item).grow();
+        upgradesWidget.add(item).top().expandX().fill();
         upgradesWidget.row();
         item.addListener(new ClickListener() {
             @Override
