@@ -22,10 +22,12 @@ public class UpgradeInfoPanel extends Panel {
         setContent(descriptionLabel);
         buyButton = new TextButton("Buy", skin);
         setTitleExtra(buyButton);
+        setVisible(false);
     }
 
     public void setUpgrade(Upgrade upgrade) {
         setTitle(upgrade.getName());
         descriptionLabel.setText(upgrade.getDescription());
+        setVisible(true);
     }
 }
