@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import dev.kamilpolak.rocketgame.Upgrade;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
-public class MenuTable extends Table implements UpgradeSelectionListener {
+public class MenuTable extends Table implements IUpgradeSelectionListener {
     private final Entity rocket;
     private final TextButton launchButton;
     private final UpgradeListPanel upgradeList;

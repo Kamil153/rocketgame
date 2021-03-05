@@ -13,7 +13,7 @@ public class UpgradeListPanel extends Panel {
     private final Table upgradesWidget = new Table();
     private final Skin skin;
     private UpgradeListItem selected = null;
-    private final Collection<UpgradeSelectionListener> selectionListeners = new ArrayList<>();
+    private final Collection<IUpgradeSelectionListener> selectionListeners = new ArrayList<>();
 
     public UpgradeListPanel(Skin skin) {
         super(skin, "Upgrades");
@@ -38,7 +38,7 @@ public class UpgradeListPanel extends Panel {
                 }
                 item.setHighlighted(true);
                 selected = item;
-                for(UpgradeSelectionListener listener: selectionListeners) {
+                for(IUpgradeSelectionListener listener: selectionListeners) {
                     listener.selected(item.getUpgrade());
                 }
             }
@@ -46,12 +46,12 @@ public class UpgradeListPanel extends Panel {
     }
 
     private void notifySelectionListeners(Upgrade upgrade) {
-        for(UpgradeSelectionListener listener: selectionListeners) {
+        for(IUpgradeSelectionListener listener: selectionListeners) {
             listener.selected(upgrade);
         }
     }
 
-    public void addUpgradeSelectionListener(UpgradeSelectionListener listener) {
+    public void addUpgradeSelectionListener(IUpgradeSelectionListener listener) {
         selectionListeners.add(listener);
     }
 }
