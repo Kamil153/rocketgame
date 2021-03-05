@@ -14,7 +14,7 @@ public class Panel extends Table {
         titleExtraCell = add(new Widget());
         row().space(10);
         contentCell = add(new Widget());
-        contentCell.expand().fill();
+        contentCell.colspan(2).expand().fill();
         pad(10);
     }
 
