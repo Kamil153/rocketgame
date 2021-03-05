@@ -1,5 +1,6 @@
 package dev.kamilpolak.rocketgame.ui;
 
+import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -29,5 +30,9 @@ public class UpgradeInfoPanel extends Panel {
         setTitle(upgrade.getName());
         descriptionLabel.setText(upgrade.getDescription());
         setVisible(true);
+    }
+
+    public void addBuyButtonListener(EventListener listener) {
+        buyButton.addListener(listener);
     }
 }
