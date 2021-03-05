@@ -19,7 +19,6 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
         this.rocket = rocket;
         this.upgradeList = new UpgradeList(skin);
         this.upgradeInfo = new UpgradeInfoTable(skin);
-        this.upgradeInfo.setUpgrade(new Upgrade("Upgrade 1", 100, "test upgrade description"));
         upgradeList.addUpgradeSelectionListener(this);
         upgradeList.addUpgrade(new Upgrade("Fins", 100));
         upgradeList.addUpgrade(new Upgrade("TVC", 50000000));
