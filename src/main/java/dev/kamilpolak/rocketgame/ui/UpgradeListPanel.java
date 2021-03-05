@@ -9,13 +9,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 
-public class UpgradeList extends Panel {
+public class UpgradeListPanel extends Panel {
     private final Table upgradesWidget = new Table();
     private final Skin skin;
     private UpgradeListItem selected = null;
     private final Collection<UpgradeSelectionListener> selectionListeners = new ArrayList<>();
 
-    public UpgradeList(Skin skin) {
+    public UpgradeListPanel(Skin skin) {
         super(skin, "Upgrades");
         this.skin = skin;
         ScrollPane scrollPane = new ScrollPane(upgradesWidget, skin);

@@ -8,7 +8,7 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 public class MenuTable extends Table implements UpgradeSelectionListener {
     private final Entity rocket;
     private final TextButton launchButton;
-    private final UpgradeList upgradeList;
+    private final UpgradeListPanel upgradeList;
     private final UpgradeInfoPanel upgradeInfo;
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.25f;
@@ -17,7 +17,7 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
     public MenuTable(Entity rocket, Skin skin) {
         super();
         this.rocket = rocket;
-        this.upgradeList = new UpgradeList(skin);
+        this.upgradeList = new UpgradeListPanel(skin);
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         upgradeList.addUpgradeSelectionListener(this);
         setFillParent(true);
@@ -48,7 +48,7 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
         return upgradeInfo;
     }
 
-    public UpgradeList getUpgradeList() {
+    public UpgradeListPanel getUpgradeList() {
         return upgradeList;
     }
 }
