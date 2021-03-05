@@ -3,14 +3,20 @@ package dev.kamilpolak.rocketgame.ui;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import dev.kamilpolak.rocketgame.Upgrade;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.EventListener;
 
 
 public class UpgradeList extends Table {
     private final Table upgradesWidget = new Table();
     private final Skin skin;
     private UpgradeListItem selected = null;
+    private final Collection<UpgradeSelectionListener> selectionListeners= new ArrayList<>();
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
@@ -38,5 +44,19 @@ public class UpgradeList extends Table {
                 selected = item;
             }
         });
+    }
+
+    private void notifySelectionListeners(Upgrade upgrade) {
+        for(UpgradeSelectionListener listener: selectionListeners) {
+            listener.selected(upgrade);
+        }
+    }
+
+    public void addUpgradeSelectionListener(UpgradeSelectionListener listener) {
+        selectionListeners.add(listener);
+    }
+
+    abstract static class UpgradeSelectionListener implements EventListener {
+        abstract public void selected(Upgrade upgrade);
     }
 }
