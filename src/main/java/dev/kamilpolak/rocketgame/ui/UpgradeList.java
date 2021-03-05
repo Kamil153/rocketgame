@@ -20,7 +20,7 @@ public class UpgradeList extends Table {
 
     public UpgradeList(Skin skin) {
         this.skin = skin;
-        add(new Label("Upgrades", skin)).expand().fill();
+        add(new Label("Upgrades", skin)).top().expandX().fill();
         row().space(10);
         ScrollPane scrollPane = new ScrollPane(upgradesWidget, skin);
         scrollPane.setFlickScroll(false);
