@@ -1,30 +1,26 @@
 package dev.kamilpolak.rocketgame.ui;
 
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import dev.kamilpolak.rocketgame.Upgrade;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.EventListener;
 
 
-public class UpgradeList extends Table {
+public class UpgradeList extends Panel {
     private final Table upgradesWidget = new Table();
     private final Skin skin;
     private UpgradeListItem selected = null;
-    private final Collection<UpgradeSelectionListener> selectionListeners= new ArrayList<>();
+    private final Collection<UpgradeSelectionListener> selectionListeners = new ArrayList<>();
 
     public UpgradeList(Skin skin) {
+        super(skin, "Upgrades");
         this.skin = skin;
-        add(new Label("Upgrades", skin)).top().expandX().fill();
-        row().space(10);
         ScrollPane scrollPane = new ScrollPane(upgradesWidget, skin);
         scrollPane.setFlickScroll(false);
-        add(scrollPane).expand().fill();
+        setContent(scrollPane);
         upgradesWidget.left();
         pad(10);
     }
