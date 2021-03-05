@@ -28,4 +28,6 @@ abstract public class Upgrade {
     public String getDescription() {
         return description;
     }
+
+    abstract public void install(Entity rocket);
 }
