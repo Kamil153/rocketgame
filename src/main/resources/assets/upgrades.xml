@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<upgrades>
+    <upgrade>
+        <class>TVCUpgrade</class>
+        <name>TVC System</name>
+        <price>1000</price>
+        <description>Stabilizes rocket movement and allows you to control rocket when engines are turned on. </description>
+    </upgrade>
+    <upgrade>
+        <class>FinsUpgrade</class>
+        <name>Fins</name>
+        <price>100</price>
+        <description>Reduces lateral movement of a rocket.</description>
+    </upgrade>
+</upgrades>
