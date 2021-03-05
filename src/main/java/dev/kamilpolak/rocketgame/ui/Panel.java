@@ -1,10 +1,7 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.ui.Cell;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
 
 public class Panel extends Table {
     private final Label titleLabel;
@@ -12,9 +9,10 @@ public class Panel extends Table {
 
     public Panel(Skin skin, String title) {
         titleLabel = new Label(title, skin);
-        add(titleLabel).expand().fill();
-        contentCell = row();
-        contentCell.space(10);
+        add(titleLabel).expandX().fill().top();
+        row().space(10);
+        contentCell = add(new Widget());
+        contentCell.expand().fill();
         pad(10);
     }
 
