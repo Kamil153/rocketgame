@@ -5,7 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.*;
 import dev.kamilpolak.rocketgame.Upgrade;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
-public class MenuTable extends Table {
+public class MenuTable extends Table implements UpgradeSelectionListener {
     private final Entity rocket;
     private final TextButton launchButton;
     private final UpgradeList upgradeList;
@@ -20,6 +20,7 @@ public class MenuTable extends Table {
         this.upgradeList = new UpgradeList(skin);
         this.upgradeInfo = new UpgradeInfoTable(skin);
         this.upgradeInfo.setUpgrade(new Upgrade("Upgrade 1", 100, "test upgrade description"));
+        upgradeList.addUpgradeSelectionListener(this);
         upgradeList.addUpgrade(new Upgrade("Fins", 100));
         upgradeList.addUpgrade(new Upgrade("TVC", 50000000));
         for(int i = 0; i < 100; i++) {
@@ -42,5 +43,10 @@ public class MenuTable extends Table {
 
     public void addLaunchListener(EventListener listener) {
         launchButton.addListener(listener);
+    }
+
+    @Override
+    public void selected(Upgrade upgrade) {
+        upgradeInfo.setUpgrade(upgrade);
     }
 }
