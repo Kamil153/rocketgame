@@ -20,9 +20,6 @@ public class MenuTable extends Table implements IUpgradeSelectionListener {
         this.upgradeList = new UpgradeListPanel(skin);
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         upgradeList.addUpgradeSelectionListener(this);
-        for(int i = 0; i < 20; i++) {
-            upgradeList.addUpgrade(new Upgrade("Test upgrade " + i, 134, "Test upgrade description 123 abc !@#$^& &*()_"));
-        }
         setFillParent(true);
         pad(10);
         launchButton = new TextButton("Launch", skin);
