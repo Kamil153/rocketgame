@@ -52,4 +52,8 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
     public UpgradeInfoTable getUpgradeInfo() {
         return upgradeInfo;
     }
+
+    public UpgradeList getUpgradeList() {
+        return upgradeList;
+    }
 }
