@@ -48,4 +48,8 @@ public class MenuTable extends Table implements UpgradeSelectionListener {
     public void selected(Upgrade upgrade) {
         upgradeInfo.setUpgrade(upgrade);
     }
+
+    public UpgradeInfoTable getUpgradeInfo() {
+        return upgradeInfo;
+    }
 }
