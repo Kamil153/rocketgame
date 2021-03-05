@@ -4,6 +4,7 @@ public class Upgrade {
     private final String name;
     private final int price;
     private final String description;
+    private boolean installed = false;
 
     public Upgrade(String name, int price) {
         this(name, price, "");
@@ -25,5 +26,13 @@ public class Upgrade {
 
     public String getDescription() {
         return description;
+    }
+
+    public boolean isInstalled() {
+        return installed;
+    }
+
+    public void setInstalled(boolean installed) {
+        this.installed = installed;
     }
 }
