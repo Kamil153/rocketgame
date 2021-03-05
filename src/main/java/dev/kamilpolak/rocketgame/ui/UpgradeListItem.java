@@ -38,4 +38,8 @@ public class UpgradeListItem extends Table {
             setBackground((Drawable) null);
         }
     }
+
+    public Upgrade getUpgrade() {
+        return upgrade;
+    }
 }
