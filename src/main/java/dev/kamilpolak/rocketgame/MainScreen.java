@@ -21,6 +21,7 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
 import dev.kamilpolak.rocketgame.ui.MenuTable;
+import dev.kamilpolak.rocketgame.ui.UpgradeListPanel;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
@@ -135,6 +136,10 @@ public class MainScreen implements Screen {
                 startFlight();
             }
         });
+        UpgradeListPanel upgradeList = menuTable.getUpgradeList();
+        for(Upgrade upgrade: upgrades) {
+            upgradeList.addUpgrade(upgrade);
+        }
     }
 
     private void startFlight() {
