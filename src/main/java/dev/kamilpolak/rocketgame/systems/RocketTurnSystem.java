@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import dev.kamilpolak.rocketgame.components.EngineAngleComponent;
 import dev.kamilpolak.rocketgame.components.ControlComponent;
+import dev.kamilpolak.rocketgame.components.EngineControlComponent;
 import dev.kamilpolak.rocketgame.components.RocketComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ecs.Query;
@@ -22,7 +23,7 @@ public class RocketTurnSystem extends IteratingSystem {
     @Override
     protected void updateEntity(float deltaTime, Entity entity) {
         EngineAngleComponent angleComponent = entity.getComponent(EngineAngleComponent.class);
-        if(entity.hasComponent(ControlComponent.class)) {
+        if(entity.hasComponent(ControlComponent.class) && entity.hasComponent(EngineControlComponent.class)) {
             boolean leftPressed = Gdx.input.isKeyPressed(Input.Keys.LEFT);
             boolean rightPressed = Gdx.input.isKeyPressed(Input.Keys.RIGHT);
             if(leftPressed) {
@@ -34,6 +35,9 @@ public class RocketTurnSystem extends IteratingSystem {
             else {
                 angleComponent.angle = 0;
             }
+        }
+        else {
+            angleComponent.angle = 0;
         }
     }
 }
