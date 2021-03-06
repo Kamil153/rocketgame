@@ -20,6 +20,10 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
 import dev.kamilpolak.rocketgame.ui.MenuTable;
+import dev.kamilpolak.rocketgame.upgrades.Upgrade;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class MainScreen implements Screen {
@@ -35,6 +39,8 @@ public class MainScreen implements Screen {
     private final MenuTable menuTable;
     private final Countdown countdown = new Countdown();
     private final Entity rocket;
+    private final Set<Upgrade> upgrades = new HashSet<>();
+    private final Set<Upgrade> installedUpgrades = new HashSet<>();
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
