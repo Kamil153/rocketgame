@@ -10,6 +10,7 @@ import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 public class UpgradeInfoPanel extends Panel {
     private final Label descriptionLabel;
     private final Button buyButton;
+    private Upgrade upgrade = null;
 
     public UpgradeInfoPanel(Skin skin, Upgrade upgrade) {
         this(skin);
@@ -30,6 +31,10 @@ public class UpgradeInfoPanel extends Panel {
         setTitle(upgrade.getName());
         descriptionLabel.setText(upgrade.getDescription());
         setVisible(true);
+    }
+
+    public Upgrade getUpgrade() {
+        return upgrade;
     }
 
     public void addBuyButtonListener(EventListener listener) {
