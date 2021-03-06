@@ -1,9 +1,14 @@
 package dev.kamilpolak.rocketgame.upgrades;
 
+import dev.kamilpolak.rocketgame.UpgradeData;
 import dev.kamilpolak.rocketgame.components.FinsComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
 public class FinsUpgrade extends Upgrade {
+    public FinsUpgrade(UpgradeData data) {
+        super(data);
+    }
+
     public FinsUpgrade(String name, int price) {
         super(name, price);
     }

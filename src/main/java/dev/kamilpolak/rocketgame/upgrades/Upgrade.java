@@ -1,11 +1,16 @@
 package dev.kamilpolak.rocketgame.upgrades;
 
+import dev.kamilpolak.rocketgame.UpgradeData;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
 abstract public class Upgrade {
     private final String name;
     private final int price;
     private final String description;
+
+    public Upgrade(UpgradeData data) {
+        this(data.getName(), data.getPrice(), data.getDescription());
+    }
 
     public Upgrade(String name, int price) {
         this(name, price, "");
