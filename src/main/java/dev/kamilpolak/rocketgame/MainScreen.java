@@ -21,6 +21,7 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
 import dev.kamilpolak.rocketgame.ui.MenuTable;
+import dev.kamilpolak.rocketgame.ui.UpgradeInfoPanel;
 import dev.kamilpolak.rocketgame.ui.UpgradeListPanel;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
@@ -127,7 +128,9 @@ public class MainScreen implements Screen {
     }
 
     private void installUpgrade(Upgrade upgrade) {
-
+        if(!installedUpgrades.contains(upgrade)) {
+            upgrade.install(rocket);
+        }
     }
 
     private void showMenu() {
@@ -138,6 +141,13 @@ public class MainScreen implements Screen {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 startFlight();
+            }
+        });
+        UpgradeInfoPanel upgradeInfo = menuTable.getUpgradeInfo();
+        upgradeInfo.addBuyButtonListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                installUpgrade(upgradeInfo.getUpgrade());
             }
         });
         UpgradeListPanel upgradeList = menuTable.getUpgradeList();
