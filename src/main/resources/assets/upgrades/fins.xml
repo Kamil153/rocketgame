@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <upgrade>
-    <class>FinsUpgrade</class>
     <name>Fins</name>
     <price>100</price>
     <description>Reduces lateral movement of a rocket.</description>
