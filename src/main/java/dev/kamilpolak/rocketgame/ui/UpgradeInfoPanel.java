@@ -31,6 +31,7 @@ public class UpgradeInfoPanel extends Panel {
         setTitle(upgrade.getName());
         descriptionLabel.setText(upgrade.getDescription());
         setVisible(true);
+        this.upgrade = upgrade;
     }
 
     public Upgrade getUpgrade() {
