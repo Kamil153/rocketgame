@@ -2,6 +2,7 @@ package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
@@ -20,6 +21,8 @@ import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
 import dev.kamilpolak.rocketgame.ui.MenuTable;
+import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
+import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 
 import java.util.HashSet;
@@ -28,6 +31,7 @@ import java.util.Set;
 
 public class MainScreen implements Screen {
     private final RocketGame parent;
+    private final AssetManager assets;
     private final SpriteBatch batch;
     private final World world;
     private final OrthographicCamera camera;
@@ -52,10 +56,12 @@ public class MainScreen implements Screen {
 
     public MainScreen(RocketGame game) {
         parent = game;
+        assets = parent.getAssets();
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
-        entityFactory = new EntityFactory(world, parent.getAssets());
+        entityFactory = new EntityFactory(world, assets);
+        initializeUpgrades();
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -70,7 +76,7 @@ public class MainScreen implements Screen {
         ecs.addEntity(entityFactory.createMountains());
         final int GROUND_COUNT = 16;
         final int TREES_COUNT = 5;
-        float groundWidth = parent.getAssets().get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
+        float groundWidth = assets.get(Asset.EARTH_TEXTURE.getPath(), Texture.class).getWidth();
         ecs.addEntity(entityFactory.createEarth());
         float groundX = 0;
         for(int i = 1; i < GROUND_COUNT; i++) {
@@ -80,7 +86,7 @@ public class MainScreen implements Screen {
             }
             ecs.addEntity(entityFactory.createEarth(groundX));
         }
-        float treesWidth = parent.getAssets().get(Asset.TREES_TEXTURE.getPath(), Texture.class).getWidth();
+        float treesWidth = assets.get(Asset.TREES_TEXTURE.getPath(), Texture.class).getWidth();
         ecs.addEntity(entityFactory.createTrees());
         float treesX = 0;
         for(int i = 1; i < TREES_COUNT; i++) {
@@ -91,7 +97,7 @@ public class MainScreen implements Screen {
             ecs.addEntity(entityFactory.createTrees(treesX));
         }
 
-        Skin uiSkin = parent.getAssets().get(Asset.UI_SKIN.getPath());
+        Skin uiSkin = assets.get(Asset.UI_SKIN.getPath());
         gameStage = new Stage();
         gameStage.setDebugAll(true);
         Gdx.input.setInputProcessor(gameStage);
@@ -113,6 +119,11 @@ public class MainScreen implements Screen {
 
     private static float calculateViewportWidth(float width, float height, float viewportHeight) {
         return viewportHeight * (width / height);
+    }
+
+    private void initializeUpgrades() {
+        upgrades.add(new TVCUpgrade(assets.get(Asset.TVC_UPGRADE.getPath())));
+        upgrades.add(new FinsUpgrade(assets.get(Asset.FINS_UPGRADE.getPath())));
     }
 
     private void showMenu() {
