@@ -104,7 +104,6 @@ public class MainScreen implements Screen {
         Gdx.input.setInputProcessor(gameStage);
 
         flightTable = new FlightTable(rocket, uiSkin);
-        flightTable.setCountdown(countdown);
         menuTable = new MenuTable(rocket, uiSkin);
         showMenu();
 
@@ -127,9 +126,14 @@ public class MainScreen implements Screen {
         upgrades.add(new FinsUpgrade(assets.get(Asset.FINS_UPGRADE.getPath())));
     }
 
+    private void installUpgrade(Upgrade upgrade) {
+
+    }
+
     private void showMenu() {
         gameStage.clear();
         gameStage.addActor(menuTable);
+        flightTable.setCountdown(countdown);
         menuTable.addLaunchListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
