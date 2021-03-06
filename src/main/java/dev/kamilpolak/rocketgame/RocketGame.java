@@ -28,6 +28,7 @@ public class RocketGame extends Game {
         assets.setLoader(FreeTypeFontGenerator.class, new FreeTypeFontGeneratorLoader(resolver));
         assets.setLoader(BitmapFont.class, ".ttf", new FreetypeFontLoader(resolver));
         assets.setLoader(BodyData.class, new BodyLoader(resolver));
+        assets.setLoader(UpgradeData.class, new UpgradeLoader(resolver));
 
         final ObjectMap<String, Object> resources = new ObjectMap<>();
         FreeTypeFontLoaderParameter fontParams = new FreeTypeFontLoaderParameter();
