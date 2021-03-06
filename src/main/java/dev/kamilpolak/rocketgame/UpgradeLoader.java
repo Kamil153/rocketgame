@@ -23,11 +23,10 @@ public class UpgradeLoader extends AsynchronousAssetLoader<UpgradeData, UpgradeL
     public void loadAsync(AssetManager manager, String fileName, FileHandle file, UpgradeParameter parameter) {
         data = null;
         XmlReader.Element upgradeElement = xmlReader.parse(file);
-        String className = upgradeElement.getChildByName("class").getText();
         String name = upgradeElement.getChildByName("name").getText();
         int price = Integer.parseInt(upgradeElement.getChildByName("price").getText());
         String description = upgradeElement.getChildByName("description").getText();
-        data = new UpgradeData(className, name, price, description);
+        data = new UpgradeData(name, price, description);
     }
 
     @Override

@@ -5,7 +5,7 @@ public class UpgradeData {
     private final int price;
     private final String description;
 
-    public UpgradeData(String className, String name, int price, String description) {
+    public UpgradeData(String name, int price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
