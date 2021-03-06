@@ -1,7 +1,7 @@
 package dev.kamilpolak.rocketgame.upgrades;
 
 import dev.kamilpolak.rocketgame.UpgradeData;
-import dev.kamilpolak.rocketgame.components.EngineControlComponent;
+import dev.kamilpolak.rocketgame.components.EngineAngleComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
 public class TVCUpgrade extends Upgrade{
@@ -19,6 +19,6 @@ public class TVCUpgrade extends Upgrade{
 
     @Override
     public void install(Entity rocket) {
-        rocket.addComponent(new EngineControlComponent());
+        rocket.addComponent(new EngineAngleComponent());
     }
 }
