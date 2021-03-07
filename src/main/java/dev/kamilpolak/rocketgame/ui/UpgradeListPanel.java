@@ -59,4 +59,8 @@ public class UpgradeListPanel extends Panel {
     public void addUpgradeSelectionListener(IUpgradeSelectionListener listener) {
         selectionListeners.add(listener);
     }
+
+    public UpgradeListItem getListItem(Upgrade upgrade) {
+        return items.get(upgrade);
+    }
 }
