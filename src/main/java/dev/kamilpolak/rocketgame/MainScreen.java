@@ -8,10 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.components.ControlComponent;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
@@ -20,12 +18,6 @@ import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.*;
-import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
-import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
-import dev.kamilpolak.rocketgame.upgrades.Upgrade;
-
-import java.util.HashSet;
-import java.util.Set;
 
 
 public class MainScreen implements Screen, ILaunchListener {
@@ -42,8 +34,7 @@ public class MainScreen implements Screen, ILaunchListener {
     private final MenuTable menuTable;
     private final Countdown countdown = new Countdown();
     private final Entity rocket;
-    private final Set<Upgrade> upgrades = new HashSet<>();
-    private final Set<Upgrade> installedUpgrades = new HashSet<>();
+    private final UpgradeController upgradeController;
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
@@ -60,7 +51,6 @@ public class MainScreen implements Screen, ILaunchListener {
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
         entityFactory = new EntityFactory(world, assets);
-        initializeUpgrades();
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -104,6 +94,11 @@ public class MainScreen implements Screen, ILaunchListener {
         flightTable = new FlightTable(rocket, uiSkin);
         menuTable = new MenuTable(rocket, uiSkin);
         showMenu();
+        upgradeController = new UpgradeController(
+                rocket,
+                menuTable.getUpgradeInfo(),
+                menuTable.getUpgradeList(),
+                assets);
 
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
@@ -119,33 +114,11 @@ public class MainScreen implements Screen, ILaunchListener {
         return viewportHeight * (width / height);
     }
 
-    private void initializeUpgrades() {
-        upgrades.add(new TVCUpgrade(assets.get(Asset.TVC_UPGRADE.getPath())));
-        upgrades.add(new FinsUpgrade(assets.get(Asset.FINS_UPGRADE.getPath())));
-    }
-
-    private void installUpgrade(Upgrade upgrade) {
-        if(!installedUpgrades.contains(upgrade)) {
-            upgrade.install(rocket);
-        }
-    }
-
     private void showMenu() {
         gameStage.clear();
         gameStage.addActor(menuTable);
         flightTable.setCountdown(countdown);
         menuTable.addLaunchListener(this);
-        UpgradeInfoPanel upgradeInfo = menuTable.getUpgradeInfo();
-        upgradeInfo.addBuyButtonListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent changeEvent, Actor actor) {
-                installUpgrade(upgradeInfo.getUpgrade());
-            }
-        });
-        UpgradeListPanel upgradeList = menuTable.getUpgradeList();
-        for(Upgrade upgrade: upgrades) {
-            upgradeList.addUpgrade(upgrade);
-        }
     }
 
     private void updateFlight() {
