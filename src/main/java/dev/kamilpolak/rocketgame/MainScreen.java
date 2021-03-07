@@ -19,10 +19,7 @@ import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
-import dev.kamilpolak.rocketgame.ui.FlightTable;
-import dev.kamilpolak.rocketgame.ui.MenuTable;
-import dev.kamilpolak.rocketgame.ui.UpgradeInfoPanel;
-import dev.kamilpolak.rocketgame.ui.UpgradeListPanel;
+import dev.kamilpolak.rocketgame.ui.*;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
@@ -31,7 +28,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class MainScreen implements Screen {
+public class MainScreen implements Screen, ILaunchListener {
     private final RocketGame parent;
     private final AssetManager assets;
     private final SpriteBatch batch;
@@ -137,12 +134,7 @@ public class MainScreen implements Screen {
         gameStage.clear();
         gameStage.addActor(menuTable);
         flightTable.setCountdown(countdown);
-        menuTable.addLaunchListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                startFlight();
-            }
-        });
+        menuTable.addLaunchListener(this);
         UpgradeInfoPanel upgradeInfo = menuTable.getUpgradeInfo();
         upgradeInfo.addBuyButtonListener(new ChangeListener() {
             @Override
@@ -153,17 +145,6 @@ public class MainScreen implements Screen {
         UpgradeListPanel upgradeList = menuTable.getUpgradeList();
         for(Upgrade upgrade: upgrades) {
             upgradeList.addUpgrade(upgrade);
-        }
-    }
-
-    private void startFlight() {
-        if(currentState == GameState.MENU) {
-            gameStage.clear();
-            gameStage.addActor(flightTable);
-            currentState = GameState.COUNTDOWN;
-            countdown.setTime(COUNTDOWN_TIME);
-            Gdx.input.setInputProcessor(gameStage);
-            rocket.removeComponent(ThrustNoiseComponent.class);
         }
     }
 
@@ -228,5 +209,17 @@ public class MainScreen implements Screen {
     @Override
     public void dispose() {
         gameStage.dispose();
+    }
+
+    @Override
+    public void clickedLaunch() {
+        if(currentState == GameState.MENU) {
+            gameStage.clear();
+            gameStage.addActor(flightTable);
+            currentState = GameState.COUNTDOWN;
+            countdown.setTime(COUNTDOWN_TIME);
+            Gdx.input.setInputProcessor(gameStage);
+            rocket.removeComponent(ThrustNoiseComponent.class);
+        }
     }
 }
