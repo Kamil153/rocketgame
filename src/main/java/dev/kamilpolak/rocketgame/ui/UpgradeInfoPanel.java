@@ -41,4 +41,8 @@ public class UpgradeInfoPanel extends Panel {
     public void addBuyButtonListener(EventListener listener) {
         buyButton.addListener(listener);
     }
+
+    public void setBuyButtonVisible(boolean visible) {
+        buyButton.setVisible(false);
+    }
 }
