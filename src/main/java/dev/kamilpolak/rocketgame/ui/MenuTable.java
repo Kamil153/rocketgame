@@ -1,15 +1,21 @@
 package dev.kamilpolak.rocketgame.ui;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
-public class MenuTable extends Table implements IUpgradeSelectionListener {
+import java.util.ArrayList;
+import java.util.Collection;
+
+public class MenuTable extends Table {
     private final Entity rocket;
     private final TextButton launchButton;
     private final UpgradeListPanel upgradeList;
     private final UpgradeInfoPanel upgradeInfo;
+    private final Collection<ILaunchListener> launchListeners = new ArrayList<>();
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.35f;
     private static final float UPGRADE_LIST_HEIGHT_PERCENT = 0.65f;
@@ -19,7 +25,6 @@ public class MenuTable extends Table implements IUpgradeSelectionListener {
         this.rocket = rocket;
         this.upgradeList = new UpgradeListPanel(skin);
         this.upgradeInfo = new UpgradeInfoPanel(skin);
-        upgradeList.addUpgradeSelectionListener(this);
         setFillParent(true);
         pad(10);
         launchButton = new TextButton("Launch", skin);
@@ -32,16 +37,22 @@ public class MenuTable extends Table implements IUpgradeSelectionListener {
         rightSidebar.row().space(10);
         rightSidebar.add(upgradeInfo).bottom().expand().fill();
         add(rightSidebar).top().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
-
+        launchButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent changeEvent, Actor actor) {
+                notifyLaunchListeners();
+            }
+        });
     }
 
-    public void addLaunchListener(EventListener listener) {
-        launchButton.addListener(listener);
+    private void notifyLaunchListeners() {
+        for(ILaunchListener listener: launchListeners) {
+            listener.clickedLaunch();
+        }
     }
 
-    @Override
-    public void selected(Upgrade upgrade) {
-        upgradeInfo.setUpgrade(upgrade);
+    public void addLaunchListener(ILaunchListener listener) {
+        launchListeners.add(listener);
     }
 
     public UpgradeInfoPanel getUpgradeInfo() {
