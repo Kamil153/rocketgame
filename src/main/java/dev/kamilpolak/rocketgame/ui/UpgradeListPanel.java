@@ -45,9 +45,7 @@ public class UpgradeListPanel extends Panel {
                 }
                 item.setHighlighted(true);
                 selected = item;
-                for(IUpgradeSelectionListener listener: selectionListeners) {
-                    listener.selected(item.getUpgrade());
-                }
+                notifySelectionListeners(item.getUpgrade());
             }
         });
     }
