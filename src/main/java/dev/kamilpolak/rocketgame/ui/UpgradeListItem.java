@@ -41,4 +41,8 @@ public class UpgradeListItem extends Table {
     public Upgrade getUpgrade() {
         return upgrade;
     }
+
+    public void setPriceVisible(boolean hidden) {
+        priceLabel.setVisible(hidden);
+    }
 }
