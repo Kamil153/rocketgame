@@ -11,6 +11,10 @@ public class Player {
         this.money = money;
     }
 
+    public Player() {
+        this(0);
+    }
+
     public int getMoney() {
         return money;
     }
