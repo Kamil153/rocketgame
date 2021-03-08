@@ -35,6 +35,7 @@ public class MainScreen implements Screen, ILaunchListener {
     private final Countdown countdown = new Countdown();
     private final Entity rocket;
     private final UpgradeController upgradeController;
+    private final Player player = new Player();
 
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
