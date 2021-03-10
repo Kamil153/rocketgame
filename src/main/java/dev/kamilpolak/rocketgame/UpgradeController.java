@@ -42,12 +42,14 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
     @Override
     public void selected(Upgrade upgrade) {
         upgradeInfoView.setUpgrade(upgrade);
+        upgradeInfoView.setBuyButtonVisible(!installedUpgrades.contains(upgrade));
     }
 
     @Override
     public void clickedBuy(Upgrade upgrade) {
         if(!installedUpgrades.contains(upgrade)) {
             upgrade.install(rocket);
+            installedUpgrades.add(upgrade);
             upgradeListView.getListItem(upgrade).setPriceVisible(false);
             upgradeInfoView.setBuyButtonVisible(false);
         }
