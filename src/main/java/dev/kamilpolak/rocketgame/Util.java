@@ -12,4 +12,8 @@ public class Util {
         result.y = position.y + radius*(float)Math.sin(rotation + angle);
         return result;
     }
+
+    public static float calculateViewportWidth(float width, float height, float viewportHeight) {
+        return viewportHeight * (width / height);
+    }
 }

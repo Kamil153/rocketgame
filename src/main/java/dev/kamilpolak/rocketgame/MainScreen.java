@@ -29,18 +29,12 @@ public class MainScreen implements Screen, ILaunchListener {
     private final Stage gameStage;
     private final FlightTable flightTable;
     private final MenuTable menuTable;
-    private final Countdown countdown = new Countdown();
     private final Entity rocket;
     private final UpgradeController upgradeController;
+    private final FlightController flightController;
     private final Player player = new Player();
 
-    private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
-    private static final float COUNTDOWN_TIME = 5.0f;
-    private static final float ZOOM_OUT_TIME = 3.0f;
-
-    private float cameraHeight = CAMERA_HEIGHT_MENU;
-    private GameState currentState = GameState.MENU;
 
     public MainScreen(RocketGame game) {
         parent = game;
@@ -52,7 +46,7 @@ public class MainScreen implements Screen, ILaunchListener {
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
-        camera = new OrthographicCamera(calculateViewportWidth(w, h, cameraHeight), cameraHeight);
+        camera = new OrthographicCamera(Util.calculateViewportWidth(w, h, CAMERA_HEIGHT_MENU), CAMERA_HEIGHT_MENU);
 
         rocket = entityFactory.createRocket();
         System.out.println(rocket.getComponent(BodyComponent.class).body.getMass());
@@ -97,48 +91,24 @@ public class MainScreen implements Screen, ILaunchListener {
                 menuTable.getUpgradeInfo(),
                 menuTable.getUpgradeList(),
                 assets);
+        flightController = new FlightController(rocket, flightTable, camera);
 
         ecs.addSystem(new FuelSystem(18));
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
         ecs.addSystem(new PhysicsSystem(15, world));
-        ecs.addSystem(new BindSystem(14));
+        ecs.addSystem(new FlightTerminationSystem(14));
+        ecs.addSystem(new BindSystem(13));
         ecs.addSystem(new CameraSystem(12, camera, 0));
         ecs.addSystem(new RenderingSystem(10, batch, camera));
         ecs.addSystem(new PlumeSystem(7));
         ecs.addSystem(new DebugRenderSystem(5, camera, world));
     }
 
-    private static float calculateViewportWidth(float width, float height, float viewportHeight) {
-        return viewportHeight * (width / height);
-    }
-
     private void showMenu() {
         gameStage.clear();
         gameStage.addActor(menuTable);
-        flightTable.setCountdown(countdown);
         menuTable.addLaunchListener(this);
-    }
-
-    private void updateFlight() {
-        if(countdown.isPastT0() && currentState == GameState.COUNTDOWN) {
-            currentState = GameState.STARTING;
-            rocket.getComponent(EngineStateComponent.class).running = true;
-        }
-        if(currentState == GameState.STARTING) {
-            float progress = Math.min(1.0f, Math.abs(countdown.getTime())/ZOOM_OUT_TIME);
-            float viewportHeight = Interpolation.smooth.apply(CAMERA_HEIGHT_MENU, CAMERA_HEIGHT_FLIGHT, progress);
-            camera.viewportHeight = viewportHeight;
-            camera.viewportWidth = calculateViewportWidth(
-                    Gdx.graphics.getWidth(),
-                    Gdx.graphics.getHeight(),
-                    viewportHeight);
-            if(viewportHeight == CAMERA_HEIGHT_FLIGHT) {
-                currentState = GameState.FLIGHT;
-                rocket.addComponent(new ControlComponent());
-                rocket.addComponent(new ThrustNoiseComponent());
-            }
-        }
     }
 
     @Override
@@ -151,15 +121,15 @@ public class MainScreen implements Screen, ILaunchListener {
         Gdx.gl.glClearColor(0.529f, 0.808f, 0.922f, 1);
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         ecs.update(delta);
-        countdown.update(delta);
-        updateFlight();
+        flightController.update(delta);
         gameStage.act();
         gameStage.draw();
     }
 
     @Override
     public void resize(int width, int height) {
-        camera.viewportWidth = calculateViewportWidth((float)width, (float)height, cameraHeight);
+        float cameraHeight = camera.viewportHeight;
+        camera.viewportWidth = Util.calculateViewportWidth((float)width, (float)height, cameraHeight);
         gameStage.getViewport().update(width, height);
     }
 
@@ -185,15 +155,8 @@ public class MainScreen implements Screen, ILaunchListener {
 
     @Override
     public void clickedLaunch() {
-        if(currentState == GameState.MENU) {
-            gameStage.clear();
-            gameStage.addActor(flightTable);
-            currentState = GameState.COUNTDOWN;
-            countdown.setTime(COUNTDOWN_TIME);
-            Gdx.input.setInputProcessor(gameStage);
-            rocket.removeComponent(ThrustNoiseComponent.class);
-            FuelComponent fuelComponent = rocket.getComponent(FuelComponent.class);
-            fuelComponent.fuel = fuelComponent.maxFuel;
-        }
+        gameStage.clear();
+        gameStage.addActor(flightTable);
+        flightController.initiate();
     }
 }
