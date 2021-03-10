@@ -5,6 +5,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.Countdown;
 import dev.kamilpolak.rocketgame.EntityData;
+import dev.kamilpolak.rocketgame.Player;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
@@ -14,7 +15,7 @@ public class FlightTable extends Table {
     private final CountdownLabel countdownLabel;
     private final TelemetryTable telemetryTable;
 
-    public FlightTable(Entity rocket, Skin skin) {
+    public FlightTable(Entity rocket, Player player, Skin skin) {
         super();
         this.rocket = rocket;
         setFillParent(true);

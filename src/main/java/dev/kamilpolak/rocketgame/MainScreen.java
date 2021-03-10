@@ -92,7 +92,7 @@ public class MainScreen implements Screen, ILaunchListener {
         gameStage.setDebugAll(true);
         Gdx.input.setInputProcessor(gameStage);
 
-        flightTable = new FlightTable(rocket, uiSkin);
+        flightTable = new FlightTable(rocket, player, uiSkin);
         menuTable = new MenuTable(rocket, uiSkin);
         showMenu();
         upgradeController = new UpgradeController(
