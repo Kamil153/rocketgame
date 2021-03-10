@@ -1,4 +1,6 @@
 package dev.kamilpolak.rocketgame.components;
 
-public class FlightTerminationComponent {
+import dev.kamilpolak.rocketgame.ecs.IComponent;
+
+public class FlightTerminationComponent implements IComponent {
 }
