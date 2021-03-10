@@ -10,10 +10,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import dev.kamilpolak.rocketgame.components.BodyComponent;
-import dev.kamilpolak.rocketgame.components.ControlComponent;
-import dev.kamilpolak.rocketgame.components.EngineStateComponent;
-import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
+import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.systems.*;
@@ -101,6 +98,7 @@ public class MainScreen implements Screen, ILaunchListener {
                 menuTable.getUpgradeList(),
                 assets);
 
+        ecs.addSystem(new FuelSystem(18));
         ecs.addSystem(new RocketTurnSystem(17));
         ecs.addSystem(new ThrustSystem(16));
         ecs.addSystem(new PhysicsSystem(15, world));
@@ -194,6 +192,8 @@ public class MainScreen implements Screen, ILaunchListener {
             countdown.setTime(COUNTDOWN_TIME);
             Gdx.input.setInputProcessor(gameStage);
             rocket.removeComponent(ThrustNoiseComponent.class);
+            FuelComponent fuelComponent = rocket.getComponent(FuelComponent.class);
+            fuelComponent.fuel = fuelComponent.maxFuel;
         }
     }
 }
