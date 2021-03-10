@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -17,7 +18,7 @@ import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.*;
 
 
-public class MainScreen implements Screen, ILaunchListener {
+public class MainScreen implements Screen, ILaunchListener, ITerminationListener {
     private final RocketGame parent;
     private final AssetManager assets;
     private final SpriteBatch batch;
@@ -92,6 +93,7 @@ public class MainScreen implements Screen, ILaunchListener {
                 menuTable.getUpgradeList(),
                 assets);
         flightController = new FlightController(rocket, flightTable, camera);
+        flightController.addListener(this);
 
         ecs.addSystem(new FuelSystem(18));
         ecs.addSystem(new RocketTurnSystem(17));
@@ -158,5 +160,15 @@ public class MainScreen implements Screen, ILaunchListener {
         gameStage.clear();
         gameStage.addActor(flightTable);
         flightController.initiate();
+    }
+
+    @Override
+    public void flightTerminated() {
+        Body body = rocket.getComponent(BodyComponent.class).body;
+        body.setTransform(EntityData.ROCKET_POSITION.x, EntityData.ROCKET_POSITION.y, EntityData.ROCKET_ANGLE);
+        body.setLinearVelocity(Vector2.Zero);
+        EngineStateComponent state = rocket.getComponent(EngineStateComponent.class);
+        state.running = false;
+        showMenu();
     }
 }
