@@ -10,7 +10,9 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Engine;
 import dev.kamilpolak.rocketgame.ecs.Entity;
@@ -86,6 +88,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
 
         flightTable = new FlightTable(rocket, player, uiSkin);
         menuTable = new MenuTable(rocket, uiSkin);
+        menuTable.addLaunchListener(this);
         showMenu();
         upgradeController = new UpgradeController(
                 rocket,
@@ -110,7 +113,6 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
     private void showMenu() {
         gameStage.clear();
         gameStage.addActor(menuTable);
-        menuTable.addLaunchListener(this);
     }
 
     @Override
@@ -164,6 +166,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
 
     @Override
     public void flightTerminated() {
+        rocket.removeComponent(FlightTerminationComponent.class);
         Body body = rocket.getComponent(BodyComponent.class).body;
         body.setTransform(EntityData.ROCKET_POSITION.x, EntityData.ROCKET_POSITION.y, EntityData.ROCKET_ANGLE);
         body.setLinearVelocity(Vector2.Zero);
