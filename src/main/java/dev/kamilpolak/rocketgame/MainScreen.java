@@ -167,6 +167,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         Body body = rocket.getComponent(BodyComponent.class).body;
         body.setTransform(EntityData.ROCKET_POSITION.x, EntityData.ROCKET_POSITION.y, EntityData.ROCKET_ANGLE);
         body.setLinearVelocity(Vector2.Zero);
+        body.setAngularVelocity(0.0f);
         EngineStateComponent state = rocket.getComponent(EngineStateComponent.class);
         state.running = false;
         showMenu();
