@@ -61,6 +61,6 @@ public class UpgradeInfoPanel extends Panel {
     }
 
     public void setBuyButtonVisible(boolean visible) {
-        buyButton.setVisible(false);
+        buyButton.setVisible(visible);
     }
 }
