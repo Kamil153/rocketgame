@@ -3,12 +3,12 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Interpolation;
-import dev.kamilpolak.rocketgame.components.ControlComponent;
-import dev.kamilpolak.rocketgame.components.EngineStateComponent;
-import dev.kamilpolak.rocketgame.components.FuelComponent;
-import dev.kamilpolak.rocketgame.components.ThrustNoiseComponent;
+import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 public class FlightController {
     private final Entity rocket;
@@ -20,6 +20,7 @@ public class FlightController {
     private boolean controllable = false;
     private boolean terminated = false;
     private float initialCameraHeight;
+    private final Collection<ITerminationListener> listeners = new ArrayList<>();
 
     private static final float COUNTDOWN_TIME = 5.0f;
     private static final float CAMERA_HEIGHT_FLIGHT = 350.0f;
@@ -63,6 +64,24 @@ public class FlightController {
                 rocket.addComponent(new ControlComponent());
                 rocket.addComponent(new ThrustNoiseComponent());
             }
+        }
+        if(!terminated && rocket.hasComponent(FlightTerminationComponent.class)) {
+            terminated = true;
+            notifyTerminationListeners();
+        }
+    }
+
+    public void addListener(ITerminationListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(ITerminationListener listener) {
+        listeners.remove(listener);
+    }
+
+    public void notifyTerminationListeners() {
+        for(ITerminationListener listener: listeners) {
+            listener.flightTerminated();
         }
     }
 
