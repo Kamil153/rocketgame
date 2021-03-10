@@ -18,7 +18,6 @@ public class FlightController {
     private boolean initiated = false;
     private boolean launched = false;
     private boolean controllable = false;
-    private boolean terminated = false;
     private float initialCameraHeight;
     private final Collection<ITerminationListener> listeners = new ArrayList<>();
 
@@ -65,8 +64,10 @@ public class FlightController {
                 rocket.addComponent(new ThrustNoiseComponent());
             }
         }
-        if(!terminated && rocket.hasComponent(FlightTerminationComponent.class)) {
-            terminated = true;
+        if(initiated && rocket.hasComponent(FlightTerminationComponent.class)) {
+            initiated = false;
+            launched = false;
+            controllable = false;
             notifyTerminationListeners();
         }
     }
@@ -95,9 +96,5 @@ public class FlightController {
 
     public boolean isControllable() {
         return controllable;
-    }
-
-    public boolean isTerminated() {
-        return terminated;
     }
 }
