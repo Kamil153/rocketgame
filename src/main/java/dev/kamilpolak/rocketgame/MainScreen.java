@@ -20,7 +20,7 @@ import dev.kamilpolak.rocketgame.systems.*;
 import dev.kamilpolak.rocketgame.ui.*;
 
 
-public class MainScreen implements Screen, ILaunchListener, ITerminationListener {
+public class MainScreen implements Screen, ILaunchListener, ITerminationListener, ISummaryListener {
     private final RocketGame parent;
     private final AssetManager assets;
     private final SpriteBatch batch;
@@ -36,6 +36,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
     private final UpgradeController upgradeController;
     private final FlightController flightController;
     private final Player player = new Player();
+    private final SummaryScreen summaryScreen;
 
     private static final float CAMERA_HEIGHT_MENU = 150.0f;
 
@@ -46,6 +47,8 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         world = new World(new Vector2(0, -10), true);
         bodyFactory = new BodyFactory(world);
         entityFactory = new EntityFactory(world, assets);
+        summaryScreen = new SummaryScreen(assets);
+        summaryScreen.addListener(this);
 
         float w = Gdx.graphics.getWidth();
         float h = Gdx.graphics.getHeight();
@@ -172,6 +175,11 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         body.setAngularVelocity(0.0f);
         EngineStateComponent state = rocket.getComponent(EngineStateComponent.class);
         state.running = false;
-        showMenu();
+        parent.setScreen(summaryScreen);
+    }
+
+    @Override
+    public void summaryContinued() {
+        parent.setScreen(this);
     }
 }
