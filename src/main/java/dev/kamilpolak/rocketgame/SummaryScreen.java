@@ -22,6 +22,7 @@ public class SummaryScreen implements Screen {
         this.assets = assets;
         SummaryTable summaryTable = new SummaryTable(assets.get(Asset.UI_SKIN.getPath()));
         summaryStage.addActor(summaryTable);
+        summaryTable.setFillParent(true);
         summaryTable.getContinueButton().addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
