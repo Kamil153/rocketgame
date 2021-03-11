@@ -84,12 +84,10 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         Skin uiSkin = assets.get(Asset.UI_SKIN.getPath());
         gameStage = new Stage();
         gameStage.setDebugAll(true);
-        Gdx.input.setInputProcessor(gameStage);
 
         flightTable = new FlightTable(rocket, player, uiSkin);
         menuTable = new MenuTable(rocket, uiSkin);
         menuTable.addLaunchListener(this);
-        showMenu();
         upgradeController = new UpgradeController(
                 rocket,
                 menuTable.getUpgradeInfo(),
@@ -117,7 +115,8 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
 
     @Override
     public void show() {
-
+        showMenu();
+        Gdx.input.setInputProcessor(gameStage);
     }
 
     @Override
