@@ -17,12 +17,14 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
     private final Set<Upgrade> upgrades = new HashSet<>();
     private final Set<Upgrade> installedUpgrades = new HashSet<>();
     private final AssetManager assets;
+    private final Player player;
 
-    public UpgradeController(Entity rocket, MenuTable menuView, AssetManager assets) {
+    public UpgradeController(Entity rocket, MenuTable menuView, AssetManager assets, Player player) {
         this.rocket = rocket;
         this.upgradeInfoView = menuView.getUpgradeInfo();
         this.upgradeListView = menuView.getUpgradeList();
         this.assets = assets;
+        this.player = player;
         upgradeInfoView.addBuyButtonListener(this);
         upgradeListView.addUpgradeSelectionListener(this);
         initializeUpgrades();

@@ -91,7 +91,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         flightTable = new FlightTable(rocket, player, uiSkin);
         menuTable = new MenuTable(rocket, uiSkin);
         menuTable.addLaunchListener(this);
-        upgradeController = new UpgradeController(rocket, menuTable, assets);
+        upgradeController = new UpgradeController(rocket, menuTable, assets, player);
         flightController = new FlightController(rocket, flightTable, camera);
         flightController.addListener(this);
 
