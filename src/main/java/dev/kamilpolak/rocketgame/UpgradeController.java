@@ -39,7 +39,8 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
         upgrades.add(new TVCUpgrade(assets.get(Asset.TVC_UPGRADE.getPath())));
         upgrades.add(new FinsUpgrade(assets.get(Asset.FINS_UPGRADE.getPath())));
         for(Upgrade upgrade: upgrades) {
-            updatePriceColor(player.getMoney(), upgrade);
+            UpgradeListItem itemView = upgradeListView.addUpgrade(upgrade);
+            updatePriceColor(itemView, player.getMoney(), upgrade);
         }
     }
 
@@ -63,12 +64,11 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
     @Override
     public void moneyChanged(int oldMoney, int newMoney) {
         for(Upgrade upgrade: upgrades) {
-            updatePriceColor(newMoney, upgrade);
+            updatePriceColor(upgradeListView.getListItem(upgrade), newMoney, upgrade);
         }
     }
 
-    private void updatePriceColor(int money, Upgrade upgrade) {
-        UpgradeListItem itemView = upgradeListView.getListItem(upgrade);
+    private void updatePriceColor(UpgradeListItem itemView, int money, Upgrade upgrade) {
         itemView.setPriceColor(money < upgrade.getPrice() ? NOT_ENOUGH_MONEY_COLOR : PRICE_COLOR);
     }
 }
