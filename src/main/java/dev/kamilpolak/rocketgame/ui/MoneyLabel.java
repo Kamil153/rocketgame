@@ -2,15 +2,17 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import dev.kamilpolak.rocketgame.IPlayerListener;
 
-public class MoneyLabel extends Label {
+public class MoneyLabel extends Label implements IPlayerListener {
     private static final String MONEY_FORMAT = "$%d";
 
     public MoneyLabel(Skin skin) {
         super(String.format(MONEY_FORMAT, 0), skin);
     }
 
-    public void setMoney(int money) {
-        setText(String.format(MONEY_FORMAT, money));
+    @Override
+    public void moneyChanged(int oldMoney, int newMoney) {
+        setText(String.format(MONEY_FORMAT, newMoney));
     }
 }
