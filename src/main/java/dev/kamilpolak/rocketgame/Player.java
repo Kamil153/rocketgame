@@ -25,6 +25,10 @@ public class Player {
         notifyMoneyChanged(oldMoney, money);
     }
 
+    public void subtractMoney(int money) {
+        setMoney(this.money - money);
+    }
+
     public void addListener(IPlayerListener listener) {
         listeners.add(listener);
     }
