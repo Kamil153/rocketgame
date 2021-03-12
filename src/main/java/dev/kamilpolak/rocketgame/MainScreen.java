@@ -166,6 +166,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
     public void flightTerminated() {
         rocket.removeComponent(FlightTerminationComponent.class);
         Body body = rocket.getComponent(BodyComponent.class).body;
+        player.addMoney((int)body.getPosition().y/2);
         body.setTransform(EntityData.ROCKET_POSITION.x, EntityData.ROCKET_POSITION.y, EntityData.ROCKET_ANGLE);
         body.setLinearVelocity(Vector2.Zero);
         body.setAngularVelocity(0.0f);
