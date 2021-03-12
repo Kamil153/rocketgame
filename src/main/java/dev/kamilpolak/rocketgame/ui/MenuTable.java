@@ -29,19 +29,25 @@ public class MenuTable extends Table {
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         setFillParent(true);
         pad(10);
+
         Table leftSidebar = new Table(skin);
+        leftSidebar.left();
         moneyLabel = new MoneyLabel(skin, player);
         leftSidebar.add(moneyLabel);
+
         launchButton = new TextButton("Launch", skin);
         launchButton.pad(5, 20, 5, 20);
-        add(leftSidebar).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
-        add(launchButton).top().expandX();
+
         Table rightSidebar = new Table(skin);
         rightSidebar.add(upgradeList).top().expand().fill()
                 .maxHeight(Value.percentHeight(UPGRADE_LIST_HEIGHT_PERCENT, this));
         rightSidebar.row().space(10);
         rightSidebar.add(upgradeInfo).bottom().expand().fill();
+
+        add(leftSidebar).top().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
+        add(launchButton).top().expand();
         add(rightSidebar).top().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
+
         launchButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent changeEvent, Actor actor) {
