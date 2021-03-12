@@ -29,6 +29,10 @@ public class Player {
         setMoney(this.money - money);
     }
 
+    public void addMoney(int money) {
+        setMoney(this.money + money);
+    }
+
     public void addListener(IPlayerListener listener) {
         listeners.add(listener);
     }
