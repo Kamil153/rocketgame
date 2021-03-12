@@ -2,10 +2,7 @@ package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.assets.AssetManager;
 import dev.kamilpolak.rocketgame.ecs.Entity;
-import dev.kamilpolak.rocketgame.ui.IBuyListener;
-import dev.kamilpolak.rocketgame.ui.IUpgradeSelectionListener;
-import dev.kamilpolak.rocketgame.ui.UpgradeInfoPanel;
-import dev.kamilpolak.rocketgame.ui.UpgradeListPanel;
+import dev.kamilpolak.rocketgame.ui.*;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
@@ -21,10 +18,10 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
     private final Set<Upgrade> installedUpgrades = new HashSet<>();
     private final AssetManager assets;
 
-    public UpgradeController(Entity rocket, UpgradeInfoPanel upgradeInfoView, UpgradeListPanel upgradeListView, AssetManager assets) {
+    public UpgradeController(Entity rocket, MenuTable menuView, AssetManager assets) {
         this.rocket = rocket;
-        this.upgradeInfoView = upgradeInfoView;
-        this.upgradeListView = upgradeListView;
+        this.upgradeInfoView = menuView.getUpgradeInfo();
+        this.upgradeListView = menuView.getUpgradeList();
         this.assets = assets;
         upgradeInfoView.addBuyButtonListener(this);
         upgradeListView.addUpgradeSelectionListener(this);
