@@ -172,6 +172,11 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         body.setAngularVelocity(0.0f);
         EngineStateComponent state = rocket.getComponent(EngineStateComponent.class);
         state.running = false;
+        float cameraHeight = camera.viewportHeight;
+        float w = Gdx.graphics.getWidth();
+        float h = Gdx.graphics.getHeight();
+        camera.viewportHeight = CAMERA_HEIGHT_MENU;
+        camera.viewportWidth = Util.calculateViewportWidth(w, h, CAMERA_HEIGHT_MENU);
         parent.setScreen(summaryScreen);
     }
 
