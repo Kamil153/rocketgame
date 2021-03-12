@@ -10,7 +10,7 @@ import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 import java.util.HashSet;
 import java.util.Set;
 
-public class UpgradeController implements IUpgradeSelectionListener, IBuyListener {
+public class UpgradeController implements IUpgradeSelectionListener, IBuyListener, IPlayerListener {
     private final Entity rocket;
     private final UpgradeInfoPanel upgradeInfoView;
     private final UpgradeListPanel upgradeListView;
@@ -25,6 +25,7 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
         this.upgradeListView = menuView.getUpgradeList();
         this.assets = assets;
         this.player = player;
+
         upgradeInfoView.addBuyButtonListener(this);
         upgradeListView.addUpgradeSelectionListener(this);
         initializeUpgrades();
@@ -52,5 +53,10 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
             upgradeListView.getListItem(upgrade).setPriceVisible(false);
             upgradeInfoView.setBuyButtonVisible(false);
         }
+    }
+
+    @Override
+    public void moneyChanged(int oldMoney, int newMoney) {
+
     }
 }
