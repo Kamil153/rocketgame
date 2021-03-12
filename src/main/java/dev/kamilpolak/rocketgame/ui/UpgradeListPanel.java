@@ -28,7 +28,7 @@ public class UpgradeListPanel extends Panel {
         pad(10);
     }
 
-    public void addUpgrade(Upgrade upgrade) {
+    public UpgradeListItem addUpgrade(Upgrade upgrade) {
         if(items.containsKey(upgrade)) {
             throw new IllegalArgumentException("Upgrade has already been added");
         }
@@ -48,6 +48,7 @@ public class UpgradeListPanel extends Panel {
                 notifySelectionListeners(item.getUpgrade());
             }
         });
+        return item;
     }
 
     private void notifySelectionListeners(Upgrade upgrade) {
