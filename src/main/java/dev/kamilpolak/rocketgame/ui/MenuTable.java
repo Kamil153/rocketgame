@@ -4,6 +4,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import dev.kamilpolak.rocketgame.Player;
 import dev.kamilpolak.rocketgame.upgrades.Upgrade;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
@@ -15,6 +16,7 @@ public class MenuTable extends Table {
     private final TextButton launchButton;
     private final UpgradeListPanel upgradeList;
     private final UpgradeInfoPanel upgradeInfo;
+    private final MoneyLabel moneyLabel;
     private final Collection<ILaunchListener> launchListeners = new ArrayList<>();
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.35f;
@@ -27,9 +29,12 @@ public class MenuTable extends Table {
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         setFillParent(true);
         pad(10);
+        Table leftSidebar = new Table(skin);
+        moneyLabel = new MoneyLabel(skin);
+        leftSidebar.add(moneyLabel);
         launchButton = new TextButton("Launch", skin);
         launchButton.pad(5, 20, 5, 20);
-        add(new Widget()).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
+        add(leftSidebar).expandY().width(Value.percentWidth(SIDEBAR_WIDTH_PERCENT, this));
         add(launchButton).top().expandX();
         Table rightSidebar = new Table(skin);
         rightSidebar.add(upgradeList).top().expand().fill()
@@ -61,5 +66,9 @@ public class MenuTable extends Table {
 
     public UpgradeListPanel getUpgradeList() {
         return upgradeList;
+    }
+
+    public MoneyLabel getMoneyLabel() {
+        return moneyLabel;
     }
 }
