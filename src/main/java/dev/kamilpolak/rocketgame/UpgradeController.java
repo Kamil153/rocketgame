@@ -20,6 +20,9 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
     private final AssetManager assets;
     private final Player player;
 
+    private static final Color PRICE_COLOR = Color.WHITE;
+    private static final Color NOT_ENOUGH_MONEY_COLOR = Color.RED;
+
     public UpgradeController(Entity rocket, MenuTable menuView, AssetManager assets, Player player) {
         this.rocket = rocket;
         this.upgradeInfoView = menuView.getUpgradeInfo();
@@ -48,7 +51,8 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
 
     @Override
     public void clickedBuy(Upgrade upgrade) {
-        if(!installedUpgrades.contains(upgrade)) {
+        if(!installedUpgrades.contains(upgrade) && player.getMoney() >= upgrade.getPrice()) {
+            player.subtractMoney(upgrade.getPrice());
             upgrade.install(rocket);
             installedUpgrades.add(upgrade);
             upgradeListView.getListItem(upgrade).setPriceVisible(false);
