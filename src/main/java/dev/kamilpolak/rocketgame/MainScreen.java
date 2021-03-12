@@ -89,7 +89,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         gameStage.setDebugAll(true);
 
         flightTable = new FlightTable(rocket, player, uiSkin);
-        menuTable = new MenuTable(rocket, uiSkin);
+        menuTable = new MenuTable(uiSkin);
         menuTable.addLaunchListener(this);
         upgradeController = new UpgradeController(rocket, menuTable, assets, player);
         flightController = new FlightController(rocket, flightTable, camera);

@@ -12,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 public class MenuTable extends Table {
-    private final Entity rocket;
     private final TextButton launchButton;
     private final UpgradeListPanel upgradeList;
     private final UpgradeInfoPanel upgradeInfo;
@@ -22,9 +21,8 @@ public class MenuTable extends Table {
     private static final float SIDEBAR_WIDTH_PERCENT = 0.35f;
     private static final float UPGRADE_LIST_HEIGHT_PERCENT = 0.65f;
 
-    public MenuTable(Entity rocket, Skin skin) {
+    public MenuTable(Skin skin) {
         super();
-        this.rocket = rocket;
         this.upgradeList = new UpgradeListPanel(skin);
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         setFillParent(true);
