@@ -1,6 +1,7 @@
 package dev.kamilpolak.rocketgame;
 
 import com.badlogic.gdx.assets.AssetManager;
+import com.badlogic.gdx.graphics.Color;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 import dev.kamilpolak.rocketgame.ui.*;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
@@ -35,7 +36,7 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
         upgrades.add(new TVCUpgrade(assets.get(Asset.TVC_UPGRADE.getPath())));
         upgrades.add(new FinsUpgrade(assets.get(Asset.FINS_UPGRADE.getPath())));
         for(Upgrade upgrade: upgrades) {
-            upgradeListView.addUpgrade(upgrade);
+            updatePriceColor(player.getMoney(), upgrade);
         }
     }
 
@@ -57,6 +58,13 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
 
     @Override
     public void moneyChanged(int oldMoney, int newMoney) {
+        for(Upgrade upgrade: upgrades) {
+            updatePriceColor(newMoney, upgrade);
+        }
+    }
 
+    private void updatePriceColor(int money, Upgrade upgrade) {
+        UpgradeListItem itemView = upgradeListView.getListItem(upgrade);
+        itemView.setPriceColor(money < upgrade.getPrice() ? NOT_ENOUGH_MONEY_COLOR : PRICE_COLOR);
     }
 }
