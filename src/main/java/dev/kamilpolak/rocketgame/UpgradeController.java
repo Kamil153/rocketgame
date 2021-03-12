@@ -25,7 +25,7 @@ public class UpgradeController implements IUpgradeSelectionListener, IBuyListene
         this.upgradeListView = menuView.getUpgradeList();
         this.assets = assets;
         this.player = player;
-
+        player.addListener(this);
         upgradeInfoView.addBuyButtonListener(this);
         upgradeListView.addUpgradeSelectionListener(this);
         initializeUpgrades();
