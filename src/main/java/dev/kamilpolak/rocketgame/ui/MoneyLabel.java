@@ -6,7 +6,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 public class MoneyLabel extends Label {
     private static final String MONEY_FORMAT = "$%d";
 
-    public MoneyLabel(CharSequence text, Skin skin) {
+    public MoneyLabel(Skin skin) {
         super(String.format(MONEY_FORMAT, 0), skin);
     }
 
