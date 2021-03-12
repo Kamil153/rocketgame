@@ -17,18 +17,20 @@ public class MenuTable extends Table {
     private final UpgradeInfoPanel upgradeInfo;
     private final MoneyLabel moneyLabel;
     private final Collection<ILaunchListener> launchListeners = new ArrayList<>();
+    private final Player player;
 
     private static final float SIDEBAR_WIDTH_PERCENT = 0.35f;
     private static final float UPGRADE_LIST_HEIGHT_PERCENT = 0.65f;
 
-    public MenuTable(Skin skin) {
+    public MenuTable(Skin skin, Player player) {
         super();
+        this.player = player;
         this.upgradeList = new UpgradeListPanel(skin);
         this.upgradeInfo = new UpgradeInfoPanel(skin);
         setFillParent(true);
         pad(10);
         Table leftSidebar = new Table(skin);
-        moneyLabel = new MoneyLabel(skin);
+        moneyLabel = new MoneyLabel(skin, player);
         leftSidebar.add(moneyLabel);
         launchButton = new TextButton("Launch", skin);
         launchButton.pad(5, 20, 5, 20);
