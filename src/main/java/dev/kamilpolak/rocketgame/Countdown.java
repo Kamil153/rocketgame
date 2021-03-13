@@ -19,8 +19,8 @@ public class Countdown {
         return time;
     }
 
-    public void update(float deltaTime) {
-        time -= deltaTime;
+    public void passTime(float time) {
+        this.time -= time;
     }
 
     public int getSeconds() {
