@@ -1,7 +1,11 @@
 package dev.kamilpolak.rocketgame;
 
+import java.util.ArrayList;
+import java.util.Collection;
+
 public class Countdown {
     private float time;
+    private final Collection<ICountdownListener> listeners = new ArrayList<>();
 
     public Countdown(float time) {
         this.time = time;
@@ -12,7 +16,9 @@ public class Countdown {
     }
 
     public void setTime(float time) {
+        float oldTime = this.time;
         this.time = time;
+        notifyTimeChanged(oldTime, time - oldTime, oldTime);
     }
 
     public float getTime() {
@@ -20,7 +26,9 @@ public class Countdown {
     }
 
     public void passTime(float time) {
+        float oldTime = this.time;
         this.time -= time;
+        notifyTimeChanged(oldTime, time, this.time);
     }
 
     public int getSeconds() {
@@ -33,5 +41,19 @@ public class Countdown {
 
     public boolean isPastT0() {
         return time < 0;
+    }
+
+    public void addListener(ICountdownListener listener) {
+        listeners.add(listener);
+    }
+
+    public void removeListener(ICountdownListener listener) {
+        listeners.remove(listener);
+    }
+
+    public void notifyTimeChanged(float oldTime, float deltaTime, float newTime) {
+        for(ICountdownListener listener: listeners) {
+            listener.timeChanged(oldTime, deltaTime, newTime);
+        }
     }
 }
