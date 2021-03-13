@@ -54,7 +54,6 @@ public class MainScreen implements Screen {
         camera = new OrthographicCamera(calculateViewportWidth(w, h, cameraHeight), cameraHeight);
 
         rocket = entityFactory.createRocket();
-        System.out.println(rocket.getComponent(BodyComponent.class).body.getMass());
         ecs.addEntity(rocket);
         ecs.addEntity(entityFactory.createEarth());
         ecs.addEntity(entityFactory.createRocketPlume(rocket));
