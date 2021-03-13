@@ -18,7 +18,7 @@ public class FlightTable extends Table {
     private final TelemetryTable telemetryTable;
     private final static float FUEL_BAR_WIDTH = 0.2f;
 
-    public FlightTable(Entity rocket, Player player, Skin skin) {
+    public FlightTable(Entity rocket, Skin skin) {
         super();
         this.rocket = rocket;
         setFillParent(true);
