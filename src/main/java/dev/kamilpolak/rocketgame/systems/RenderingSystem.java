@@ -59,17 +59,24 @@ public class RenderingSystem extends IteratingSystem {
                         originX, originY,
                         width, height,
                         transform.scale.x, transform.scale.y,
-                        transform.rotation * 180.0f / (float) Math.PI  // conversion from radians to degrees
+                        radiansToDegrees(transform.rotation)  // conversion from radians to degrees
                 );
             }
         }
         batch.end();
     }
 
+    private static float radiansToDegrees(float radians) {
+        return radians * 180.0f / (float) Math.PI;
+    }
+
     static class ZComparator implements Comparator<Entity> {
 
         @Override
         public int compare(Entity entity1, Entity entity2) {
+            if(!entity1.hasComponent(TransformComponent.class) || !entity2.hasComponent(TransformComponent.class)) {
+                return 0;
+            }
             float z1 = entity1.getComponent(TransformComponent.class).position.z;
             float z2 = entity2.getComponent(TransformComponent.class).position.z;
             return Float.compare(z1, z2);

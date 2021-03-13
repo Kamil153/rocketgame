@@ -1,9 +1,6 @@
 package dev.kamilpolak.rocketgame.systems;
 
-import dev.kamilpolak.rocketgame.ecs.Entity;
-import dev.kamilpolak.rocketgame.ecs.EntitySystem;
-import dev.kamilpolak.rocketgame.ecs.IChangeListener;
-import dev.kamilpolak.rocketgame.ecs.Query;
+import dev.kamilpolak.rocketgame.ecs.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -42,13 +39,16 @@ abstract public class IteratingSystem extends EntitySystem implements IChangeLis
     @Override
     protected void addedToEngine() {
         super.addedToEngine();
-        entities.addAll(getCurrentEngine().queryEntities(query));
+        Engine engine = getCurrentEngine();
+        entities.addAll(engine.queryEntities(query));
+        engine.addEntityChangeListener(this);
     }
 
     @Override
     protected void removedFromEngine() {
         super.removedFromEngine();
         entities.clear();
+        getCurrentEngine().removeEntityChangeListener(this);
     }
 
     @Override

@@ -54,7 +54,6 @@ public class EntityFactory {
         rocket.addComponent(new FuelComponent());
         rocket.addComponent(new BodyComponent(body));
         rocket.addComponent(new RocketComponent());
-        rocket.addComponent(new EngineAngleComponent());
         return rocket;
     }
 
@@ -129,5 +128,18 @@ public class EntityFactory {
 
     public Entity createTrees() {
         return createTrees(0);
+    }
+
+    public Entity createMountains(float x, float y, float z, float rotation) {
+        TextureRegion region = getTextureRegion(Asset.MOUNTAINS_TEXTURE);
+        return createEntity(x, y, z, rotation, region);
+    }
+
+    public Entity createMountains(float x) {
+        return createMountains(x, EntityData.MOUNTAINS_Y, EntityData.MOUNTAINS_Z, 0);
+    }
+
+    public Entity createMountains() {
+        return createMountains(0);
     }
 }

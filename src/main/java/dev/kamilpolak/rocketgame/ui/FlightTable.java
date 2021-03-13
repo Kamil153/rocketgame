@@ -1,37 +1,35 @@
 package dev.kamilpolak.rocketgame.ui;
 
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Label.LabelStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import dev.kamilpolak.rocketgame.Countdown;
 import dev.kamilpolak.rocketgame.EntityData;
+import dev.kamilpolak.rocketgame.Player;
 import dev.kamilpolak.rocketgame.components.BodyComponent;
+import dev.kamilpolak.rocketgame.components.FuelComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
 
-public class FlightStage extends Stage {
+public class FlightTable extends Table {
     private final Entity rocket;
-    private final Table table;
     private Countdown countdown = null;
     private final CountdownLabel countdownLabel;
     private final TelemetryTable telemetryTable;
+    private final static float FUEL_BAR_WIDTH = 0.2f;
 
-    public FlightStage(Entity rocket, Skin skin) {
+    public FlightTable(Entity rocket, Player player, Skin skin) {
         super();
         this.rocket = rocket;
-        table = new Table();
-        table.setFillParent(true);
-        addActor(table);
+        setFillParent(true);
 
         countdownLabel = new CountdownLabel(skin);
         countdownLabel.setVisible(false);
         telemetryTable = new TelemetryTable(skin);
-        table.top();
-        table.add(countdownLabel).expandX().top();
-        table.row().expand();
-        table.add(telemetryTable).bottom().left();
+        top();
+        add(countdownLabel).expandX().top().colspan(2);
+        row().expand();
+        add(telemetryTable).bottom().left();
     }
 
     public void setCountdown(Countdown countdown) {
@@ -53,5 +51,7 @@ public class FlightStage extends Stage {
             countdownLabel.setTime(countdown.isPastT0(), countdown.getMinutes(), countdown.getSeconds());
         }
         super.act(delta);
+        FuelComponent fuelComponent = rocket.getComponent(FuelComponent.class);
+        telemetryTable.setFuel(fuelComponent.fuel/fuelComponent.maxFuel);
     }
 }

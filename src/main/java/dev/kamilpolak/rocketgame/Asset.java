@@ -13,7 +13,9 @@ public enum Asset {
     TREES_TEXTURE("textures/trees.png", Texture.class),
     UI_SKIN("ui/uiskin.json", Skin.class),
     ROCKET_BODY("body/rocket.xml", BodyData.class),
-    LAUNCHPAD_BODY("body/launchpad.xml", BodyData.class);
+    LAUNCHPAD_BODY("body/launchpad.xml", BodyData.class),
+    TVC_UPGRADE("upgrades/tvc.xml", UpgradeData.class),
+    FINS_UPGRADE("upgrades/fins.xml", UpgradeData.class);
 
     private static final String prefix = "assets/";
 
