@@ -1,7 +1,5 @@
 package dev.kamilpolak.rocketgame.ecs;
 
-import dev.kamilpolak.rocketgame.ecs.*;
-
 import java.util.HashSet;
 import java.util.Set;
 
