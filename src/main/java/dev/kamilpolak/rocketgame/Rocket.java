@@ -19,19 +19,19 @@ public class Rocket {
         listeners.remove(listener);
     }
 
-    public void notifyVelocityChanged() {
+    private void notifyVelocityChanged() {
         for(IRocketListener listener: listeners) {
             listener.velocityChanged(velocity);
         }
     }
 
-    public void notifyFuelChanged() {
+    private void notifyFuelChanged() {
         for(IRocketListener listener: listeners) {
             listener.fuelChanged(fuel);
         }
     }
 
-    public void notifyPositionChanged() {
+    private void notifyPositionChanged() {
         for(IRocketListener listener: listeners) {
             listener.positionChanged(position.x, position.y);
         }
