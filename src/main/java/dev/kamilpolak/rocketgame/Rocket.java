@@ -42,7 +42,10 @@ public class Rocket {
     }
 
     public void setVelocity(float velocity) {
-        this.velocity = velocity;
+        if(this.velocity != velocity) {
+            this.velocity = velocity;
+            notifyVelocityChanged();
+        }
     }
 
     public Vector2 getPosition() {
@@ -50,7 +53,10 @@ public class Rocket {
     }
 
     public void setPosition(Vector2 position) {
-        this.position.set(position);
+        if(this.position != position) {
+            this.position.set(position);
+            notifyPositionChanged();
+        }
     }
 
     public float getFuel() {
@@ -58,6 +64,9 @@ public class Rocket {
     }
 
     public void setFuel(float fuel) {
-        this.fuel = fuel;
+        if(this.fuel != fuel) {
+            this.fuel = fuel;
+            notifyFuelChanged();
+        }
     }
 }
