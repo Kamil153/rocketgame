@@ -52,9 +52,9 @@ public class Rocket {
         return position;
     }
 
-    public void setPosition(Vector2 position) {
-        if(this.position != position) {
-            this.position.set(position);
+    public void setPosition(float x, float y) {
+        if(position.x != x || position.y != y) {
+            position.set(x, y);
             notifyPositionChanged();
         }
     }
