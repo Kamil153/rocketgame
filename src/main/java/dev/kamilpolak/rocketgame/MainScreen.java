@@ -27,7 +27,6 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
     private final World world;
     private final OrthographicCamera camera;
     private final Engine ecs = new Engine();
-    private final BodyFactory bodyFactory;
     private final EntityFactory entityFactory;
     private final Stage gameStage;
     private final FlightTable flightTable;
@@ -45,7 +44,6 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         assets = parent.getAssets();
         batch = new SpriteBatch();
         world = new World(new Vector2(0, -10), true);
-        bodyFactory = new BodyFactory(world);
         entityFactory = new EntityFactory(world, assets);
         summaryScreen = new SummaryScreen(assets);
         summaryScreen.addListener(this);
