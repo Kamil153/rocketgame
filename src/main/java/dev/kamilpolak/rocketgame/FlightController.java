@@ -44,7 +44,7 @@ public class FlightController {
     }
 
     public void update(float deltaTime) {
-        countdown.update(deltaTime);
+        countdown.passTime(deltaTime);
         if(countdown.isPastT0() && initiated) {
             launched = true;
             rocket.getComponent(EngineStateComponent.class).running = true;
