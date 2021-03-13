@@ -2,8 +2,8 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import dev.kamilpolak.rocketgame.IPlayerListener;
-import dev.kamilpolak.rocketgame.Player;
+import dev.kamilpolak.rocketgame.models.IPlayerListener;
+import dev.kamilpolak.rocketgame.models.Player;
 
 public class MoneyLabel extends Label implements IPlayerListener {
     private static final String MONEY_FORMAT = "$%d";

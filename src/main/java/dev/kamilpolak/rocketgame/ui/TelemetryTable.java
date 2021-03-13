@@ -3,8 +3,8 @@ package dev.kamilpolak.rocketgame.ui;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import dev.kamilpolak.rocketgame.IRocketListener;
-import dev.kamilpolak.rocketgame.Rocket;
+import dev.kamilpolak.rocketgame.models.IRocketListener;
+import dev.kamilpolak.rocketgame.models.Rocket;
 
 public class TelemetryTable extends Table implements IRocketListener {
     private static final String SPEED_FORMAT = "%.0f m/s";

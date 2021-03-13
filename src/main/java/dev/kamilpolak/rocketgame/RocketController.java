@@ -5,6 +5,7 @@ import dev.kamilpolak.rocketgame.components.BodyComponent;
 import dev.kamilpolak.rocketgame.components.FuelComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.models.Rocket;
 
 public class RocketController {
     private Entity rocketEntity;

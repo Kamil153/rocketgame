@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame;
+package dev.kamilpolak.rocketgame.models;
 
 import com.badlogic.gdx.math.Vector2;
 

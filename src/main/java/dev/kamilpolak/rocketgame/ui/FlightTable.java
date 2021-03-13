@@ -2,9 +2,9 @@ package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import dev.kamilpolak.rocketgame.Countdown;
-import dev.kamilpolak.rocketgame.ICountdownListener;
-import dev.kamilpolak.rocketgame.Rocket;
+import dev.kamilpolak.rocketgame.models.Countdown;
+import dev.kamilpolak.rocketgame.models.ICountdownListener;
+import dev.kamilpolak.rocketgame.models.Rocket;
 
 public class FlightTable extends Table implements ICountdownListener {
     private Countdown countdown = null;
