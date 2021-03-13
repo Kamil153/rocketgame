@@ -1,31 +1,24 @@
 package dev.kamilpolak.rocketgame.ui;
 
-import com.badlogic.gdx.physics.box2d.Body;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Value;
 import dev.kamilpolak.rocketgame.Countdown;
-import dev.kamilpolak.rocketgame.EntityData;
-import dev.kamilpolak.rocketgame.Player;
-import dev.kamilpolak.rocketgame.components.BodyComponent;
-import dev.kamilpolak.rocketgame.components.FuelComponent;
-import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.Rocket;
 
 public class FlightTable extends Table {
-    private final Entity rocket;
+    private final Rocket rocket;
     private Countdown countdown = null;
     private final CountdownLabel countdownLabel;
     private final TelemetryTable telemetryTable;
-    private final static float FUEL_BAR_WIDTH = 0.2f;
 
-    public FlightTable(Entity rocket, Skin skin) {
+    public FlightTable(Rocket rocket, Skin skin) {
         super();
         this.rocket = rocket;
         setFillParent(true);
 
         countdownLabel = new CountdownLabel(skin);
         countdownLabel.setVisible(false);
-        telemetryTable = new TelemetryTable(skin);
+        telemetryTable = new TelemetryTable(rocket, skin);
         top();
         add(countdownLabel).expandX().top().colspan(2);
         row().expand();
@@ -44,14 +37,9 @@ public class FlightTable extends Table {
 
     @Override
     public void act(float delta) {
-        Body body = rocket.getComponent(BodyComponent.class).body;
-        telemetryTable.setSpeed(body.getLinearVelocity().len());
-        telemetryTable.setAltitude(body.getPosition().y - EntityData.ROCKET_POSITION.y);
         if(countdown != null) {
             countdownLabel.setTime(countdown.isPastT0(), countdown.getMinutes(), countdown.getSeconds());
         }
         super.act(delta);
-        FuelComponent fuelComponent = rocket.getComponent(FuelComponent.class);
-        telemetryTable.setFuel(fuelComponent.fuel/fuelComponent.maxFuel);
     }
 }

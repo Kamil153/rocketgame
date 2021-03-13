@@ -12,6 +12,7 @@ public class RocketController {
 
     public RocketController(Entity rocketEntity) {
         this.rocketEntity = rocketEntity;
+        rocket = new Rocket();
     }
 
     public void update() {

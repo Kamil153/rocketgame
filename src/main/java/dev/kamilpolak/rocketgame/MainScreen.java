@@ -31,6 +31,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
     private final Entity rocketEntity;
     private final UpgradeController upgradeController;
     private final FlightController flightController;
+    private final RocketController rocketController;
     private final Player player = new Player();
     private final SummaryScreen summaryScreen;
 
@@ -52,7 +53,8 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         gameStage = new Stage();
         gameStage.setDebugAll(true);
 
-        flightTable = new FlightTable(rocketEntity, player, uiSkin);
+        rocketController = new RocketController(rocketEntity);
+        flightTable = new FlightTable(rocketController.getRocket(), uiSkin);
         menuTable = new MenuTable(uiSkin, player);
         menuTable.addLaunchListener(this);
         upgradeController = new UpgradeController(rocketEntity, menuTable, assets, player);
@@ -77,6 +79,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
         Gdx.gl.glClear( GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT );
         ecs.update(delta);
         flightController.update(delta);
+        rocketController.update();
         gameStage.act();
         gameStage.draw();
     }
