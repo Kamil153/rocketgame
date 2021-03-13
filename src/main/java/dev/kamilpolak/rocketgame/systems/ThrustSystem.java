@@ -5,6 +5,7 @@ import com.badlogic.gdx.physics.box2d.Body;
 import dev.kamilpolak.rocketgame.Util;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.ecs.IteratingSystem;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 import java.util.Random;

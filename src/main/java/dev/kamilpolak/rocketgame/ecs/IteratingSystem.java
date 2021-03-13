@@ -1,4 +1,4 @@
-package dev.kamilpolak.rocketgame.systems;
+package dev.kamilpolak.rocketgame.ecs;
 
 import dev.kamilpolak.rocketgame.ecs.*;
 

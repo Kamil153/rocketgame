@@ -3,6 +3,7 @@ package dev.kamilpolak.rocketgame.systems;
 import dev.kamilpolak.rocketgame.components.EngineStateComponent;
 import dev.kamilpolak.rocketgame.components.FuelComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.ecs.IteratingSystem;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 public class FuelSystem extends IteratingSystem {
