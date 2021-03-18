@@ -40,7 +40,7 @@ public class EntityFactory {
     }
 
     public Entity createRocket(float x, float y, float z, float angle) {
-        TextureRegion region = getTextureRegion(Asset.ROCKET_TEXTURE);
+        TextureRegion region = getTextureRegion(Asset.ROCKET_OFF_TEXTURE);
         float width = RenderingSystem.getForegroundLength(region.getRegionWidth());
         float height = RenderingSystem.getForegroundLength(region.getRegionHeight());
         Entity rocket = createEntity(x, y, z, angle, region);
