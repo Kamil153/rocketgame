@@ -51,6 +51,7 @@ public class GameWorld extends Engine {
     private void addRepeatingEntities(Asset texture, int quantity, Function<Float, Entity> factory) {
         float textureWidth = assets.get(texture.getPath(), Texture.class).getWidth();
         float x = 0;
+        addEntity(factory.apply(x));
         for(int i = 1; i < quantity; i++) {
             x = -x;
             if(i % 2 == 1) {
