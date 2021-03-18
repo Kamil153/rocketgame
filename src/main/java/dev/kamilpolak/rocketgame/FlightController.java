@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Interpolation;
 import dev.kamilpolak.rocketgame.components.*;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.models.Countdown;
 import dev.kamilpolak.rocketgame.ui.FlightTable;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class FlightController {
     }
 
     public void update(float deltaTime) {
-        countdown.update(deltaTime);
+        countdown.passTime(deltaTime);
         if(countdown.isPastT0() && initiated) {
             launched = true;
             rocket.getComponent(EngineStateComponent.class).running = true;

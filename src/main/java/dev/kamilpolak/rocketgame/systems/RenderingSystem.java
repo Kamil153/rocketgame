@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import dev.kamilpolak.rocketgame.components.TextureComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.ecs.IteratingSystem;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 import java.util.Comparator;

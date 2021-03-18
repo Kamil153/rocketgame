@@ -3,6 +3,8 @@ package dev.kamilpolak.rocketgame;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Color;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.models.IPlayerListener;
+import dev.kamilpolak.rocketgame.models.Player;
 import dev.kamilpolak.rocketgame.ui.*;
 import dev.kamilpolak.rocketgame.upgrades.FinsUpgrade;
 import dev.kamilpolak.rocketgame.upgrades.TVCUpgrade;

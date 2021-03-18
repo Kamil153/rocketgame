@@ -1,6 +1,4 @@
-package dev.kamilpolak.rocketgame.systems;
-
-import dev.kamilpolak.rocketgame.ecs.*;
+package dev.kamilpolak.rocketgame.ecs;
 
 import java.util.HashSet;
 import java.util.Set;

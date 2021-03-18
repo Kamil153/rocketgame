@@ -5,6 +5,7 @@ import dev.kamilpolak.rocketgame.Util;
 import dev.kamilpolak.rocketgame.components.BindComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.ecs.IteratingSystem;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 public class BindSystem extends IteratingSystem {

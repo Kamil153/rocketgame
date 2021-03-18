@@ -1,12 +1,9 @@
 package dev.kamilpolak.rocketgame.ui;
 
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import dev.kamilpolak.rocketgame.Player;
-import dev.kamilpolak.rocketgame.upgrades.Upgrade;
-import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.models.Player;
 
 import java.util.ArrayList;
 import java.util.Collection;

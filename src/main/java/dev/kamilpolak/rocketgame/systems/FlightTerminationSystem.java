@@ -4,6 +4,7 @@ import dev.kamilpolak.rocketgame.components.FlightTerminationComponent;
 import dev.kamilpolak.rocketgame.components.RocketComponent;
 import dev.kamilpolak.rocketgame.components.TransformComponent;
 import dev.kamilpolak.rocketgame.ecs.Entity;
+import dev.kamilpolak.rocketgame.ecs.IteratingSystem;
 import dev.kamilpolak.rocketgame.ecs.Query;
 
 public class FlightTerminationSystem extends IteratingSystem {
