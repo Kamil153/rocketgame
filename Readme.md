@@ -8,3 +8,6 @@ Name of the game was inspired by [Artemis program](https://en.wikipedia.org/wiki
 ## Technologies
 * **Entity-Component-System** - pattern that consists of game objects (Entities) which use composition to define their properties (Components). Entities are updated by systems. [More info](https://en.wikipedia.org/wiki/Entity_component_system)
 * **LibGDX** - graphics library that provides tools for creating games for multiple platforms. [More info](https://libgdx.com/)
+## Screenshots
+![game menu](menu.png "Game menu")
+![flight screen](flight.png "Flight screen")
