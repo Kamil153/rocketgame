@@ -34,7 +34,7 @@ public class GameWorld extends Engine {
 
         addRepeatingEntities(Asset.EARTH_TEXTURE, 20, entityFactory::createEarth);
         addRepeatingEntities(Asset.TREES_TEXTURE, 10, entityFactory::createTrees);
-        addRepeatingEntities(Asset.EARTH_TEXTURE, 10, entityFactory::createMountains);
+        addRepeatingEntities(Asset.MOUNTAINS_TEXTURE, 10, entityFactory::createMountains);
 
         addSystem(new FuelSystem(18));
         addSystem(new RocketTurnSystem(17));
