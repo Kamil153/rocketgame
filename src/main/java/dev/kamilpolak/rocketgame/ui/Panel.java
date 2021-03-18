@@ -9,6 +9,8 @@ public class Panel extends Table {
     private final Cell<?> titleExtraCell;
 
     public Panel(Skin skin, String title) {
+        super(skin);
+        setBackground(skin.getDrawable("default-rect"));
         titleLabel = new Label(title, skin);
         add(titleLabel).expandX().fill().top();
         titleExtraCell = add(new Widget());
