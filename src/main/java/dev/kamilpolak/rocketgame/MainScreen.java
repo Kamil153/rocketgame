@@ -45,7 +45,7 @@ public class MainScreen implements Screen, ILaunchListener, ITerminationListener
 
         Skin uiSkin = assets.get(Asset.UI_SKIN.getPath());
         gameStage = new Stage();
-        gameStage.setDebugAll(true);
+        //gameStage.setDebugAll(true);
 
         rocketController = new RocketController(rocketEntity);
         flightTable = new FlightTable(rocketController.getRocket(), uiSkin);
